@@ -29,5 +29,5 @@ code {
 
 @font-face {
     font-family: 'Formula1-Wide';
-  src: local('Formula1-Wide') url('./fonts/Formula1-Wide.ttf') format("truetype");
+  src: local('Formula1-Wide'), url('./fonts/Formula1-Wide.ttf') format("truetype");
 }

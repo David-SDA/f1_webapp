@@ -1,9 +1,62 @@
 .navBar{
+    height: 10vh;
+    width: 100%;
     background-color: #ff1801;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    overflow: hidden;
 }
 .navBar a{
-    color: #ffffff;
+    padding: 10px;
 }
-.navBar h1{
-    font-family: "Formula1-Bold";
+
+.title{
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.navList{
+    display: flex;
+
+}
+
+.navLink{
+    display: flex;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.subNav{
+    margin-left: 1vw;
+    position: relative;
+    display: inline-block;
+}
+
+.subNavButton{
+    color: #ffffff;
+    border: none;
+    outline: none;
+    background-color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    padding: 10px;
+}
+.subNav:hover .subNavContent{
+    display: block;
+}
+
+.navLink:hover, .subNavButton:hover{
+    background-color: #ffffff;
+    color: #ff1801;
+}
+
+.subNavContent{
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
 }
