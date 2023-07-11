@@ -1,5 +1,4 @@
 import '../styles/navBar.css';
-import '../fonts/Formula1-Bold.ttf';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 
