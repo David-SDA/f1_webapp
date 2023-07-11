@@ -6,24 +6,22 @@ import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 export default function Navbar(){
     return (
         <header className="navBar">
-            <h1><a href='#' className='title'>Title</a></h1>
+            <h1 className='title'><a href='#'>Title</a></h1>
             <div className='navList'>
-                <div>
-                    <a href='#' className='navLink'>Schedule</a>
-                </div>
+                <a href='#' className='navLink'>Schedule</a>
                 <div className='subNav'>
                     <button className='subNavButton'>Standings <FontAwesomeIcon icon={faCaretDown} /></button>
-                    <div className='subNavContent'>
-                        <a href="#">Drivers</a>
-                        <a href="#">Constructors</a>
+                    <div class="subNavContent">
+                        <a href="#" className='navLink'>Drivers</a>
+                        <a href="#" className='navLink'>Constuctors</a>
                     </div>
                 </div>
                 <div className='subNav'>
                     <button className='subNavButton'>History <FontAwesomeIcon icon={faCaretDown} /><i class="fa-solid fa-caret-down"></i></button>
                     <div className='subNavContent'>
-                        <a href="#">Drivers Champions</a>
-                        <a href="#">Constructors Champions</a>
-                        <a href="#">Circuits</a>
+                        <a href="#" className='navLink'>Drivers Champions</a>
+                        <a href="#" className='navLink'>Constructors Champions</a>
+                        <a href="#" className='navLink'>Tracks</a>
                     </div>
                 </div>
             </div>

@@ -11,26 +11,36 @@
     padding: 10px;
 }
 
-.title{
+.title a{
     color: #ffffff;
     text-decoration: none;
+    font-family: 'Formula1-Black';
 }
 
 .navList{
     display: flex;
-
+    font-family: 'Formula1-Bold';
 }
 
 .navLink{
     display: flex;
     color: #ffffff;
     text-decoration: none;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.navLink:hover, .subNavButton:hover{
+    background-color: #ffffff;
+    color: #ff1801;
 }
 
 .subNav{
     margin-left: 1vw;
-    position: relative;
-    display: inline-block;
+}
+.subNav .navLink{
+    border-radius: 0;
 }
 
 .subNavButton{
@@ -41,22 +51,32 @@
     font-family: inherit;
     font-size: inherit;
     padding: 10px;
-}
-.subNav:hover .subNavContent{
-    display: block;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
-.navLink:hover, .subNavButton:hover{
-    background-color: #ffffff;
-    color: #ff1801;
+.subNav:hover .subNavContent{
+    height: auto;
 }
 
 .subNavContent{
-    display: none;
+    display: flex;
+    height: 0;
+    flex-direction: column;
     position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    padding: 12px 16px;
+    border-radius: 0 0 10px 10px;
+    overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     z-index: 1;
+}
+
+.subNavContent a{
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #ff1801;
+}
+
+.subNavContent:hover .subNavButton{
+    color: #ff1801;
+    background-color: #ffffff;
 }
