@@ -12,12 +12,3 @@
     font-family: 'Formula1-Regular';
     font-style: italic;
 }
-
-.raceContainer{
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    border-radius: 10px;
-    width: 90%;
-    display: flex;
-    flex-direction: column;
-    background-color: #f8f8f8;
-}
