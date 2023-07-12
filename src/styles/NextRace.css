@@ -108,10 +108,3 @@
     min-width: 3vw;
     font-family: 'Formula1-Regular';
 }
-
-.verticalBar{
-    background-color: #c8c8c8;
-    width: 0.1vw;
-    height: 10vh;
-    border-radius: 20px;
-}
