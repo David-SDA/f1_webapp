@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import '../styles/NextRace.css';
 import { flags } from '../constants/flags';
-import Session from "./raceComponents/Session";
-import VerticalBar from "./others/VerticalBar";
-import DayMonth from "./raceComponents/DayMonth";
+import ScheduleOneSession from "./raceComponents/ScheduleOneSession";
 
 export default function NextRace(){
     const [isLoading, setIsLoading] = useState(true);
@@ -46,31 +44,11 @@ export default function NextRace(){
                 </div>
                 <h2 className="scheduleText">SCHEDULE</h2>
                 <div className="allSchedule">
-                    <div className="scheduleBox">
-                        <DayMonth date={dateRace} />
-                        <VerticalBar />
-                        <Session sessionName={'RACE'} date={dateRace} />
-                    </div>
-                    <div className="scheduleBox">
-                        <DayMonth date={dateQuali} />
-                        <VerticalBar />
-                        <Session sessionName={'QUALIFYING'} date={dateQuali} />
-                    </div>
-                    <div className="scheduleBox">
-                        <DayMonth date={dateFP3} />
-                        <VerticalBar />
-                        <Session sessionName={'PRACTICE 3'} date={dateFP3} />
-                    </div>
-                    <div className="scheduleBox">
-                        <DayMonth date={dateFP2} />
-                        <VerticalBar />
-                        <Session sessionName={'PRACTICE 2'} date={dateFP2} />
-                    </div>
-                    <div className="scheduleBox">
-                        <DayMonth date={dateFP1} />
-                        <VerticalBar />
-                        <Session sessionName={'PRACTICE 1'} date={dateFP1} />
-                    </div>
+                    <ScheduleOneSession sessionName={'RACE'} date={dateRace} />
+                    <ScheduleOneSession sessionName={'QUALIFYING'} date={dateQuali} />
+                    <ScheduleOneSession sessionName={'PRACTICE 3'} date={dateFP3} />
+                    <ScheduleOneSession sessionName={'PRACTICE 2'} date={dateFP2} />
+                    <ScheduleOneSession sessionName={'PRACTICE 1'} date={dateFP1} />
                 </div>
             </div>
         </div>
