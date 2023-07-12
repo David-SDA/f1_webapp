@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import '../styles/NextRace.css';
 import { flags } from '../constants/flags';
-import ScheduleOneSession from "./raceComponents/ScheduleOneSession";
+import ScheduleNormalWeekend from "./raceComponents/ScheduleNormalWeekend";
 
 export default function NextRace(){
     const [isLoading, setIsLoading] = useState(true);
@@ -42,14 +42,13 @@ export default function NextRace(){
                     <img src={flags[race?.Circuit?.Location?.country]} alt="Flag image" className="countryFlag" />
                     <p className="raceName">{race?.raceName}</p>
                 </div>
-                <h2 className="scheduleText">SCHEDULE</h2>
-                <div className="allSchedule">
-                    <ScheduleOneSession sessionName={'RACE'} date={dateRace} />
-                    <ScheduleOneSession sessionName={'QUALIFYING'} date={dateQuali} />
-                    <ScheduleOneSession sessionName={'PRACTICE 3'} date={dateFP3} />
-                    <ScheduleOneSession sessionName={'PRACTICE 2'} date={dateFP2} />
-                    <ScheduleOneSession sessionName={'PRACTICE 1'} date={dateFP1} />
-                </div>
+                <ScheduleNormalWeekend 
+                    dateFP1={dateFP1}
+                    dateFP2={dateFP2}
+                    dateFP3={dateFP3}
+                    dateQuali={dateQuali}
+                    dateRace={dateRace} 
+                />
             </div>
         </div>
     );
