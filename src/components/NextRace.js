@@ -3,6 +3,7 @@ import '../styles/NextRace.css';
 import { flags } from '../constants/flags';
 import Session from "./raceComponents/Session";
 import VerticalBar from "./others/VerticalBar";
+import DayMonth from "./raceComponents/DayMonth";
 
 export default function NextRace(){
     const [isLoading, setIsLoading] = useState(true);
@@ -46,42 +47,27 @@ export default function NextRace(){
                 <h2 className="scheduleText">SCHEDULE</h2>
                 <div className="allSchedule">
                     <div className="scheduleBox">
-                        <div className="scheduleDate">
-                            <p className="scheduleDateNumber">{dateRace.toLocaleDateString('en-GB', {day: '2-digit'})}</p>
-                            <p className="scheduleDateMonth">{dateRace.toLocaleDateString('en-GB', {month: 'short'})}</p>
-                        </div>
+                        <DayMonth date={dateRace} />
                         <VerticalBar />
                         <Session sessionName={'RACE'} date={dateRace} />
                     </div>
                     <div className="scheduleBox">
-                        <div className="scheduleDate">
-                            <p className="scheduleDateNumber">{dateQuali.toLocaleDateString('en-GB', {day: '2-digit'})}</p>
-                            <p className="scheduleDateMonth">{dateQuali.toLocaleDateString('en-GB', {month: 'short'})}</p>
-                        </div>
+                        <DayMonth date={dateQuali} />
                         <VerticalBar />
                         <Session sessionName={'QUALIFYING'} date={dateQuali} />
                     </div>
                     <div className="scheduleBox">
-                        <div className="scheduleDate">
-                            <p className="scheduleDateNumber">{dateFP3.toLocaleDateString('en-GB', {day: '2-digit'})}</p>
-                            <p className="scheduleDateMonth">{dateFP3.toLocaleDateString('en-GB', {month: 'short'})}</p>
-                        </div>
+                        <DayMonth date={dateFP3} />
                         <VerticalBar />
                         <Session sessionName={'PRACTICE 3'} date={dateFP3} />
                     </div>
                     <div className="scheduleBox">
-                        <div className="scheduleDate">
-                            <p className="scheduleDateNumber">{dateFP2.toLocaleDateString('en-GB', {day: '2-digit'})}</p>
-                            <p className="scheduleDateMonth">{dateFP2.toLocaleDateString('en-GB', {month: 'short'})}</p>
-                        </div>
+                        <DayMonth date={dateFP2} />
                         <VerticalBar />
                         <Session sessionName={'PRACTICE 2'} date={dateFP2} />
                     </div>
                     <div className="scheduleBox">
-                        <div className="scheduleDate">
-                            <p className="scheduleDateNumber">{dateFP1.toLocaleDateString('en-GB', {day: '2-digit'})}</p>
-                            <p className="scheduleDateMonth">{dateFP1.toLocaleDateString('en-GB', {month: 'short'})}</p>
-                        </div>
+                        <DayMonth date={dateFP1} />
                         <VerticalBar />
                         <Session sessionName={'PRACTICE 1'} date={dateFP1} />
                     </div>
