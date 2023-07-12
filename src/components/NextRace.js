@@ -3,11 +3,9 @@ import '../styles/NextRace.css';
 
 import ScheduleNormalWeekend from "./raceComponents/ScheduleNormalWeekend";
 import ScheduleSprintWeekend from "./raceComponents/ScheduleSprintWeekend";
-import FlagTitleRace from "./raceComponents/FlagTitleRace";
-import Round from "./raceComponents/Round";
+import RaceHeader from "./raceComponents/RaceHeader";
 
 export default function NextRace(){
-    const [isLoading, setIsLoading] = useState(true);
     const [race, setRace] = useState([]);
 
     const fetchInfo = async () => {
@@ -18,8 +16,6 @@ export default function NextRace(){
             console.log(race);
         }catch(error){
             console.log(error);
-        }finally{
-            setIsLoading(false);
         }
     };
 
@@ -43,10 +39,11 @@ export default function NextRace(){
         <div className="nextRaceContainer">
             <h1 className="titleNextRace">Next Race</h1>
             <div className="raceContainer">
-                <div className="raceRoundNameContainer">
-                    <Round round={race?.round} />
-                    <FlagTitleRace raceName={race?.raceName} country={race?.Circuit?.Location?.country} />
-                </div>
+                <RaceHeader
+                    round={race?.round}
+                    raceName={race?.raceName}
+                    country={race?.Circuit?.Location?.country}
+                />
                 {
                     (dateFP3) ? 
                         <ScheduleNormalWeekend

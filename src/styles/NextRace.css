@@ -21,9 +21,3 @@
     flex-direction: column;
     background-color: #f8f8f8;
 }
-
-.raceRoundNameContainer{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
