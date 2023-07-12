@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import '../styles/NextRace.css';
 import { flags } from '../constants/flags';
+import Session from "./raceComponents/Session";
 
 export default function NextRace(){
     const [isLoading, setIsLoading] = useState(true);
@@ -49,10 +50,7 @@ export default function NextRace(){
                             <p className="scheduleDateMonth">{dateRace.toLocaleDateString('en-GB', {month: 'short'})}</p>
                         </div>
                         <div className="verticalBar"></div>
-                        <div className="scheduleSession">
-                            <p className="scheduleSessionName">RACE</p>
-                            <p className="scheduleSessionTime">{dateRace.toLocaleTimeString('en-GB', {hour: '2-digit', minute: '2-digit'})}</p>
-                        </div>
+                        <Session sessionName={'RACE'} date={dateRace} />
                     </div>
                     <div className="scheduleBox">
                         <div className="scheduleDate">
@@ -60,10 +58,7 @@ export default function NextRace(){
                             <p className="scheduleDateMonth">{dateQuali.toLocaleDateString('en-GB', {month: 'short'})}</p>
                         </div>
                         <div className="verticalBar"></div>
-                        <div className="scheduleSession">
-                            <p className="scheduleSessionName">QUALIFYING</p>
-                            <p className="scheduleSessionTime">{dateQuali.toLocaleTimeString('en-GB', {hour: '2-digit', minute: '2-digit'})}</p>
-                        </div>
+                        <Session sessionName={'QUALIFYING'} date={dateQuali} />
                     </div>
                     <div className="scheduleBox">
                         <div className="scheduleDate">
@@ -71,10 +66,7 @@ export default function NextRace(){
                             <p className="scheduleDateMonth">{dateFP3.toLocaleDateString('en-GB', {month: 'short'})}</p>
                         </div>
                         <div className="verticalBar"></div>
-                        <div className="scheduleSession">
-                            <p className="scheduleSessionName">PRACTICE 3</p>
-                            <p className="scheduleSessionTime">{dateFP3.toLocaleTimeString('en-GB', {hour: '2-digit', minute: '2-digit'})}</p>
-                        </div>
+                        <Session sessionName={'PRACTICE 3'} date={dateFP3} />
                     </div>
                     <div className="scheduleBox">
                         <div className="scheduleDate">
@@ -82,10 +74,7 @@ export default function NextRace(){
                             <p className="scheduleDateMonth">{dateFP2.toLocaleDateString('en-GB', {month: 'short'})}</p>
                         </div>
                         <div className="verticalBar"></div>
-                        <div className="scheduleSession">
-                            <p className="scheduleSessionName">PRACTICE 2</p>
-                            <p className="scheduleSessionTime">{dateFP2.toLocaleTimeString('en-GB', {hour: '2-digit', minute: '2-digit'})}</p>
-                        </div>
+                        <Session sessionName={'PRACTICE 2'} date={dateFP2} />
                     </div>
                     <div className="scheduleBox">
                         <div className="scheduleDate">
@@ -93,10 +82,7 @@ export default function NextRace(){
                             <p className="scheduleDateMonth">{dateFP1.toLocaleDateString('en-GB', {month: 'short'})}</p>
                         </div>
                         <div className="verticalBar"></div>
-                        <div className="scheduleSession">
-                            <p className="scheduleSessionName">PRACTICE 1</p>
-                            <p className="scheduleSessionTime">{dateFP1.toLocaleTimeString('en-GB', {hour: '2-digit', minute: '2-digit'})}</p>
-                        </div>
+                        <Session sessionName={'PRACTICE 1'} date={dateFP1} />
                     </div>
                 </div>
             </div>

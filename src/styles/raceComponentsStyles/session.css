@@ -1,0 +1,16 @@
+.scheduleSession{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-left: 1rem;
+    height: 10vh;
+}
+
+.scheduleSessionName{
+    font-family: 'Formula1-Bold';
+    font-size: 1.2rem;
+}
+
+.scheduleSessionTime{
+    font-family: 'Formula1-Regular';
+}
