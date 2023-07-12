@@ -25,13 +25,62 @@ export default function NextRace(){
         <div className="nextRaceContainer">
             <h1 className="titleNextRace">Next Race</h1>
             <div className="raceContainer">
-                <div className="roundContainer">
-                    <p className="roundText">Round</p>
-                    <p className="roundNumber">{race?.round}</p>
+                <div className="raceRoundNameContainer">
+                    <div className="roundContainer">
+                        <p className="roundText">Round</p>
+                        <p className="roundNumber">{race?.round}</p>
+                    </div>
+                    <img src={require('../assets/countryFlags/hungary.jpg')} alt="Flag image" className="countryFlag" />
+                    <p className="raceName">RACE NAME</p>
                 </div>
-                <p className="raceName">RACE NAME</p>
+                <h2 className="scheduleText">SCHEDULE</h2>
+                <div className="allSchedule">
+                    <div className="scheduleBox">
+                        <div className="scheduleDate">
+                            <p className="scheduleDateNumber">23</p>
+                            <p className="scheduleDateMonth">JUL</p>
+                        </div>
+                        <div className="verticalBar"></div>
+                        <div className="scheduleSession">
+                            <p className="scheduleSessionName">RACE</p>
+                            <p className="scheduleSessionTime">15:00</p>
+                        </div>
+                    </div>
+                    <div className="scheduleBox">
+                        <div className="scheduleDate">
+                            <p className="scheduleDateNumber">23</p>
+                            <p className="scheduleDateMonth">JUL</p>
+                        </div>
+                        <div className="verticalBar"></div>
+                        <div className="scheduleSession">
+                            <p className="scheduleSessionName">RACE</p>
+                            <p className="scheduleSessionTime">15:00</p>
+                        </div>
+                    </div>
+                    <div className="scheduleBox">
+                        <div className="scheduleDate">
+                            <p className="scheduleDateNumber">23</p>
+                            <p className="scheduleDateMonth">JUL</p>
+                        </div>
+                        <div className="verticalBar"></div>
+                        <div className="scheduleSession">
+                            <p className="scheduleSessionName">RACE</p>
+                            <p className="scheduleSessionTime">15:00</p>
+                        </div>
+                    </div>
+                    <div className="scheduleBox">
+                        <div className="scheduleDate">
+                            <p className="scheduleDateNumber">23</p>
+                            <p className="scheduleDateMonth">JUL</p>
+                        </div>
+                        <div className="verticalBar"></div>
+                        <div className="scheduleSession">
+                            <p className="scheduleSessionName">RACE</p>
+                            <p className="scheduleSessionTime">15:00</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
         </div>
     );
 }
