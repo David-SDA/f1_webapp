@@ -4,6 +4,7 @@ import '../styles/NextRace.css';
 import ScheduleNormalWeekend from "./raceComponents/ScheduleNormalWeekend";
 import ScheduleSprintWeekend from "./raceComponents/ScheduleSprintWeekend";
 import FlagTitleRace from "./raceComponents/FlagTitleRace";
+import Round from "./raceComponents/Round";
 
 export default function NextRace(){
     const [isLoading, setIsLoading] = useState(true);
@@ -43,10 +44,7 @@ export default function NextRace(){
             <h1 className="titleNextRace">Next Race</h1>
             <div className="raceContainer">
                 <div className="raceRoundNameContainer">
-                    <div className="roundContainer">
-                        <p className="roundText">Round</p>
-                        <p className="roundNumber">{race?.round}</p>
-                    </div>
+                    <Round round={race?.round} />
                     <FlagTitleRace raceName={race?.raceName} country={race?.Circuit?.Location?.country} />
                 </div>
                 {
