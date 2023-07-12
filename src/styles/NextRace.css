@@ -50,14 +50,3 @@
     font-family: 'Formula1-Wide';
     font-size: 1rem;
 }
-
-.countryFlag{
-    width: 5rem;
-    border-radius: 10px;
-    margin-right: 0.5vw;
-}
-
-.raceName{
-    font-family: 'Formula1-Wide';
-    font-size: 1.5rem;
-}

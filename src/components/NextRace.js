@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import '../styles/NextRace.css';
-import { flags } from '../constants/flags';
+
 import ScheduleNormalWeekend from "./raceComponents/ScheduleNormalWeekend";
 import ScheduleSprintWeekend from "./raceComponents/ScheduleSprintWeekend";
+import FlagTitleRace from "./raceComponents/FlagTitleRace";
 
 export default function NextRace(){
     const [isLoading, setIsLoading] = useState(true);
@@ -46,8 +47,7 @@ export default function NextRace(){
                         <p className="roundText">Round</p>
                         <p className="roundNumber">{race?.round}</p>
                     </div>
-                    <img src={flags[race?.Circuit?.Location?.country]} alt="Flag image" className="countryFlag" />
-                    <p className="raceName">{race?.raceName}</p>
+                    <FlagTitleRace raceName={race?.raceName} country={race?.Circuit?.Location?.country} />
                 </div>
                 {
                     (dateFP3) ? 

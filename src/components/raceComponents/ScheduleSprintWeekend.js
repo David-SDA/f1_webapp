@@ -14,5 +14,5 @@ export default function ScheduleNormalWeekend({dateFP1, dateQuali, dateFP2, date
                 <ScheduleOneSession sessionName={'PRACTICE 1'} date={dateFP1} />
             </div>
         </>
-    )
+    );
 }
