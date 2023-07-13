@@ -4,9 +4,11 @@ import '../../styles/raceComponentsStyles/raceContainer.css';
 import RaceHeader from './RaceHeader';
 import ScheduleNormalWeekend from './ScheduleNormalWeekend';
 import ScheduleSprintWeekend from './ScheduleSprintWeekend';
+import LoadingCircle from "../others/LoadingCircle";
 
 export default function RaceContainer({round}){
     const [race, setRace] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     const fetchInfo = async () => {
         try{
@@ -16,6 +18,8 @@ export default function RaceContainer({round}){
             console.log(race);
         }catch(error){
             console.log(error);
+        }finally{
+            setIsLoading(false);
         }
     };
 
@@ -34,31 +38,38 @@ export default function RaceContainer({round}){
     else{
         var dateSprint = new Date(race?.Sprint?.date + 'T' + race?.Sprint?.time);
     }
-    return (
-        <div className="raceContainer">
-            <RaceHeader
-                round={race?.round}
-                raceName={race?.raceName}
-                country={race?.Circuit?.Location?.country}
-            />
-            {
-                (dateFP3) ? 
-                    <ScheduleNormalWeekend
-                        dateFP1={dateFP1}
-                        dateFP2={dateFP2}
-                        dateFP3={dateFP3}
-                        dateQuali={dateQuali}
-                        dateRace={dateRace} 
-                    />
-                :
-                    <ScheduleSprintWeekend
-                        dateFP1={dateFP1}
-                        dateQuali={dateQuali}
-                        dateFP2={dateFP2}
-                        dateSprint={dateSprint}
-                        dateRace={dateRace}
-                    />
-            }
-        </div>
-    );
+
+    if(isLoading){
+        return (
+            <LoadingCircle />
+        )
+    }else{
+        return (
+            <div className="raceContainer">
+                <RaceHeader
+                    round={race?.round}
+                    raceName={race?.raceName}
+                    country={race?.Circuit?.Location?.country}
+                />
+                {
+                    (dateFP3) ? 
+                        <ScheduleNormalWeekend
+                            dateFP1={dateFP1}
+                            dateFP2={dateFP2}
+                            dateFP3={dateFP3}
+                            dateQuali={dateQuali}
+                            dateRace={dateRace} 
+                        />
+                    :
+                        <ScheduleSprintWeekend
+                            dateFP1={dateFP1}
+                            dateQuali={dateQuali}
+                            dateFP2={dateFP2}
+                            dateSprint={dateSprint}
+                            dateRace={dateRace}
+                        />
+                }
+            </div>
+        );
+    }
 }
