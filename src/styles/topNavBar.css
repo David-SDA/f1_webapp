@@ -1,0 +1,18 @@
+.bgColorMyRed{
+    background-color: #ff1801;
+}
+
+.title{
+    color: #ffffff;
+    font-family: 'Formula1-Black';
+}
+
+.navList{
+    font-family: 'Formula1-Bold';
+    letter-spacing: 0.0005rem;
+}
+
+.navDrop{
+    background-color: #ff1801;
+    color: #ffffff;
+}

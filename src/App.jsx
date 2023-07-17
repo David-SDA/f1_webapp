@@ -7,7 +7,7 @@ import './fonts/Formula1-Bold.ttf';
 import './fonts/Formula1-Regular.ttf';
 import './fonts/Formula1-Wide.ttf';
 
-import Navbar from './components/Navbar';
+import TopNavBar from './components/TopNavBar';
 import Home from './components/Home';
 import Schedule from './components/Schedule';
 import DriversStandings from './components/DriversStandings';
@@ -20,7 +20,7 @@ import NotFound from './components/NotFound';
 function App() {
     return (
         <Router>
-            <Navbar />
+            <TopNavBar />
             <div className="App">
                 <Routes>
                     <Route path='/' element={<Home />} />
