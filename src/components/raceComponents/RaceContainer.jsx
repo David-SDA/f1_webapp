@@ -45,7 +45,7 @@ export default function RaceContainer({round}){
         )
     }else{
         return (
-            <Container className="d-flex flex-column shadow-lg rounded-4 p-1 mb-5" style={{backgroundColor: '#f8f8f8'}}>
+            <Container className="d-flex flex-column shadow-lg rounded-4 p-2 mb-5" style={{backgroundColor: '#f8f8f8'}}>
                 <RaceHeader
                     round={race?.round}
                     raceName={race?.raceName}
