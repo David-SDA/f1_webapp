@@ -1,15 +1,15 @@
 import React from "react";
 
-import Round from "./Round";
-import FlagTitleRace from "./FlagTitleRace";
+import RoundFlag from "./RoundFlag";
+import TitleRace from "./TitleRace";
 
 import { Container } from "react-bootstrap";
 
 export default function RaceHeader({round, raceName, country}){
     return (
-        <Container className="d-flex flex-row align-items-center">
-            <Round round={round} />
-            <FlagTitleRace raceName={raceName} country={country} />
+        <Container className="d-flex flex-column align-items-center">
+            <RoundFlag round={round} country={country} />
+            <TitleRace raceName={raceName} />
         </Container>
     );
 }
