@@ -1,16 +1,17 @@
 import React from "react";
-import '../../styles/raceComponentsStyles/scheduleOneSession.css'
 
 import DayMonth from "./DayMonth";
 import VerticalBar from "../others/VerticalBar";
 import Session from "./Session";
 
+import { Container } from "react-bootstrap";
+
 export default function ScheduleOneSession({sessionName, date}){
     return (
-        <div className="scheduleBox">
+        <Container className="d-flex flex-row justify-content-start align-items-center bg-white rounded-3 shadow-sm mb-2 p-2">
             <DayMonth date={date} />
             <VerticalBar />
             <Session sessionName={sessionName} date={date} />
-        </div>
+        </Container>
     );
 }
