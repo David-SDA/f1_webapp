@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import '../../styles/raceComponentsStyles/raceContainer.css';
 
 import RaceHeader from './RaceHeader';
 import ScheduleNormalWeekend from './ScheduleNormalWeekend';
 import ScheduleSprintWeekend from './ScheduleSprintWeekend';
-import LoadingCircle from "../others/LoadingCircle";
+
+import { Container, Spinner } from "react-bootstrap";
 
 export default function RaceContainer({round}){
     const [race, setRace] = useState([]);
@@ -41,11 +41,11 @@ export default function RaceContainer({round}){
 
     if(isLoading){
         return (
-            <LoadingCircle />
+            <Spinner animation="border" style={{color: "#ff1801"}} />
         )
     }else{
         return (
-            <div className="raceContainer">
+            <Container className="d-flex flex-column shadow-lg rounded-4 p-1 mb-5" style={{backgroundColor: '#f8f8f8'}}>
                 <RaceHeader
                     round={race?.round}
                     raceName={race?.raceName}
@@ -69,7 +69,7 @@ export default function RaceContainer({round}){
                             dateRace={dateRace}
                         />
                 }
-            </div>
+            </Container>
         );
     }
 }
