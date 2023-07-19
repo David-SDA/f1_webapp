@@ -27,7 +27,7 @@ export default function TopThreeDrivers(){
 
     if(isLoading){
         return(
-            <Spinner animation="border" style={{color: "#ff1801"}} />
+            <Spinner animation="border" className="align-self-center" style={{color: "#ff1801"}} />
         );
     }
     else{
