@@ -8,9 +8,9 @@ import { Container } from "react-bootstrap";
 export default function Home(){
     return (
         <Container className="d-flex flex-column justify-content-center align-items-center">
-            <span className="h1 align-self-start fst-italic ms-3 mt-2" style={{fontFamily: "Formula1-Regular"}}>Current Standings</span>
+            <p className="h1 align-self-start fst-italic ms-3 mt-2" style={{fontFamily: "Formula1-Regular"}}>Current Standings</p>
             <SmallStandingsContainer />
-            <span className="h1 align-self-start fst-italic ms-3" style={{fontFamily: "Formula1-Regular"}}>Next Race</span>
+            <p className="h1 align-self-start fst-italic ms-3" style={{fontFamily: "Formula1-Regular"}}>Next Race</p>
             <RaceContainer round={"next"} />
         </Container>
     );
