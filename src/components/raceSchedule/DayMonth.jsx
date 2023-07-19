@@ -1,7 +1,5 @@
 import React from "react";
 
-import { Container } from "react-bootstrap";
-
 export default function DayMonth({date}){
     return (
         <div className="d-flex flex-column align-items-center ms-2 me-2">
