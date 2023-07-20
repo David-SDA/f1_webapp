@@ -9,7 +9,7 @@ import './fonts/Formula1-Wide.ttf';
 
 import TopNavBar from './components/TopNavBar';
 import Home from './components/Home';
-import Schedule from './components/Schedule';
+import Schedule from './components/schedule/Schedule';
 import DriversStandings from './components/DriversStandings';
 import ConstructorsStandings from './components/ConstructorsStandings';
 import DriverChampions from './components/DriverChampions';

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 
-import SmallDriver from "./standings/SmallDriver";
-import { currentConstructorColor } from "../constants/currentConstructorColor";
-import { currentYearTracks } from "../constants/currentYearTracks";
+import SmallDriver from "../standings/SmallDriver";
+import TrackImageContainer from "./TrackImageContainer";
+import { currentConstructorColor } from "../../constants/currentConstructorColor";
 
 import { Col, Container, Image, Row, Spinner } from "react-bootstrap";
-import { flags } from "../constants/flags";
+import { flags } from "../../constants/flags";
 
 export default function Schedule() {
     const myBorder = {
@@ -137,9 +137,7 @@ export default function Schedule() {
                                                         }
                                                     </Container>
                                                 ) : (
-                                                    <Container className="f-flex justify-content-center align-items-center mb-2" style={{height: 170}}>
-                                                        <Image src={currentYearTracks[race?.Circuit?.circuitId]} alt="" className="w-100 h-100 object-fit-contain"/>
-                                                    </Container>
+                                                    <TrackImageContainer heightSize={170} circuitId={race?.Circuit?.circuitId}/>
                                                 )
                                             }
                                         </Container>
