@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 
-import SmallDriver from "../standings/SmallDriver";
+import Dates from "./Dates";
+import TopThreeDriversRace from "./TopThreeDriversRace";
 import TrackImageContainer from "./TrackImageContainer";
-import { currentConstructorColor } from "../../constants/currentConstructorColor";
 
 import { Col, Container, Image, Row, Spinner } from "react-bootstrap";
 import { flags } from "../../constants/flags";
-import TopThreeDriversRace from "./TopThreeDriversRace";
 
 export default function Schedule() {
     const myBorder = {
@@ -16,11 +15,6 @@ export default function Schedule() {
         borderRadius: 10,
         minHeight: 200,
     };
-
-    const dateStyle = {
-        fontFamily: "Formula1-Wide",
-        fontSize: 12,
-    }
 
     const [schedule, setSchedule] = useState([]);
     const [winners, setWinners] = useState([]);
@@ -78,17 +72,7 @@ export default function Schedule() {
                                                 <p className="m-0" style={{fontFamily: "Formula1-Regular"}}>Round {race?.round}</p>
                                                 <Image src={flags[race?.Circuit?.Location?.country]} alt={"Flag of " + race?.Circuit?.Location?.country} className="border rounded-3" height={30} />
                                             </Container>
-                                            <Container className="d-flex flex-row align-items-center mt-2 border-2 border-black border-bottom border-end rounded-4">
-                                                <Container className="d-flex flex-column align-items-center">
-                                                    <p className="m-0" style={dateStyle}>{dateDebut.toLocaleDateString("en-GB", {day: "2-digit"})}</p>
-                                                    <p className="m-0" style={dateStyle}>{dateDebut.toLocaleDateString("en-GB", {month: "short"})}</p>
-                                                </Container>
-                                                <p style={{fontFamily: "Formula1-Wide"}}>-</p>
-                                                <Container className="d-flex flex-column align-items-center">
-                                                    <p className="m-0" style={dateStyle}>{dateFin.toLocaleDateString("en-GB", {day: "2-digit"})}</p>
-                                                    <p className="m-0" style={dateStyle}>{dateFin.toLocaleDateString("en-GB", {month: "short"})}</p>
-                                                </Container>
-                                            </Container>
+                                            <Dates dateDebut={dateDebut} dateFin={dateFin} />
                                             <p className="text-center mt-2" style={{fontFamily: "Formula1-Bold", letterSpacing: "0.0001rem"}}>{race?.raceName}</p>
                                             {
                                                 winners[index] && seconds[index] && thirds[index] ? (
