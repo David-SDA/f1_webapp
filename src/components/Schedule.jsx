@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
 
+import SmallDriver from "./standings/SmallDriver";
+import { currentConstructorColor } from "../constants/currentConstructorColor";
+import { currentYearTracks } from "../constants/currentYearTracks";
+
 import { Col, Container, Image, Row, Spinner } from "react-bootstrap";
 import { flags } from "../constants/flags";
 
@@ -18,13 +22,27 @@ export default function Schedule() {
     }
 
     const [schedule, setSchedule] = useState([]);
+    const [winners, setWinners] = useState([]);
+    const [seconds, setSeconds] = useState([]);
+    const [thirds, setThirds] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     const fetchInfo = async () => {
         try{
-            const response = await fetch("http://ergast.com/api/f1/current.json");
-            const data = await response.json();
-            setSchedule(data.MRData.RaceTable.Races);
+            const responseSchedule = await fetch("http://ergast.com/api/f1/current.json");
+            const responseWinners = await fetch("http://ergast.com/api/f1/current/results/1.json");
+            const responseSeconds = await fetch("http://ergast.com/api/f1/current/results/2.json");
+            const responseThirds = await fetch("http://ergast.com/api/f1/current/results/3.json");
+
+            const dataSchedule = await responseSchedule.json();
+            const dataWinners = await responseWinners.json();
+            const dataSeconds = await responseSeconds.json();
+            const dataThirds = await responseThirds.json();
+
+            setSchedule(dataSchedule.MRData.RaceTable.Races);
+            setWinners(dataWinners.MRData.RaceTable.Races);
+            setSeconds(dataSeconds.MRData.RaceTable.Races);
+            setThirds(dataThirds.MRData.RaceTable.Races);
         }catch(error){
             console.log(error);
         }finally{
@@ -50,12 +68,25 @@ export default function Schedule() {
                         schedule.map((race, index) => {
                             const dateDebut = new Date(race?.FirstPractice?.date);
                             const dateFin = new Date(race?.date);
-
-                            console.log(dateDebut);
-                            console.log(dateFin);
-
+                            
+                            if(winners[index]){
+                                var winnerPosition = winners[index]?.Results[0]?.position;
+                                var winnerName = winners[index]?.Results[0]?.Driver?.familyName;
+                                var winnerTeamId = winners[index]?.Results[0]?.Constructor?.constructorId;
+                            }
+                            if(seconds[index]){
+                                var secondPosition = seconds[index]?.Results[0]?.position;
+                                var secondName = seconds[index]?.Results[0]?.Driver?.familyName;
+                                var secondTeamId = seconds[index]?.Results[0]?.Constructor?.constructorId;
+                            }
+                            if(thirds[index]){
+                                var thridPosition = thirds[index]?.Results[0]?.position;
+                                var thirdName  = thirds[index]?.Results[0]?.Driver?.familyName;
+                                var thirdTeamId = thirds[index]?.Results[0]?.Constructor?.constructorId;
+                            }
+                            
                             return (
-                                <Col sm={6} md={4} lg={3} className="mb-3" key={index}>
+                                <Col sm={12} md={6} lg={4} className="mb-3" key={index}>
                                     <a href="#" className="link-dark link-underline-opacity-0 link-opacity-50-hover">
                                         <Container style={myBorder} >
                                             <Container className="d-flex justify-content-between align-items-center p-0">
@@ -73,7 +104,44 @@ export default function Schedule() {
                                                     <p className="m-0" style={dateStyle}>{dateFin.toLocaleDateString("en-GB", {month: "short"})}</p>
                                                 </Container>
                                             </Container>
-                                            <p className="text-center mt-2" style={{fontFamily: "Formula1-Bold", letterSpacing: "0.0001rem"}}>{race?.raceName} &gt;</p>
+                                            <p className="text-center mt-2" style={{fontFamily: "Formula1-Bold", letterSpacing: "0.0001rem"}}>{race?.raceName}</p>
+                                            {
+                                                winners[index] ? (
+                                                    <Container className="d-flex flex-column justify-content-center mb-2 pt-2 rounded-2" style={{backgroundColor: "#38383f", height: 170}}>
+                                                        {
+                                                            winners[index] ? (
+                                                                <SmallDriver
+                                                                    position={winnerPosition}
+                                                                    name={winnerName}
+                                                                    color={currentConstructorColor[winnerTeamId]}
+                                                                />
+                                                            ) : ("")
+                                                        }
+                                                        {
+                                                            seconds[index] ? (
+                                                                <SmallDriver
+                                                                    position={secondPosition}
+                                                                    name={secondName}
+                                                                    color={currentConstructorColor[secondTeamId]}
+                                                                />
+                                                            ) : ("")
+                                                        }
+                                                        {
+                                                            thirds[index] ? (
+                                                                <SmallDriver
+                                                                    position={thridPosition}
+                                                                    name={thirdName}
+                                                                    color={currentConstructorColor[thirdTeamId]}
+                                                                />
+                                                            ) : ("")
+                                                        }
+                                                    </Container>
+                                                ) : (
+                                                    <Container className="f-flex justify-content-center align-items-center mb-2" style={{height: 170}}>
+                                                        <Image src={currentYearTracks[race?.Circuit?.circuitId]} alt="" className="w-100 h-100 object-fit-contain"/>
+                                                    </Container>
+                                                )
+                                            }
                                         </Container>
                                     </a>
                                 </Col>
