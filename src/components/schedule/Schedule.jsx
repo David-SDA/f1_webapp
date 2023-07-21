@@ -78,7 +78,7 @@ export default function Schedule() {
                                                 winners[index] && seconds[index] && thirds[index] ? (
                                                     <TopThreeDriversRace winner={winners[index]} second={seconds[index]} third={thirds[index]} />
                                                 ) : (
-                                                    <TrackImageContainer heightSize={170} circuitId={race?.Circuit?.circuitId}/>
+                                                    <TrackImageContainer heightSize={170} circuitId={race?.Circuit?.circuitId} country={race?.Circuit?.Location?.country} />
                                                 )
                                             }
                                         </Container>
