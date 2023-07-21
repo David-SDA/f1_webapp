@@ -63,10 +63,12 @@ export default function SchedulePage() {
                         schedule.map((race, index) => {
                             const dateDebut = new Date(race?.FirstPractice?.date);
                             const dateFin = new Date(race?.date);
+
+                            const format = race?.ThirdPractice ? "normal" : "sprint";
                             
                             return (
                                 <Col sm={12} md={6} lg={4} className="mb-3" key={index}>
-                                    <a href={"/schedule/" + race?.round} className="link-dark link-underline-opacity-0 link-opacity-50-hover">
+                                    <a href={"/schedule/" + race?.round + "/" + format} className="link-dark link-underline-opacity-0 link-opacity-50-hover">
                                         <Container style={myBorder} >
                                             <SmallRoundFlag round={race?.round} country={race?.Circuit?.Location?.country} />
                                             <Dates dateDebut={dateDebut} dateFin={dateFin} />
