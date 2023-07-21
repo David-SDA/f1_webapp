@@ -16,10 +16,10 @@ export default function Schedule() {
         minHeight: 200,
     };
 
-    const [schedule, setSchedule] = useState([]);
-    const [winners, setWinners] = useState([]);
-    const [seconds, setSeconds] = useState([]);
-    const [thirds, setThirds] = useState([]);
+    const [schedule, setSchedule] = useState([]); // Le programme complet
+    const [winners, setWinners] = useState([]); // Les vainqueurs des courses déjà couru
+    const [seconds, setSeconds] = useState([]); // Les deuxièmes des courses déjà couru
+    const [thirds, setThirds] = useState([]); // Les troisièmes des courses déjà couru
     const [isLoading, setIsLoading] = useState(true);
 
     const fetchInfo = async () => {
@@ -73,7 +73,7 @@ export default function Schedule() {
                                                 <Image src={flags[race?.Circuit?.Location?.country]} alt={"Flag of " + race?.Circuit?.Location?.country} className="border rounded-3" height={30} />
                                             </Container>
                                             <Dates dateDebut={dateDebut} dateFin={dateFin} />
-                                            <p className="text-center mt-2" style={{fontFamily: "Formula1-Bold", letterSpacing: "0.0001rem"}}>{race?.raceName}</p>
+                                            <p className="text-center mt-2" style={{fontFamily: "Formula1-Bold", letterSpacing: "0.0001rem"}}>{race?.raceName} &gt;</p>
                                             {
                                                 winners[index] && seconds[index] && thirds[index] ? (
                                                     <TopThreeDriversRace winner={winners[index]} second={seconds[index]} third={thirds[index]} />
