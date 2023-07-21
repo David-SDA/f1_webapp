@@ -10,6 +10,7 @@ import './fonts/Formula1-Wide.ttf';
 import TopNavBar from './components/TopNavBar';
 import HomePage from './components/HomePage';
 import SchedulePage from './components/schedule/SchedulePage';
+import RaceResultsPage from './components/raceResults/RaceResultsPage';
 import DriversStandings from './components/DriversStandings';
 import ConstructorsStandings from './components/ConstructorsStandings';
 import DriverChampions from './components/DriverChampions';
@@ -25,6 +26,7 @@ function App() {
                 <Routes>
                     <Route path='/' element={<HomePage />} />
                     <Route path='/schedule' element={<SchedulePage />} />
+                    <Route path='/schedule/:round' element={<RaceResultsPage />} />
                     <Route path='/driversStandings' element={<DriversStandings />} />
                     <Route path='/constructorsStandings' element={<ConstructorsStandings />} />
                     <Route path='/driverChampions' element={<DriverChampions />} />
