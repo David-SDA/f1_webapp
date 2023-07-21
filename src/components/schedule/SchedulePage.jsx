@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 
+import SmallRoundFlag from "./SmallRoundFlag";
 import Dates from "./Dates";
 import TopThreeDriversRace from "./TopThreeDriversRace";
 import TrackImageContainer from "./TrackImageContainer";
 
-import { Col, Container, Image, Row, Spinner } from "react-bootstrap";
-import { flags } from "../../constants/flags";
+import { Col, Container, Row, Spinner } from "react-bootstrap";
 
-export default function Schedule() {
+export default function SchedulePage() {
     const myBorder = {
         fontFamily: "Formula1-Regular",
         borderBottom: "5px solid #ff1801",
@@ -68,10 +68,7 @@ export default function Schedule() {
                                 <Col sm={12} md={6} lg={4} className="mb-3" key={index}>
                                     <a href="#" className="link-dark link-underline-opacity-0 link-opacity-50-hover">
                                         <Container style={myBorder} >
-                                            <Container className="d-flex justify-content-between align-items-center p-0">
-                                                <p className="m-0" style={{fontFamily: "Formula1-Regular"}}>Round {race?.round}</p>
-                                                <Image src={flags[race?.Circuit?.Location?.country]} alt={"Flag of " + race?.Circuit?.Location?.country} className="border rounded-3" height={30} />
-                                            </Container>
+                                            <SmallRoundFlag round={race?.round} country={race?.Circuit?.Location?.country} />
                                             <Dates dateDebut={dateDebut} dateFin={dateFin} />
                                             <p className="text-center mt-2" style={{fontFamily: "Formula1-Bold", letterSpacing: "0.0001rem"}}>{race?.raceName} &gt;</p>
                                             {

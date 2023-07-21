@@ -8,8 +8,8 @@ import './fonts/Formula1-Regular.ttf';
 import './fonts/Formula1-Wide.ttf';
 
 import TopNavBar from './components/TopNavBar';
-import Home from './components/Home';
-import Schedule from './components/schedule/Schedule';
+import HomePage from './components/HomePage';
+import SchedulePage from './components/schedule/SchedulePage';
 import DriversStandings from './components/DriversStandings';
 import ConstructorsStandings from './components/ConstructorsStandings';
 import DriverChampions from './components/DriverChampions';
@@ -23,8 +23,8 @@ function App() {
             <TopNavBar />
             <div className="App">
                 <Routes>
-                    <Route path='/' element={<Home />} />
-                    <Route path='/schedule' element={<Schedule />} />
+                    <Route path='/' element={<HomePage />} />
+                    <Route path='/schedule' element={<SchedulePage />} />
                     <Route path='/driversStandings' element={<DriversStandings />} />
                     <Route path='/constructorsStandings' element={<ConstructorsStandings />} />
                     <Route path='/driverChampions' element={<DriverChampions />} />

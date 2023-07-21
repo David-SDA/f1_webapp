@@ -5,7 +5,7 @@ import SmallStandingsContainer from "./standings/SmallStandingsContainer";
 
 import { Container } from "react-bootstrap";
 
-export default function Home(){
+export default function HomePage(){
     return (
         <Container className="d-flex flex-column justify-content-center align-items-center">
             <p className="h1 align-self-start fst-italic ms-3 mt-2" style={{fontFamily: "Formula1-Regular"}}>Current Standings</p>

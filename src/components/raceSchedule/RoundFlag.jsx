@@ -11,7 +11,7 @@ export default function RoundFlag({round, country}){
                 <h6 style={{fontFamily: "Formula1-Regular"}}>Round</h6>
                 <h5 style={{fontFamily: "Formula1-Wide"}}>{round}</h5>
             </Badge>
-            <Image src={flags[country]} alt="Country's flag of the race location" className="rounded-4" width={120}/>
+            <Image src={flags[country]} alt="Country's flag of the race location" className="rounded-4 border" width={120}/>
         </Container>
     );
 }
