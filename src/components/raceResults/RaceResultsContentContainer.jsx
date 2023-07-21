@@ -71,7 +71,13 @@ export default function RaceResultsContentContainer({
             </Col>
             <Col className="p-0"  xs={5} sm={3} md={2} lg={2}>
                 <p className="m-0 text-center" style={regularText}>
-                    <span className="rounded-5 p-1" style={{backgroundColor: "#e8e8e8"}}>{totalTime}</span>
+                    {
+                        totalTime ? (
+                            <span className="rounded-5 p-1" style={{backgroundColor: "#e8e8e8"}}>{totalTime}</span>
+                        ) : (
+                            <span className="rounded-5 p-1" style={{backgroundColor: "#e8e8e8"}}>DNF</span>
+                        )
+                    }
                 </p>
             </Col>
             <Col className="p-0" xs={2} sm={1} md={1} lg={1}>

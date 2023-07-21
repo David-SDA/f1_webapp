@@ -14,7 +14,7 @@ export default function RoundResultsPage(){
     return (
         <Container className="d-flex flex-column justify-content-center align-items-center pt-3 pb-3 ps-1 ps-sm-3 pe-1 pe-sm-3">
             <RaceContainer round={round} />
-            <RaceResultsContainer />
+            <RaceResultsContainer round={round} />
             <QualifyingResultsContainer />
             {
                 format === "sprint" ? (
