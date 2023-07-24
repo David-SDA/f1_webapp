@@ -6,7 +6,7 @@ import ScheduleSprintWeekend from './ScheduleSprintWeekend';
 
 import { Container, Spinner } from "react-bootstrap";
 
-export default function RaceContainer({round}){
+export default function RaceContainer({round, onDateReceived}){
     const [race, setRace] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -15,7 +15,7 @@ export default function RaceContainer({round}){
             const response = await fetch('https://ergast.com/api/f1/current/' + round + '.json');
             const data = await response.json();
             setRace(data.MRData.RaceTable.Races[0]);
-            console.log(race);
+            onDateReceived(data.MRData.RaceTable.Races[0].date + 'T' + data.MRData.RaceTable.Races[0].time);
         }catch(error){
             console.log(error);
         }finally{
@@ -25,7 +25,7 @@ export default function RaceContainer({round}){
 
     useEffect(() => {
         fetchInfo();
-    }, []);
+    }, [onDateReceived]);
 
     let dateFP1 = new Date(race?.FirstPractice?.date + 'T' + race?.FirstPractice?.time);
     let dateFP2 = new Date(race?.SecondPractice?.date + 'T' + race?.SecondPractice?.time);
