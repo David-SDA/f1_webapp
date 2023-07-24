@@ -11,6 +11,7 @@ export default function RaceResultsContentContainer({
     fastestLap,
     fastestLapRank,
     totalTime,
+    status,
     points
 }){
     const MyBar = {
@@ -74,8 +75,11 @@ export default function RaceResultsContentContainer({
                     {
                         totalTime ? (
                             <span className="rounded-5 p-1" style={{backgroundColor: "#e8e8e8"}}>{totalTime}</span>
-                        ) : (
-                            <span className="rounded-5 p-1" style={{backgroundColor: "#e8e8e8"}}>DNF</span>
+                        ) : ( status.includes("Lap") ? (
+                                <span className="rounded-5 p-1" style={{backgroundColor: "#e8e8e8"}}>{status}</span>
+                            ):(
+                                <span className="rounded-5 p-1" style={{backgroundColor: "#e8e8e8"}}>DNF</span>
+                            )
                         )
                     }
                 </p>

@@ -41,7 +41,7 @@ export default function RaceResultsContainer({round}){
                         results.map((result, index) => {
                             return (
                                 <RaceResultsContentContainer
-                                    position={result?.position}
+                                    position={result?.positionText}
                                     color={currentConstructorColor[result?.Constructor?.constructorId]}
                                     firstName={result?.Driver?.givenName}
                                     familyName={result?.Driver?.familyName}
@@ -49,6 +49,7 @@ export default function RaceResultsContainer({round}){
                                     fastestLap={result?.FastestLap?.Time?.time}
                                     fastestLapRank={result?.FastestLap?.rank}
                                     totalTime={result?.Time?.time}
+                                    status={result?.status}
                                     points={result?.points}
                                     key={index}
                                 />
