@@ -9,14 +9,14 @@ import './fonts/Formula1-Wide.ttf';
 
 import TopNavBar from './components/TopNavBar';
 import HomePage from './components/HomePage';
-import SchedulePage from './components/schedule/SchedulePage';
+import SchedulePage from './components/schedule/SchedulePageContainer';
 import RoundResultsPage from './components/raceResults/RoundResultsPage';
-import DriversStandings from './components/DriversStandings';
-import ConstructorsStandings from './components/ConstructorsStandings';
-import DriverChampions from './components/DriverChampions';
-import ConstructorChampions from './components/ConstructorChampions';
-import Tracks from './components/Tracks';
-import NotFound from './components/NotFound';
+import DriversStandingsPage from './components/DriversStandingsPage';
+import ConstructorsStandingsPage from './components/ConstructorsStandingsPage';
+import DriverChampionsPage from './components/DriverChampionsPage';
+import ConstructorChampionsPage from './components/ConstructorChampionsPage';
+import TracksPage from './components/TracksPage';
+import NotFoundPage from './components/NotFoundPage';
 
 function App() {
     return (
@@ -27,12 +27,12 @@ function App() {
                     <Route path='/' element={<HomePage />} />
                     <Route path='/schedule' element={<SchedulePage />} />
                     <Route path='/schedule/:round/:format' element={<RoundResultsPage />} />
-                    <Route path='/driversStandings' element={<DriversStandings />} />
-                    <Route path='/constructorsStandings' element={<ConstructorsStandings />} />
-                    <Route path='/driverChampions' element={<DriverChampions />} />
-                    <Route path='/constructorChampions' element={<ConstructorChampions />} />
-                    <Route path='/tracks' element={<Tracks />} />
-                    <Route path='*' element={<NotFound />} />
+                    <Route path='/driversStandings' element={<DriversStandingsPage />} />
+                    <Route path='/constructorsStandings' element={<ConstructorsStandingsPage />} />
+                    <Route path='/driverChampions' element={<DriverChampionsPage />} />
+                    <Route path='/constructorChampions' element={<ConstructorChampionsPage />} />
+                    <Route path='/tracks' element={<TracksPage />} />
+                    <Route path='*' element={<NotFoundPage />} />
                 </Routes>
             </div>
         </Router>

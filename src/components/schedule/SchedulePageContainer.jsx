@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 
-import SmallRoundFlag from "./SmallRoundFlag";
-import Dates from "./Dates";
-import TopThreeDriversRace from "./TopThreeDriversRace";
+import SmallRoundFlagContainer from "./SmallRoundFlagContainer";
+import DatesContainer from "./DatesContainer";
+import TopThreeDriversRaceContainer from "./TopThreeDriversRaceContainer";
 import TrackImageContainer from "./TrackImageContainer";
 
 import { Col, Container, Row, Spinner } from "react-bootstrap";
 
-export default function SchedulePage() {
+export default function SchedulePageContainer() {
     const myBorder = {
         fontFamily: "Formula1-Regular",
         borderBottom: "5px solid #ff1801",
@@ -70,12 +70,12 @@ export default function SchedulePage() {
                                 <Col sm={12} md={6} lg={4} className="mb-3" key={index}>
                                     <a href={"/schedule/" + race?.round + "/" + format} className="link-dark link-underline-opacity-0 link-opacity-50-hover">
                                         <Container style={myBorder} >
-                                            <SmallRoundFlag round={race?.round} country={race?.Circuit?.Location?.country} />
-                                            <Dates dateDebut={dateDebut} dateFin={dateFin} />
+                                            <SmallRoundFlagContainer round={race?.round} country={race?.Circuit?.Location?.country} />
+                                            <DatesContainer dateDebut={dateDebut} dateFin={dateFin} />
                                             <p className="text-center mt-2" style={{fontFamily: "Formula1-Bold", letterSpacing: "0.0001rem"}}>{race?.raceName} &gt;</p>
                                             {
                                                 winners[index] && seconds[index] && thirds[index] ? (
-                                                    <TopThreeDriversRace winner={winners[index]} second={seconds[index]} third={thirds[index]} />
+                                                    <TopThreeDriversRaceContainer winner={winners[index]} second={seconds[index]} third={thirds[index]} />
                                                 ) : (
                                                     <TrackImageContainer heightSize={170} circuitId={race?.Circuit?.circuitId} country={race?.Circuit?.Location?.country} />
                                                 )

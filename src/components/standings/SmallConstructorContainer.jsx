@@ -2,7 +2,7 @@ import React from "react";
 
 import { Container } from "react-bootstrap";
 
-export default function SmallConstructor({position, name, points, color}){
+export default function SmallConstructorContainer({position, name, points, color}){
     const MyBar = {
         width: 7,
         height: 25,

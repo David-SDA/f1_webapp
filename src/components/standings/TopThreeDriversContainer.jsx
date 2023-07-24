@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 
-import SmallDriver from "./SmallDriver";
+import SmallDriverContainer from "./SmallDriverContainer";
 import { currentConstructorColor } from "../../constants/currentConstructorColor";
 
 import { Container, Spinner } from "react-bootstrap";
 
-export default function TopThreeDrivers(){
+export default function TopThreeDriversContainer(){
     const [standings, setStandings] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -36,7 +36,7 @@ export default function TopThreeDrivers(){
                 {
                     standings.map((driver, index) => {
                         return (
-                            <SmallDriver
+                            <SmallDriverContainer
                                 position={driver?.position}
                                 firstName={driver?.Driver?.givenName}
                                 name={driver?.Driver?.familyName}

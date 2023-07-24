@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function DriverChampions() {
+export default function DriverChampionsPage() {
     return (
         <div>
             <p>Driver Champions</p>

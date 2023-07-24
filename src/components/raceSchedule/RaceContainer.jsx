@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 
-import RaceHeader from './RaceHeader';
-import ScheduleNormalWeekend from './ScheduleNormalWeekend';
-import ScheduleSprintWeekend from './ScheduleSprintWeekend';
+import RaceHeaderContainer from './RaceHeaderContainer';
+import ScheduleNormalWeekendContainer from './ScheduleNormalWeekendContainer';
+import ScheduleSprintWeekendContainer from './ScheduleSprintWeekendContainer';
 
 import { Container, Spinner } from "react-bootstrap";
 
@@ -46,14 +46,14 @@ export default function RaceContainer({round, onDateReceived}){
     }else{
         return (
             <Container className="d-flex flex-column shadow-lg rounded-4 p-2 mb-5" style={{backgroundColor: '#f8f8f8'}}>
-                <RaceHeader
+                <RaceHeaderContainer
                     round={race?.round}
                     raceName={race?.raceName}
                     country={race?.Circuit?.Location?.country}
                 />
                 {
                     (dateFP3) ? 
-                        <ScheduleNormalWeekend
+                        <ScheduleNormalWeekendContainer
                             dateFP1={dateFP1}
                             dateFP2={dateFP2}
                             dateFP3={dateFP3}
@@ -61,7 +61,7 @@ export default function RaceContainer({round, onDateReceived}){
                             dateRace={dateRace} 
                         />
                     :
-                        <ScheduleSprintWeekend
+                        <ScheduleSprintWeekendContainer
                             dateFP1={dateFP1}
                             dateQuali={dateQuali}
                             dateFP2={dateFP2}

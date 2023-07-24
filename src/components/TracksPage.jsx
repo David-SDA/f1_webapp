@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Tracks() {
+export default function TracksPage() {
     return (
         <div>
             <p>Tracks</p>

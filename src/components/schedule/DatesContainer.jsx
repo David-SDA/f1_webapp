@@ -1,14 +1,14 @@
 import React from "react";
 
 import { Container } from "react-bootstrap";
-import OneDate from "./OneDate";
+import OneDateContainer from "./OneDateContainer";
 
-export default function Dates({dateDebut, dateFin}){
+export default function DatesContainer({dateDebut, dateFin}){
     return (
         <Container className="d-flex flex-row align-items-center mt-2 border-2 border-black border-bottom border-end rounded-4">
-            <OneDate date={dateDebut} />
+            <OneDateContainer date={dateDebut} />
             <p style={{fontFamily: "Formula1-Wide"}}>-</p>
-            <OneDate date={dateFin} />
+            <OneDateContainer date={dateFin} />
         </Container>
     );
 }

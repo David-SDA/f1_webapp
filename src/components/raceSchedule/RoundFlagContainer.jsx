@@ -4,7 +4,7 @@ import { flags } from "../../constants/flags";
 
 import { Badge, Container, Image } from "react-bootstrap";
 
-export default function RoundFlag({round, country}){
+export default function RoundFlagContainer({round, country}){
     return (
         <Container className="d-flex flex-row justify-content-between" style={{maxHeight: 80}}>
             <Badge bg="light" text="dark" className="d-flex flex-column justify-content-center align-items-center shadow rounded-3">

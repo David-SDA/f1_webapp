@@ -2,7 +2,7 @@ import React from "react";
 
 import { Container } from "react-bootstrap";
 
-export default function SmallDriver({position, firstName, name, points, color}){
+export default function SmallDriverContainer({position, firstName, name, points, color}){
     const MyBar = {
         width: 7,
         height: 25,

@@ -2,7 +2,7 @@ import React from "react";
 
 import { Container } from "react-bootstrap";
 
-export default function OneDate({date}){
+export default function OneDateContainer({date}){
     const dateStyle = {
         fontFamily: "Formula1-Wide",
         fontSize: 12,

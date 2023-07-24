@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function DayMonth({date}){
+export default function DayMonthContainer({date}){
     return (
         <div className="d-flex flex-column align-items-center ms-2 me-2">
             <p className="h4 mb-0" style={{fontFamily: "Formula1-Bold"}}>{date.toLocaleDateString('en-GB', {day: '2-digit'})}</p>

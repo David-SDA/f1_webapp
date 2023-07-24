@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function ConstructorChampions() {
+export default function ConstructorChampionsPage() {
     return (
         <div>
             <p>Constructor Champions</p>

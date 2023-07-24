@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function ConstructorsStandings() {
+export default function ConstructorsStandingsPage() {
     return (
         <div>
             <p>Constructors Standings</p>

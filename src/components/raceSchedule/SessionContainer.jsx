@@ -2,7 +2,7 @@ import React from "react";
 
 import { Container } from "react-bootstrap";
 
-export default function Session({sessionName, date}){
+export default function SessionContainer({sessionName, date}){
     return (
         <Container className="d-flex flex-column justify-content-evenly ms-1">
             <p className="h6" style={{fontFamily: "Formula1-Bold"}}>{sessionName}</p>

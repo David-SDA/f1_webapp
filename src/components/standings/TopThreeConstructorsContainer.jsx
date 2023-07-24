@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 
-import SmallConstructor from "./SmallConstructor";
+import SmallConstructorContainer from "./SmallConstructorContainer";
 import { currentConstructorColor } from "../../constants/currentConstructorColor";
 import { currentConstructorSmallText } from "../../constants/currentConstructorSmallText";
 
 import { Container, Spinner } from "react-bootstrap";
 
-export default function TopThreeConstructors(){
+export default function TopThreeConstructorsContainer(){
     const [standings, setStandings] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -37,7 +37,7 @@ export default function TopThreeConstructors(){
                 {
                     standings.map((constructor, index) => {
                         return (
-                            <SmallConstructor
+                            <SmallConstructorContainer
                                 position={constructor?.position}
                                 name={currentConstructorSmallText[constructor?.Constructor?.constructorId]}
                                 points={constructor?.points}

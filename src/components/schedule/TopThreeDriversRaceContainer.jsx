@@ -1,11 +1,11 @@
 import React from "react";
 
-import SmallDriver from "../standings/SmallDriver";
+import SmallDriverContainer from "../standings/SmallDriverContainer";
 import { currentConstructorColor } from "../../constants/currentConstructorColor";
 
 import { Container } from "react-bootstrap";
 
-export default function TopThreeDriversRace({winner, second, third}){
+export default function TopThreeDriversRaceContainer({winner, second, third}){
     var winnerPosition = winner?.Results[0]?.position;
     var winnerName = winner?.Results[0]?.Driver?.familyName;
     var winnerTeamId = winner?.Results[0]?.Constructor?.constructorId;
@@ -20,17 +20,17 @@ export default function TopThreeDriversRace({winner, second, third}){
 
     return (
         <Container className="d-flex flex-column justify-content-center mb-2 pt-2 rounded-2" style={{backgroundColor: "#38383f", height: 170}}>
-            <SmallDriver
+            <SmallDriverContainer
                 position={winnerPosition}
                 name={winnerName}
                 color={currentConstructorColor[winnerTeamId]}
             />
-            <SmallDriver
+            <SmallDriverContainer
                 position={secondPosition}
                 name={secondName}
                 color={currentConstructorColor[secondTeamId]}
             />
-            <SmallDriver
+            <SmallDriverContainer
                 position={thridPosition}
                 name={thirdName}
                 color={currentConstructorColor[thirdTeamId]}
