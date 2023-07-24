@@ -12,10 +12,10 @@ export default function RoundResultsPage(){
     let { round, format } = useParams();
 
     return (
-        <Container className="d-flex flex-column justify-content-center align-items-center pt-3 pb-3 ps-1 ps-sm-3 pe-1 pe-sm-3">
+        <Container className="d-flex flex-column justify-content-center align-items-center pt-3 pb-3 ps-1 pe-1">
             <RaceContainer round={round} />
             <RaceResultsContainer round={round} />
-            <QualifyingResultsContainer />
+            <QualifyingResultsContainer round={round} />
             {
                 format === "sprint" ? (
                     <SprintResultsContainer round={round} />

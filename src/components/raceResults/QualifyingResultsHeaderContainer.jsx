@@ -19,8 +19,9 @@ export default function QualifyingResultsHeaderContainer(){
                 </p>
             </Col>
             <Col xs={2} sm={1} md={1} lg={1}>
+                <p className="m-0"></p>
             </Col>
-            <Col xs={3} sm={4} md={4} lg={7}>
+            <Col xs={2} sm={3} md={4} lg={4} className="p-0">
                 <p className="m-0 d-none d-sm-block" style={headerTextStyle}>
                     DRIVER
                 </p>
@@ -28,17 +29,17 @@ export default function QualifyingResultsHeaderContainer(){
                     DRI
                 </p>
             </Col>
-            <Col className="p-0" xs={2} sm={2} md={2} lg={1}>
+            <Col className="p-0" xs={2} sm={2} md={2} lg={2}>
                 <p className="m-0 text-center" style={headerTextStyle}>
                     Q1
                 </p>
             </Col>
-            <Col className="p-0" xs={2} sm={2} md={2} lg={1}>
+            <Col className="p-0" xs={2} sm={2} md={2} lg={2}>
                 <p className="m-0 text-center" style={headerTextStyle}>
                     Q2
                 </p>
             </Col>
-            <Col className="p-0" xs={2} sm={2} md={2} lg={1}>
+            <Col className="p-0" xs={2} sm={2} md={2} lg={2}>
                 <p className="m-0 text-center" style={headerTextStyle}>
                     Q3
                 </p>
