@@ -2,7 +2,7 @@ import React from "react";
 
 import { Col, Row } from "react-bootstrap";
 
-export default function RaceResultsHeaderContainer(){
+export default function RaceSprintResultsHeaderContainer({type}){
     const headerTextStyle = {
         fontFamily: "Formula1-Black",
         letterSpacing: "0.0005rem",
@@ -29,9 +29,17 @@ export default function RaceResultsHeaderContainer(){
                 </p>
             </Col>
             <Col className="p-0 d-none d-md-block" md={3} lg={2}>
-                <p className="m-0 text-center" style={headerTextStyle}>
-                    FASTEST LAP
-                </p>
+                {
+                    type === "Race" ? (
+                        <p className="m-0 text-center" style={headerTextStyle}>
+                            FASTEST LAP
+                        </p>
+                    ) : (
+                        <p className="m-0 text-center" style={headerTextStyle}>
+                            STARTED
+                        </p>
+                    )
+                }
             </Col>
             <Col className="p-0" xs={5} sm={3} md={2} lg={2}>
                 <p className="m-0 text-center" style={headerTextStyle}>

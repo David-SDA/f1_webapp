@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Col, Row } from "react-bootstrap";
 
@@ -38,11 +38,11 @@ export default function RaceResultsContentContainer({
     const wideText = {
         fontFamily: "Formula1-Wide",
         letterSpacing: "0.0005rem",
-    }
+    };
 
     return (
         <a href="#" className="link-dark link-underline-opacity-0 link-opacity-75-hover">
-            <Row className="d-flex flex-nowrap flex-row justify-content-around align-items-center bg-white m-1 p-1 p-sm-2 rounded-3">
+            <Row className="d-flex flex-nowrap flex-row justify-content-around align-items-center bg-white m-1 p-1 p-sm-2 rounded-3">                    
                 <Col className="p-0" xs={1} sm={1} md={1} lg={1}>
                     <p className="m-0 text-center text-xs" style={wideText}>
                         {position}
@@ -76,7 +76,8 @@ export default function RaceResultsContentContainer({
                         {
                             totalTime ? (
                                 <span className="rounded-5 p-1" style={{backgroundColor: "#e8e8e8"}}>{totalTime}</span>
-                            ) : ( status.includes("Lap") ? (
+                            ) : (
+                                status.includes("Lap") ? (
                                     <span className="rounded-5 p-1" style={{backgroundColor: "#e8e8e8"}}>{status}</span>
                                 ):(
                                     <span className="rounded-5 p-1" style={{backgroundColor: "#e8e8e8"}}>DNF</span>
