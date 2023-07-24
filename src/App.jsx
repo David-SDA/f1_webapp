@@ -11,7 +11,7 @@ import TopNavBar from './components/TopNavBar';
 import HomePage from './components/HomePage';
 import SchedulePage from './components/schedule/SchedulePageContainer';
 import RoundResultsPage from './components/raceResults/RoundResultsPage';
-import DriversStandingsPage from './components/DriversStandingsPage';
+import DriversStandingsPage from './components/standings/drivers/DriversStandingsPage';
 import ConstructorsStandingsPage from './components/ConstructorsStandingsPage';
 import DriverChampionsPage from './components/DriverChampionsPage';
 import ConstructorChampionsPage from './components/ConstructorChampionsPage';
