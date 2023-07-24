@@ -18,7 +18,7 @@ export default function RoundResultsPage(){
             <QualifyingResultsContainer />
             {
                 format === "sprint" ? (
-                    <SprintResultsContainer />
+                    <SprintResultsContainer round={round} />
                 ) : ("")
             }
         </Container>

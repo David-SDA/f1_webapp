@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import RaceSprintResultsHeaderContainer from "./RaceSprintResultsHeaderContainer";
-import RaceResultsContentContainer from "./RaceResultsContentContainer";
+import RaceSprintResultsContentContainer from "./RaceSprintResultsContentContainer";
 import { currentConstructorColor } from "../../constants/currentConstructorColor";
 
 import { Container, Spinner } from "react-bootstrap";
@@ -40,8 +40,10 @@ export default function RaceResultsContainer({round}){
                     {
                         results.map((result, index) => {
                             return (
-                                <RaceResultsContentContainer
+                                <RaceSprintResultsContentContainer
+                                    type={"Race"}
                                     position={result?.positionText}
+                                    startingPosition={""}
                                     color={currentConstructorColor[result?.Constructor?.constructorId]}
                                     firstName={result?.Driver?.givenName}
                                     familyName={result?.Driver?.familyName}

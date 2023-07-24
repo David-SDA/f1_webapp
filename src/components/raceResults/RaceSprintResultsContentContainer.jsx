@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { Col, Row } from "react-bootstrap";
 
-export default function RaceResultsContentContainer({
+export default function RaceSprintResultsContentContainer({
+    type,
     position,
+    startingPosition,
     color,
     firstName,
     familyName,
@@ -63,10 +65,14 @@ export default function RaceResultsContentContainer({
                 <Col className="p-0 d-none d-md-block" md={3} lg={2}>
                     <p className="m-0 text-center" style={regularText}>
                         {
-                            fastestLapRank === "1" ? (
-                                <span className="rounded-5 p-1 text-white" style={{backgroundColor: "purple"}}>{fastestLap}</span>
+                            type === "Race" ? (
+                                fastestLapRank === "1" ? (
+                                    <span className="rounded-5 p-1 text-white" style={{backgroundColor: "purple"}}>{fastestLap}</span>
+                                ) : (
+                                    <span className="rounded-5 p-1">{fastestLap}</span>
+                                )
                             ) : (
-                                <span className="rounded-5 p-1">{fastestLap}</span>
+                                <span className="rounded-5 p-1">{startingPosition}</span>
                             )
                         }
                     </p>
