@@ -18,12 +18,6 @@ export default function ConstructorStandingsContentContainer({
         backgroundColor: color,
     };
 
-    const textRegular = {
-        fontFamily: "Formula1-Regular",
-        letterSpacing: "0.0005rem",
-        color: isSelected ? "#ffffff" : "",
-    };
-
     const textBold = {
         fontFamily: "Formula1-Bold",
         letterSpacing: "0.0005rem",
