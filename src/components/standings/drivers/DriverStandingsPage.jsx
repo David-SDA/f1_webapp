@@ -10,6 +10,7 @@ import { Container, Spinner } from "react-bootstrap";
 export default function DriverStandingsPage() {
     const [standings, setStandings] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [selectedDriverIndex, setSelectedDriverIndex] = useState(0);
 
     const fetchInfo = async () => {
         try{
@@ -27,6 +28,10 @@ export default function DriverStandingsPage() {
         fetchInfo();
     }, []);
 
+    const handleDriverClick = (driverIndex) => {
+        setSelectedDriverIndex(driverIndex);
+    }
+
     if(isLoading){
         return(
             <Spinner animation="border" className="align-self-center" style={{color: "#ff1801"}} />
@@ -42,6 +47,7 @@ export default function DriverStandingsPage() {
                         standings.map((driver, index) => {
                             return (
                                 <DriverStandingsContentContainer
+                                    key={index}
                                     position={driver?.positionText}
                                     color={currentConstructorColor[driver?.Constructors[0]?.constructorId]}
                                     givenName={driver?.Driver?.givenName}
@@ -50,7 +56,9 @@ export default function DriverStandingsPage() {
                                     team={currentConstructorSmallText[driver?.Constructors[0]?.constructorId]}
                                     wins={driver?.wins}
                                     points={driver?.points}
-                                    key={index}
+                                    isSelected={selectedDriverIndex === index}
+                                    onClick={() => handleDriverClick(index)}
+                                    selectedDriverPoints={selectedDriverIndex !== null ? standings[selectedDriverIndex].points : 0}
                                 />
                             );
                         })

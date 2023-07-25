@@ -10,7 +10,10 @@ export default function DriverStandingsContentContainer({
     code,
     team,
     wins,
-    points
+    points,
+    isSelected,
+    onClick,
+    selectedDriverPoints
 }){
     const MyBar = {
         width: 7,
@@ -21,20 +24,28 @@ export default function DriverStandingsContentContainer({
     const textRegular = {
         fontFamily: "Formula1-Regular",
         letterSpacing: "0.0005rem",
+        color: isSelected ? "#ffffff" : "",
     };
 
     const textBold = {
         fontFamily: "Formula1-Bold",
         letterSpacing: "0.0005rem",
+        color: isSelected ? "#ffffff" : "",
     }
 
     const textWide = {
         fontFamily: "Formula1-Wide",
         letterSpacing: "0.0005rem",
+        color: isSelected ? "#ffffff" : "",
     }
 
+    const pointsDiff = selectedDriverPoints !== 0 ? parseInt(points) - selectedDriverPoints : 0;
+
     return (
-        <Row className="d-flex flex-nowrap flex-row justify-content-around align-items-center bg-white m-1 mt-2 p-1 p-sm-2 rounded-3">
+        <Row className="d-flex flex-nowrap flex-row justify-content-around align-items-center m-1 mt-2 p-1 p-sm-2 rounded-3"
+            style={{backgroundColor: isSelected ? "#ff1801" : "white", cursor: "pointer"}}
+            onClick={onClick}
+        >
             <Col className="p-0" xs={1} sm={1} md={1} lg={1}>
                 <p className="m-0 text-center" style={textWide}>
                     {position}
@@ -44,22 +55,22 @@ export default function DriverStandingsContentContainer({
                 <div className="rounded-3" style={MyBar}></div>
             </Col>
             <Col className="p-0" xs={3} sm={3} md={4} lg={4}>
-                    <p className="m-0 d-none d-sm-block" style={textBold}>
+                    <p className="m-0 d-none d-sm-block">
                         <a href="#" className="link-dark link-underline-opacity-0 link-opacity-75-hover">
                             <span className="d-none d-md-inline" style={textRegular}>{givenName} </span>
-                            {familyName}
+                            <span style={textBold}>{familyName}</span>
                         </a>
                     </p>
-                    <p className="m-0 d-block d-sm-none" style={textBold}>
+                    <p className="m-0 d-block d-sm-none">
                         <a href="#" className="link-dark link-underline-opacity-0 link-opacity-75-hover">
-                            {code}
+                            <span style={textBold}>{code}</span>
                         </a>
                     </p>
             </Col>
             <Col className="p-0 d-none d-sm-block" sm={4} md={3} lg={3}>
-                <p className="m-0 text-center" style={textRegular}>
+                <p className="m-0 text-center">
                     <a href="##" className="link-dark link-underline-opacity-0 link-opacity-75-hover">
-                        {team}
+                        <span style={textRegular}>{team}</span>
                     </a>
                 </p>
             </Col>
@@ -70,12 +81,12 @@ export default function DriverStandingsContentContainer({
             </Col>
             <Col className="p-0" xs={3} sm={2} md={1} lg={1}>
                 <p className="m-0 text-center" style={textBold}>
-                    <span className="rounded-4 p-1 ps-2 pe-2" style={{backgroundColor: "#e8e8e8"}}>{points}</span>
+                    <span className="rounded-4 p-1 ps-2 pe-2" style={{backgroundColor: isSelected ? "#000000" : "#e8e8e8"}}>{points}</span>
                 </p>
             </Col>
             <Col className="p-0" xs={3} sm={1} md={1} lg={1}>
                 <p className="m-0 text-center" style={textBold}>
-                    -
+                    {pointsDiff > 0 ? "+" + pointsDiff : pointsDiff}
                 </p>
             </Col>
         </Row>
