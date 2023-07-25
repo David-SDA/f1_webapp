@@ -44,17 +44,23 @@ export default function DriverStandingsContentContainer({
                 <div className="rounded-3" style={MyBar}></div>
             </Col>
             <Col className="p-0" xs={3} sm={3} md={4} lg={4}>
-                <p className="m-0 d-none d-sm-block" style={textBold}>
-                    <span className="d-none d-md-inline" style={textRegular}>{givenName} </span>
-                    {familyName}
-                </p>
-                <p className="m-0 d-block d-sm-none" style={textBold}>
-                    {code}
-                </p>
+                    <p className="m-0 d-none d-sm-block" style={textBold}>
+                        <a href="#" className="link-dark link-underline-opacity-0 link-opacity-75-hover">
+                            <span className="d-none d-md-inline" style={textRegular}>{givenName} </span>
+                            {familyName}
+                        </a>
+                    </p>
+                    <p className="m-0 d-block d-sm-none" style={textBold}>
+                        <a href="#" className="link-dark link-underline-opacity-0 link-opacity-75-hover">
+                            {code}
+                        </a>
+                    </p>
             </Col>
             <Col className="p-0 d-none d-sm-block" sm={4} md={3} lg={3}>
                 <p className="m-0 text-center" style={textRegular}>
-                    {team}
+                    <a href="##" className="link-dark link-underline-opacity-0 link-opacity-75-hover">
+                        {team}
+                    </a>
                 </p>
             </Col>
             <Col className="p-0 d-none d-md-block" md={1} lg={1}>
@@ -64,7 +70,7 @@ export default function DriverStandingsContentContainer({
             </Col>
             <Col className="p-0" xs={3} sm={2} md={1} lg={1}>
                 <p className="m-0 text-center" style={textBold}>
-                    <span className="rounded-4 p-1" style={{backgroundColor: "#e8e8e8"}}>{points}</span>
+                    <span className="rounded-4 p-1 ps-2 pe-2" style={{backgroundColor: "#e8e8e8"}}>{points}</span>
                 </p>
             </Col>
             <Col className="p-0" xs={3} sm={1} md={1} lg={1}>
