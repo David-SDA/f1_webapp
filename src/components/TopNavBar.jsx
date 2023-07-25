@@ -19,7 +19,7 @@ export default function TopNavBar(){
                         <Nav.Link href="/schedule" style={navListStyle}>Schedule</Nav.Link>
                         <NavDropdown title="Standings" id="basic-nav-dropdown" style={navListStyle}>
                             <NavDropdown.Item href="/driverStandings">Drivers</NavDropdown.Item>
-                            <NavDropdown.Item href="/constructorsStandings">Constructors</NavDropdown.Item>
+                            <NavDropdown.Item href="/constructorStandings">Constructors</NavDropdown.Item>
                         </NavDropdown>
                         <NavDropdown title="Champions" id="basic-nav-dropdown" style={navListStyle}>
                             <NavDropdown.Item href="/driverChampions">Driver</NavDropdown.Item>

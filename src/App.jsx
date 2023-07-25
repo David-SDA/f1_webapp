@@ -12,7 +12,7 @@ import HomePage from './components/HomePage';
 import SchedulePage from './components/schedule/SchedulePageContainer';
 import RoundResultsPage from './components/raceResults/RoundResultsPage';
 import DriverStandingsPage from './components/standings/drivers/DriverStandingsPage';
-import ConstructorsStandingsPage from './components/ConstructorsStandingsPage';
+import ConstructorStandingsPage from './components/standings/constructors/ConstructorStandingsPage';
 import DriverChampionsPage from './components/DriverChampionsPage';
 import ConstructorChampionsPage from './components/ConstructorChampionsPage';
 import TracksPage from './components/TracksPage';
@@ -28,7 +28,7 @@ function App() {
                     <Route path='/schedule' element={<SchedulePage />} />
                     <Route path='/schedule/:round/:format' element={<RoundResultsPage />} />
                     <Route path='/driverStandings' element={<DriverStandingsPage />} />
-                    <Route path='/constructorsStandings' element={<ConstructorsStandingsPage />} />
+                    <Route path='/constructorStandings' element={<ConstructorStandingsPage />} />
                     <Route path='/driverChampions' element={<DriverChampionsPage />} />
                     <Route path='/constructorChampions' element={<ConstructorChampionsPage />} />
                     <Route path='/tracks' element={<TracksPage />} />
