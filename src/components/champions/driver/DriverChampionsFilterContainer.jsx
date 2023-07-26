@@ -20,6 +20,7 @@ export default function DriverChampionsFilterContainer({
                     <option value="season">Season</option>
                     <option value="DriverStandings[0].Driver.givenName">First Name</option>
                     <option value="DriverStandings[0].Driver.familyName">Last Name</option>
+                    <option value="DriverStandings[0].Driver.nationality">Nationality</option>
                     <option value="DriverStandings[0].Constructors[0].name">Constructor</option>
                 </Form.Select>
             </Col>

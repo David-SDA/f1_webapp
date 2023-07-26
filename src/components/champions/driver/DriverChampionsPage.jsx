@@ -56,17 +56,21 @@ export default function DriverChampionsPage() {
                 aValue = a.season;
                 bValue = b.season;
             }
-            else if(filter === "DriverStandings[0].Driver.givenName") {
+            else if(filter === "DriverStandings[0].Driver.givenName"){
                 aValue = a.DriverStandings[0]?.Driver?.givenName;
                 bValue = b.DriverStandings[0]?.Driver?.givenName;
             }
-            else if(filter === "DriverStandings[0].Driver.familyName") {
+            else if(filter === "DriverStandings[0].Driver.familyName"){
                 aValue = a.DriverStandings[0]?.Driver?.familyName;
                 bValue = b.DriverStandings[0]?.Driver?.familyName;
             }
-            else if (filter === "DriverStandings[0].Constructors[0].name") {
+            else if(filter === "DriverStandings[0].Constructors[0].name"){
                 aValue = a.DriverStandings[0]?.Constructors[0]?.name;
                 bValue = b.DriverStandings[0]?.Constructors[0]?.name;
+            }
+            else if(filter === "DriverStandings[0].Driver.nationality"){
+                aValue = a.DriverStandings[0]?.Driver?.nationality;
+                bValue = b.DriverStandings[0]?.Driver?.nationality
             }
 
             // On effectue le tri pour de bon
