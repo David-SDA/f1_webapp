@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 
 import DriverChampionsCardContainer from "./DriverChampionsCardContainer";
+import { flagsNationality } from "../../../constants/flagsNationality";
 
-import { Col, Container, Form, FormControl, Row, Spinner } from "react-bootstrap";
+import { Container, Row, Spinner } from "react-bootstrap";
 import DriverChampionsFilterContainer from "./DriverChampionsFilterContainer";
 
 export default function DriverChampionsPage() {
@@ -118,6 +119,8 @@ export default function DriverChampionsPage() {
                                     team={champion?.DriverStandings[0]?.Constructors[0]?.name}
                                     wins={champion?.DriverStandings[0]?.wins}
                                     points={champion?.DriverStandings[0]?.points}
+                                    image={flagsNationality[champion?.DriverStandings[0]?.Driver?.nationality]}
+                                    nationality={champion?.DriverStandings[0]?.Driver?.nationality}
                                 />
                             );
                         })

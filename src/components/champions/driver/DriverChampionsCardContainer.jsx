@@ -2,7 +2,7 @@ import React from "react";
 
 import { driversImages } from "../../../constants/driversImages";
 
-import { Card, Col, ListGroup } from "react-bootstrap";
+import { Card, Col, Image, ListGroup } from "react-bootstrap";
 
 export default function DriverChampionsCardContainer({
     season,
@@ -12,6 +12,8 @@ export default function DriverChampionsCardContainer({
     team,
     wins,
     points,
+    image,
+    nationality
 }){
     const textWide = {
         fontFamily: "Formula1-Wide",
@@ -29,7 +31,7 @@ export default function DriverChampionsCardContainer({
     };
 
     return (
-        <Col className="mb-3" xs={12} sm={6} md={4} lg={3}>
+        <Col className="mb-3" xs={12} sm={6} md={6} lg={4} xl={3}>
             <Card className="rounded-5">
                 <Card.Header className="text-center rounded-top-5" style={{backgroundColor: "#ff1801"}}>
                     <span className="text-white" style={textWide}>{season}</span>
@@ -43,6 +45,10 @@ export default function DriverChampionsCardContainer({
                         </a>
                     </Card.Title>
                     <ListGroup className="list-group list-group-flush">
+                        <ListGroup.Item className="d-flex flex-row justify-content-center align-items-center ps-2 pe-2" style={{fontStyle: "italic"}}>
+                            <Image src={image} rounded className="me-1" style={{height: 25}} />
+                            <span style={textBold}>{nationality}</span>
+                        </ListGroup.Item>
                         <ListGroup.Item style={textBold}>
                             <a href="#" className="link-dark link-underline-opacity-0 link-opacity-75-hover fst-italic">
                                 {team}
