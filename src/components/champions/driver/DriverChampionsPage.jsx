@@ -9,6 +9,7 @@ export default function DriverChampionsPage() {
     const [isLoading, setIsLoading] = useState(true);
     const [filter, setFilter] = useState("season");
     const [sortOrder, setSortOrder] = useState("descending");
+    const [search, setSearch] = useState("");
 
     const fetchInfo = async () => {
         try{
@@ -32,6 +33,10 @@ export default function DriverChampionsPage() {
 
     const handleSortChange = () => {
         setSortOrder(sortOrder === "ascending" ? "descending" : "ascending");
+    }
+
+    const handleSearchChange = (event) => {
+        setSearch(event.target.value);
     }
 
     const getSortedData = () => {
@@ -67,7 +72,13 @@ export default function DriverChampionsPage() {
         return sortedData;
     }
 
-    const sortedData = getSortedData();
+    const getSearchedData = () =>{
+        return getSortedData().filter((champion) =>{
+            const fullName = champion?.DriverStandings[0]?.Driver?.givenName + " " + champion?.DriverStandings[0]?.Driver?.familyName;
+            return fullName.toLowerCase().includes(search.toLowerCase());
+        });
+    }
+    const searchedData = getSearchedData();
 
     if(isLoading){
         return(
@@ -80,7 +91,7 @@ export default function DriverChampionsPage() {
                 <h1 className="fst-italic" style={{fontFamily: "Formula1-Regular"}}>Driver Champions</h1>
                 <Row className="d-flex flex-row align-items-center mb-3">
                     <Col xs={12} sm={7} md={7} lg={8} className="mb-2">
-                        <FormControl type="text" placeholder="Search by family name" className="mr-sm-2" />
+                        <FormControl type="text" placeholder="Search by family name" value={search} onChange={handleSearchChange} className="mr-sm-2" style={{fontFamily: "Formula1-Regular"}} />
                     </Col>
                     <Col xs={10} sm={4} md={4} lg={3} className="mb-2">
                         <Form.Select value={filter} onChange={handleFilterOptionChange} style={{fontFamily: "Formula1-Regular"}}>
@@ -108,7 +119,7 @@ export default function DriverChampionsPage() {
                 </Row>
                 <Row>
                     {
-                        sortedData.map((champion, index) => {
+                        searchedData.map((champion, index) => {
                             return (
                                 <DriverChampionsCardContainer
                                     key={index}
