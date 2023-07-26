@@ -3,13 +3,14 @@ import React, { useEffect, useState } from "react";
 import DriverChampionsCardContainer from "./DriverChampionsCardContainer";
 
 import { Col, Container, Form, FormControl, Row, Spinner } from "react-bootstrap";
+import DriverChampionsFilterContainer from "./DriverChampionsFilterContainer";
 
 export default function DriverChampionsPage() {
     const [champions, setChampions] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [filter, setFilter] = useState("season");
-    const [sortOrder, setSortOrder] = useState("descending");
-    const [search, setSearch] = useState("");
+    const [filter, setFilter] = useState("season"); // Filtre (de base : saison)
+    const [sortOrder, setSortOrder] = useState("descending"); // Ordre
+    const [search, setSearch] = useState(""); // Recherche
 
     const fetchInfo = async () => {
         try{
@@ -27,41 +28,47 @@ export default function DriverChampionsPage() {
         fetchInfo();
     }, []);
 
+    // Gérer le changement de filtre
     const handleFilterOptionChange = (event) => {
         setFilter(event.target.value);
     }
 
+    // Gérer le changement de l'ordre
     const handleSortChange = () => {
         setSortOrder(sortOrder === "ascending" ? "descending" : "ascending");
     }
 
+    // Gérer l'écriture dans la barre de recherche
     const handleSearchChange = (event) => {
         setSearch(event.target.value);
     }
 
+    // Tri des données
     const getSortedData = () => {
-        const sortedData = [...champions];
-        sortedData.sort((a, b) => {
-            let aValue;
-            let bValue;
+        const sortedData = [...champions]; // On copie les champions que l'on récupère
+        sortedData.sort((a, b) => { // On effectue le tri
+            let aValue; // On crée les variables
+            let bValue; // pour les comparés
 
+            // On leurs associe des valeurs en fonction du filtre choisi
             if(filter === "season"){
                 aValue = a.season;
                 bValue = b.season;
             }
             else if(filter === "DriverStandings[0].Driver.givenName") {
-                aValue = a.DriverStandings[0].Driver.givenName;
-                bValue = b.DriverStandings[0].Driver.givenName;
+                aValue = a.DriverStandings[0]?.Driver?.givenName;
+                bValue = b.DriverStandings[0]?.Driver?.givenName;
             }
             else if(filter === "DriverStandings[0].Driver.familyName") {
-                aValue = a.DriverStandings[0].Driver.familyName;
-                bValue = b.DriverStandings[0].Driver.familyName;
+                aValue = a.DriverStandings[0]?.Driver?.familyName;
+                bValue = b.DriverStandings[0]?.Driver?.familyName;
             }
             else if (filter === "DriverStandings[0].Constructors[0].name") {
-                aValue = a.DriverStandings[0].Constructors[0].name;
-                bValue = b.DriverStandings[0].Constructors[0].name;
+                aValue = a.DriverStandings[0]?.Constructors[0]?.name;
+                bValue = b.DriverStandings[0]?.Constructors[0]?.name;
             }
 
+            // On effectue le tri pour de bon
             if(sortOrder === 'ascending'){
                 return aValue < bValue ? -1 : aValue > bValue ? 1 : 0;
             }
@@ -72,8 +79,9 @@ export default function DriverChampionsPage() {
         return sortedData;
     }
 
+    // Récupérer les données grâce à la recherche
     const getSearchedData = () =>{
-        return getSortedData().filter((champion) =>{
+        return getSortedData().filter((champion) =>{ // On filtre les résultat avec le nom complet
             const fullName = champion?.DriverStandings[0]?.Driver?.givenName + " " + champion?.DriverStandings[0]?.Driver?.familyName;
             return fullName.toLowerCase().includes(search.toLowerCase());
         });
@@ -89,34 +97,14 @@ export default function DriverChampionsPage() {
         return (
             <Container>
                 <h1 className="fst-italic" style={{fontFamily: "Formula1-Regular"}}>Driver Champions</h1>
-                <Row className="d-flex flex-row align-items-center mb-3">
-                    <Col xs={12} sm={7} md={7} lg={8} className="mb-2">
-                        <FormControl type="text" placeholder="Search by family name" value={search} onChange={handleSearchChange} className="mr-sm-2" style={{fontFamily: "Formula1-Regular"}} />
-                    </Col>
-                    <Col xs={10} sm={4} md={4} lg={3} className="mb-2">
-                        <Form.Select value={filter} onChange={handleFilterOptionChange} style={{fontFamily: "Formula1-Regular"}}>
-                            <option value="season">Season</option>
-                            <option value="DriverStandings[0].Driver.givenName">First Name</option>
-                            <option value="DriverStandings[0].Driver.familyName">Last Name</option>
-                            <option value="DriverStandings[0].Constructors[0].name">Constructor</option>
-                        </Form.Select>
-                    </Col>
-                    <Col xs={1} sm={1} md={1} lg={1} className="mb-2 text-end">
-                        {
-                            sortOrder === "ascending" ? (
-                                <span className="d-flex flex-column user-select-none" onClick={handleSortChange} style={{cursor: "pointer"}}>
-                                    <span className="opacity-100">&#x25B2;</span>
-                                    <span className="opacity-25">&#x25BC;</span>
-                                </span>
-                            ) : (
-                                <span className="d-flex flex-column user-select-none" onClick={handleSortChange} style={{cursor: "pointer"}}>
-                                    <span className="opacity-25">&#x25B2;</span>
-                                    <span className="opacity-100">&#x25BC;</span>
-                                </span>
-                            )
-                        }
-                    </Col>
-                </Row>
+                <DriverChampionsFilterContainer
+                    search={search}
+                    handleSearchChange={handleSearchChange}
+                    filter={filter}
+                    handleFilterOptionChange={handleFilterOptionChange}
+                    handleSortChange={handleSortChange}
+                    sortOrder={sortOrder}
+                />
                 <Row>
                     {
                         searchedData.map((champion, index) => {
