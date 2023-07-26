@@ -14,7 +14,7 @@ import RoundResultsPage from './components/raceResults/RoundResultsPage';
 import DriverStandingsPage from './components/standings/drivers/DriverStandingsPage';
 import ConstructorStandingsPage from './components/standings/constructors/ConstructorStandingsPage';
 import DriverChampionsPage from './components/champions/driver/DriverChampionsPage';
-import ConstructorChampionsPage from './components/ConstructorChampionsPage';
+import ConstructorChampionsPage from './components/champions/constructor/ConstructorChampionsPage';
 import TracksPage from './components/TracksPage';
 import NotFoundPage from './components/NotFoundPage';
 
