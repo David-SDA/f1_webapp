@@ -1,4 +1,4 @@
-export const constructorsImages = {
+export const constructorImage = {
     'ferrari': require('../assets/constructorsChampionsImages/scuderiaFerrari.png'),
     'williams': require('../assets/constructorsChampionsImages/williams.png'),
     'mclaren': require('../assets/constructorsChampionsImages/mclaren.png'),
