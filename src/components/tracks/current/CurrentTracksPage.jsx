@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-import { currentYearTracks } from "../../constants/currentYearTracks";
-import { flags } from "../../constants/flags";
+import { currentYearTracks } from "../../../constants/currentYearTracks";
+import { flags } from "../../../constants/flags";
 
 import { Container, Row, Spinner } from "react-bootstrap";
 import CurrentTracksCardContainer from "./CurrentTracksCardContainer";
