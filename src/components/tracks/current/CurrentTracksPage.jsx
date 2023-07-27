@@ -60,6 +60,7 @@ export default function CurrentTracksPage() {
                             return (
                                 <TracksCardContainer
                                     key={index}
+                                    circuitId={track?.circuitId}
                                     circuitName={track?.circuitName}
                                     imageTrack={currentYearTracks[track?.circuitId]}
                                     imageCountry={flags[track?.Location?.country]}

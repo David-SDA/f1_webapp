@@ -113,6 +113,7 @@ export default function AllTracksPage() {
                             return (
                                 <TracksCardContainer
                                     key={index}
+                                    circuitId={track?.circuitId}
                                     circuitName={track?.circuitName}
                                     imageTrack={allTracks[track?.circuitId]}
                                     imageCountry={flags[track?.Location?.country]}

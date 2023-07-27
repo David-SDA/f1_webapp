@@ -3,6 +3,7 @@ import React from "react";
 import { Card, Col, Image, ListGroup } from "react-bootstrap";
 
 export default function TracksCardContainer({
+    circuitId,
     circuitName,
     imageTrack,
     imageCountry,
@@ -27,7 +28,7 @@ export default function TracksCardContainer({
     return (
         <Col xs={12} sm={12} md={6} lg={4} xxl={3}>
             <Card className="mb-2 rounded-top-5 overflow-hidden">
-                <a href="###" className="link-light link-underline-opacity-0 link-underline-opacity-100-hover">
+                <a href={"/allTracks/" + circuitId} className="link-light link-underline-opacity-0 link-underline-opacity-100-hover">
                     <Card.Header className="d-flex justify-content-center align-items-center p-2 text-center rounded-top-5" style={{backgroundColor: "#ff1801", height: "80px"}}>
                         <span className="text-white" style={textWide}>{circuitName}</span>
                     </Card.Header>

@@ -17,6 +17,7 @@ import DriverChampionsPage from './components/champions/driver/DriverChampionsPa
 import ConstructorChampionsPage from './components/champions/constructor/ConstructorChampionsPage';
 import CurrentTracksPage from './components/tracks/current/CurrentTracksPage';
 import AllTracksPage from './components/tracks/all/AllTracksPage';
+import AllTracksOnePage from './components/tracks/all/AllTracksOnePage';
 import NotFoundPage from './components/NotFoundPage';
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
                     <Route path='/constructorChampions' element={<ConstructorChampionsPage />} />
                     <Route path='/currentTracks' element={<CurrentTracksPage />} />
                     <Route path='/allTracks' element={<AllTracksPage />} />
+                    <Route path='/allTracks/:circuitId' element={<AllTracksOnePage />} />
                     <Route path='*' element={<NotFoundPage />} />
                 </Routes>
             </div>
