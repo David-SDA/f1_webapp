@@ -15,7 +15,7 @@ import DriverStandingsPage from './components/standings/drivers/DriverStandingsP
 import ConstructorStandingsPage from './components/standings/constructors/ConstructorStandingsPage';
 import DriverChampionsPage from './components/champions/driver/DriverChampionsPage';
 import ConstructorChampionsPage from './components/champions/constructor/ConstructorChampionsPage';
-import TracksPage from './components/TracksPage';
+import CurrentTracksPage from './components/tracks/CurrentTracksPage';
 import NotFoundPage from './components/NotFoundPage';
 
 function App() {
@@ -31,7 +31,7 @@ function App() {
                     <Route path='/constructorStandings' element={<ConstructorStandingsPage />} />
                     <Route path='/driverChampions' element={<DriverChampionsPage />} />
                     <Route path='/constructorChampions' element={<ConstructorChampionsPage />} />
-                    <Route path='/tracks' element={<TracksPage />} />
+                    <Route path='/currentTracks' element={<CurrentTracksPage />} />
                     <Route path='*' element={<NotFoundPage />} />
                 </Routes>
             </div>
