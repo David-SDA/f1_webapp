@@ -26,10 +26,24 @@ export default function CurrentTracksPage() {
         fetchInfo();
     }, []);
 
+    const getSortedData = () => {
+        const sortedData = [...tracks]; // On copie les champions que l'on récupère
+        sortedData.sort((a, b) => { // On effectue le tri
+            let aValue = a.circuitName; // On crée les variables
+            let bValue = b.circuitName; // pour les comparés
+            
+            // On effectue le tri pour de bon
+            return aValue < bValue ? -1 : aValue > bValue ? 1 : 0;
+        });
+        return sortedData;
+    }
+
     const textRegular = {
         fontFamily: "Formula1-Regular",
         letterSpacing: "0.0005rem",
     };
+
+    const sortedData = getSortedData();
 
     if(isLoading){
         return(
@@ -42,7 +56,7 @@ export default function CurrentTracksPage() {
                 <h1 className="fst-italic" style={textRegular}>F1 2023 : Tracks</h1>
                 <Row>
                     {
-                        tracks.map((track, index) => {
+                        sortedData.map((track, index) => {
                             return (
                                 <CurrentTracksCardContainer
                                     key={index}
