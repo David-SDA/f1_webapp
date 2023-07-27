@@ -43,7 +43,7 @@ export default function ConstructorChampionsCardContainer({
                     </Card.Title>
                     <ListGroup className="list-group list-group-flush">
                         <ListGroup.Item className="d-flex flex-row justify-content-center align-items-center ps-2 pe-2" style={{fontStyle: "italic"}}>
-                            <Image src={image} rounded className="me-1" style={{height: 25}} />
+                            <Image src={image} rounded className="me-1 border" style={{height: 25}} />
                             <span style={textBold}>{nationality}</span>
                         </ListGroup.Item>
                         <ListGroup.Item style={{fontStyle: "italic"}}>
