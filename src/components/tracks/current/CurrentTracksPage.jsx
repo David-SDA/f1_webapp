@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 
+import TracksCardContainer from "../TracksCardContainer";
 import { currentYearTracks } from "../../../constants/currentYearTracks";
 import { flags } from "../../../constants/flags";
 
 import { Container, Row, Spinner } from "react-bootstrap";
-import TracksCardContainer from "../TracksCardContainer";
 
 export default function CurrentTracksPage() {
     const [tracks, setTracks] = useState([]);
