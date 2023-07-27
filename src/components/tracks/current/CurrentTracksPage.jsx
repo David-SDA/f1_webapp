@@ -4,7 +4,7 @@ import { currentYearTracks } from "../../../constants/currentYearTracks";
 import { flags } from "../../../constants/flags";
 
 import { Container, Row, Spinner } from "react-bootstrap";
-import CurrentTracksCardContainer from "./CurrentTracksCardContainer";
+import TracksCardContainer from "../TracksCardContainer";
 
 export default function CurrentTracksPage() {
     const [tracks, setTracks] = useState([]);
@@ -58,7 +58,7 @@ export default function CurrentTracksPage() {
                     {
                         sortedData.map((track, index) => {
                             return (
-                                <CurrentTracksCardContainer
+                                <TracksCardContainer
                                     key={index}
                                     circuitName={track?.circuitName}
                                     imageTrack={currentYearTracks[track?.circuitId]}
