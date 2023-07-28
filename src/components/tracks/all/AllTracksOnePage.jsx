@@ -40,22 +40,33 @@ export default function AllTracksOnePage(){
         fetchInfo();
     }, [])
 
+    // Compter le nombre de victoire pour chaque pilotes sur ce circuit
     const driversWinsCount = winners.reduce((winsCount, race) => {
         const winnerName = race?.Results[0]?.Driver.givenName + " " + race?.Results[0]?.Driver.familyName;
+        const winnerYear = race?.season;
 
+        // Si la key existe, on ajoute 1 à son nombre de victoires sinon on l'initialise à 1
+        // -- -- --- ------, on ajoute l'année de la victoire sinon on l'initialise
         if(winsCount[winnerName]){
-            winsCount[winnerName]++;
+            winsCount[winnerName].wins++;
+            winsCount[winnerName].years.push(winnerYear)
         }
         else{
-            winsCount[winnerName] = 1;
+            winsCount[winnerName] = {
+                wins: 1,
+                years: [winnerYear]
+            };
         }
 
         return winsCount;
     }, {});
 
+    // Compter le nombre de vainqueurs différents
     const countDifferentWinners = () => {
         return Object.keys(driversWinsCount).length;
     }
+
+    const sortedWinners = Object.entries(driversWinsCount).sort((a, b) => b[1].wins - a[1].wins);
 
     const textBlack = {
         fontFamily: "Formula1-Black",
@@ -119,6 +130,19 @@ export default function AllTracksOnePage(){
                                 </Container>
                             </Col>
                         </Row>
+                    </Col>
+                    <Col lg={12} className="p-2 rounded-3" style={{backgroundColor: "#ff1801"}}>
+                        {
+                            sortedWinners.map(([driver, { wins, years}]) => (
+                                <Container key={driver} className="bg-white">
+                                    {driver} : {wins} {wins === 1 ? "win" : "wins"} ({
+                                        years.map((year, index) => (
+                                            <span key={index}>{index === 0 ? year : ", " + year}</span>
+                                        ))
+                                    })
+                                </Container>
+                            ))
+                        }
                     </Col>
                 </Row>
             </Container>
