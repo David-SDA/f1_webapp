@@ -103,12 +103,12 @@ export default function AllTracksOnePage(){
             <Container>
                 <h1 className="fst-italic" style={textRegular}>{circuit?.circuitName}</h1>
                 <Row className="d-flex align-items-center mb-3">
-                    <Col lg={6} className="d-flex justify-content-center align-items-center">
-                        <Image src={allTracks[circuitId]} style={{height: "300px", objectFit: "contain"}}/>
+                    <Col lg={6} className="mb-3 d-flex justify-content-center align-items-center">
+                        <Image src={allTracks[circuitId]} className="img-fluid" style={{maxHeight: "250px", objectFit: "contain"}}/>
                     </Col>
                     <Col lg={6}>
                         <Row>
-                            <Col lg={6} className="mb-3">
+                            <Col sm={6} md={6} lg={6} className="mb-3">
                                 <Container className="d-flex flex-column justify-content-around rounded-4" style={{height: "100px", borderRight: "5px solid #ff1801", borderBottom: "5px solid #ff1801"}}>
                                     <span style={textBlack}>COUNTRY</span>
                                     <Container className="d-flex justify-content-center align-items-center">
@@ -118,21 +118,21 @@ export default function AllTracksOnePage(){
                                     <div></div>
                                 </Container>
                             </Col>
-                            <Col lg={6} className="mb-3">
+                            <Col sm={6} md={6} lg={6} className="mb-3">
                                 <Container className="d-flex flex-column justify-content-around rounded-4" style={{height: "100px", borderRight: "5px solid #ff1801", borderBottom: "5px solid #ff1801"}}>
                                     <span style={textBlack}>LOCALITY</span>
                                     <span className="text-center" style={textBold}>{circuit?.Location?.locality}</span>
                                     <div></div>
                                 </Container>
                             </Col>
-                            <Col lg={6} className="mb-3">
+                            <Col sm={6} md={6} lg={6} className="mb-3">
                                 <Container className="d-flex flex-column justify-content-around rounded-4" style={{height: "100px", borderRight: "5px solid #ff1801", borderBottom: "5px solid #ff1801"}}>
                                     <span style={textBlack}>RACES</span>
                                     <span className="text-center" style={{...textBold, fontSize: "30px"}}>{races.length}</span>
                                     <div></div>
                                 </Container>
                             </Col>
-                            <Col lg={6} className="mb-3">
+                            <Col sm={6} md={6} lg={6} className="mb-3">
                                 <Container className="d-flex flex-column justify-content-around rounded-4" style={{height: "100px", borderRight: "5px solid #ff1801", borderBottom: "5px solid #ff1801"}}>
                                     <span style={textBlack}>WINNERS</span>
                                     <span className="text-center" style={{...textBold, fontSize: "30px"}}>{countDifferentWinners()}</span>
@@ -145,17 +145,17 @@ export default function AllTracksOnePage(){
                         <p className="h2 fst-italic" style={textRegular}>All winners</p>
                         <Container className="d-flex flex-column p-1 rounded-3" style={{backgroundColor: "#38383f"}}>
                             <Row className="bg-white m-1 p-1 w-auto rounded-3">
-                                <Col lg={5}>
+                                <Col sm={5} md={5} lg={5}>
                                     <p className="mb-0 text-center" style={textBlack}>
                                         DRIVER
                                     </p>
                                 </Col>
-                                <Col lg={2}>
+                                <Col sm={2} md={2} lg={2}>
                                     <p className="mb-0 text-center" style={textBlack}>
                                         WINS
                                     </p>
                                 </Col>
-                                <Col lg={5}>
+                                <Col sm={5} md={5} lg={5}>
                                     <p className="mb-0 text-center" style={textBlack}>
                                         YEARS
                                     </p>
@@ -164,16 +164,16 @@ export default function AllTracksOnePage(){
                             {
                                 sortedWinners.slice(0, showAllWinners ? sortedWinners.length : 5).map(([driver, { wins, years}]) => (
                                     <Row key={driver} className="bg-white m-1 p-1 w-auto rounded-3">
-                                        <Col lg={5}>
+                                        <Col sm={5} md={5} lg={5} className="d-flex justify-content-center align-items-center">
                                             <a href="#" className="link-dark link-underline-opacity-0 link-opacity-50-hover" >
-                                                <p className="text-center" style={textBold}>{driver}</p>
+                                                <p className="text-center mb-0" style={textBold}>{driver}</p>
                                             </a>
                                         </Col>
-                                        <Col lg={2}>
-                                            <p className="text-center" style={textBold}>{wins}</p>
+                                        <Col sm={2} md={2} lg={2} className="d-flex justify-content-center align-items-center">
+                                            <p className="text-center mb-0" style={textBold}>{wins}</p>
                                         </Col>
-                                        <Col lg={5}>
-                                            <p className="text-center" style={textRegular}>
+                                        <Col sm={5} md={5} lg={5} className="d-flex justify-content-center align-items-center">
+                                            <p className="text-center mb-0" style={textRegular}>
                                                 {
                                                     years.map((year, index) => (
                                                         <a href="#" className="link-dark link-underline-opacity-0 link-opacity-50-hover">
@@ -201,17 +201,17 @@ export default function AllTracksOnePage(){
                         <p className="h2 fst-italic" style={textRegular}>All Races</p>
                         <Container className="d-flex flex-column p-1 rounded-3" style={{backgroundColor: "#38383f"}}>
                             <Row className="bg-white m-1 p-1 w-auto rounded-3">
-                                <Col lg={3}>
+                                <Col sm={2} md={2} lg={3}>
                                     <p className="mb-0 text-center" style={textBlack}>
                                         SEASON
                                     </p>
                                 </Col>
-                                <Col lg={6}>
+                                <Col sm={8} md={8} lg={6}>
                                     <p className="mb-0 text-center" style={textBlack}>
                                         GRAND PRIX NAME
                                     </p>
                                 </Col>
-                                <Col lg={3}>
+                                <Col sm={2} md={2} lg={3}>
                                     <p className="mb-0 text-center" style={textBlack}>
                                         DATE
                                     </p>
@@ -222,21 +222,21 @@ export default function AllTracksOnePage(){
                                     let raceDate = new Date(race?.date);
                                     return (
                                         <Row key={index} className="bg-white m-1 p-2 w-auto rounded-3">
-                                            <Col lg={3}>
+                                            <Col sm={2} md={2} lg={3}>
                                                 <p className="mb-0 text-center" style={textBold}>
                                                     <a href="#" className="link-dark link-underline-opacity-0 link-opacity-50-hover">
                                                         {race?.season}
                                                     </a>
                                                 </p>
                                             </Col>
-                                            <Col lg={6}>
+                                            <Col sm={8} md={8} lg={6}>
                                                 <p className="mb-0 text-center" style={textBold}>
                                                     <a href="#" className="link-dark link-underline-opacity-0 link-opacity-50-hover">
                                                         {race?.raceName}
                                                     </a>
                                                 </p>
                                             </Col>
-                                            <Col lg={3}>
+                                            <Col sm={2} md={2} lg={3}>
                                                 <p className="mb-0 text-center" style={textRegular}>
                                                     {raceDate.toLocaleDateString("en-GB", {day: "2-digit", month: "short"})}
                                                 </p>
