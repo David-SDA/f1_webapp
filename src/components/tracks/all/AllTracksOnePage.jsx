@@ -144,22 +144,48 @@ export default function AllTracksOnePage(){
                     <Col lg={12} className="mb-3">
                         <p className="h2 fst-italic" style={textRegular}>All winners</p>
                         <Container className="d-flex flex-column p-1 rounded-3" style={{backgroundColor: "#38383f"}}>
+                            <Row className="bg-white m-1 p-1 w-auto rounded-3">
+                                <Col lg={5}>
+                                    <p className="mb-0 text-center" style={textBlack}>
+                                        DRIVER
+                                    </p>
+                                </Col>
+                                <Col lg={2}>
+                                    <p className="mb-0 text-center" style={textBlack}>
+                                        WINS
+                                    </p>
+                                </Col>
+                                <Col lg={5}>
+                                    <p className="mb-0 text-center" style={textBlack}>
+                                        YEARS
+                                    </p>
+                                </Col>
+                            </Row>
                             {
                                 sortedWinners.slice(0, showAllWinners ? sortedWinners.length : 5).map(([driver, { wins, years}]) => (
-                                    <Container key={driver} className="bg-white m-1 p-1 w-auto rounded-3">
-                                        <a href="#" className="link-dark link-underline-opacity-0 link-opacity-50-hover" >
-                                            <span style={textBold}>{driver}</span>
-                                        </a> : <span style={textBold}>{wins} </span>
-                                        <span style={textRegular}>
-                                            {wins === 1 ? "win" : "wins"} ({
-                                            years.map((year, index) => (
-                                                <a href="#" className="link-dark link-underline-opacity-0 link-opacity-50-hover">
-                                                    <span key={index} style={textBold}>{index === 0 ? year : ", " + year}</span>
-                                                </a>
-                                            ))
-                                        })
-                                        </span>
-                                    </Container>
+                                    <Row key={driver} className="bg-white m-1 p-1 w-auto rounded-3">
+                                        <Col lg={5}>
+                                            <a href="#" className="link-dark link-underline-opacity-0 link-opacity-50-hover" >
+                                                <p className="text-center" style={textBold}>{driver}</p>
+                                            </a>
+                                        </Col>
+                                        <Col lg={2}>
+                                            <p className="text-center" style={textBold}>{wins}</p>
+                                        </Col>
+                                        <Col lg={5}>
+                                            <p className="text-center" style={textRegular}>
+                                                {
+                                                    years.map((year, index) => (
+                                                        <a href="#" className="link-dark link-underline-opacity-0 link-opacity-50-hover">
+                                                            <span key={index} style={textBold}>
+                                                                {index === 0 ? year : ", " + year}
+                                                            </span>
+                                                        </a>
+                                                    ))
+                                                }
+                                            </p>
+                                        </Col>
+                                    </Row>
                                 ))
                             }
                             {
