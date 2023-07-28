@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { allTracks } from "../../../constants/allTracks";
 import { flags } from "../../../constants/flags";
 
-import { Col, Container, Image, Row, Spinner } from "react-bootstrap";
+import { Button, Col, Container, Image, Row, Spinner } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 
 export default function AllTracksOnePage(){
@@ -13,6 +13,7 @@ export default function AllTracksOnePage(){
     const [winners, setWinners] = useState([]);
     const [races, setRaces] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [showAllWinners, setShowAllWinners] = useState(false);
 
     const fetchInfo = async () => {
         try{
@@ -66,6 +67,10 @@ export default function AllTracksOnePage(){
         return Object.keys(driversWinsCount).length;
     }
 
+    const handleDisplayMore = () => {
+        setShowAllWinners(!showAllWinners);
+    }
+
     const sortedWinners = Object.entries(driversWinsCount).sort((a, b) => b[1].wins - a[1].wins);
 
     const textBlack = {
@@ -92,7 +97,7 @@ export default function AllTracksOnePage(){
         return (
             <Container>
                 <h1 className="fst-italic" style={textRegular}>{circuit?.circuitName}</h1>
-                <Row className="d-flex align-items-center">
+                <Row className="d-flex align-items-center mb-3">
                     <Col lg={6} className="d-flex justify-content-center align-items-center">
                         <Image src={allTracks[circuitId]} style={{height: "300px", objectFit: "contain"}}/>
                     </Col>
@@ -131,18 +136,35 @@ export default function AllTracksOnePage(){
                             </Col>
                         </Row>
                     </Col>
-                    <Col lg={12} className="p-2 rounded-3" style={{backgroundColor: "#ff1801"}}>
-                        {
-                            sortedWinners.map(([driver, { wins, years}]) => (
-                                <Container key={driver} className="bg-white">
-                                    {driver} : {wins} {wins === 1 ? "win" : "wins"} ({
-                                        years.map((year, index) => (
-                                            <span key={index}>{index === 0 ? year : ", " + year}</span>
-                                        ))
-                                    })
-                                </Container>
-                            ))
-                        }
+                    <Col lg={12}>
+                        <h2 className="fst-italic" style={textRegular}>All winners</h2>
+                        <Container className="d-flex flex-column p-1 rounded-3" style={{backgroundColor: "#38383f"}}>
+                            {
+                                sortedWinners.slice(0, showAllWinners ? sortedWinners.length : 5).map(([driver, { wins, years}]) => (
+                                    <Container key={driver} className="bg-white m-1 p-1 w-auto rounded-3">
+                                        <a href="#" className="link-dark link-underline-opacity-0 link-opacity-50-hover" >
+                                            <span style={textBold}>{driver}</span>
+                                        </a> : <span style={textBold}>{wins} </span>
+                                        <span style={textRegular}>
+                                            {wins === 1 ? "win" : "wins"} ({
+                                            years.map((year, index) => (
+                                                <a href="#" className="link-dark link-underline-opacity-0 link-opacity-50-hover">
+                                                    <span key={index} style={textBold}>{index === 0 ? year : ", " + year}</span>
+                                                </a>
+                                            ))
+                                        })
+                                        </span>
+                                    </Container>
+                                ))
+                            }
+                            {
+                                countDifferentWinners() > 5 ? (
+                                    <Button variant="outline-light" size="sm" className="align-self-end mt-1" onClick={handleDisplayMore}>
+                                        {showAllWinners ? "Show less" : "Show More"}
+                                    </Button>
+                                ) : ("")
+                            }
+                        </Container>
                     </Col>
                 </Row>
             </Container>
