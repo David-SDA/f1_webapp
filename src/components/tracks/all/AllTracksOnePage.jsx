@@ -123,14 +123,14 @@ export default function AllTracksOnePage(){
                             <Col lg={6} className="mb-3">
                                 <Container className="d-flex flex-column justify-content-around rounded-4" style={{height: "100px", borderRight: "5px solid #ff1801", borderBottom: "5px solid #ff1801"}}>
                                     <span style={textBlack}>RACES</span>
-                                    <span className="text-center" style={textBold}>{races.length}</span>
+                                    <span className="text-center" style={{...textBold, fontSize: "30px"}}>{races.length}</span>
                                     <div></div>
                                 </Container>
                             </Col>
                             <Col lg={6} className="mb-3">
                                 <Container className="d-flex flex-column justify-content-around rounded-4" style={{height: "100px", borderRight: "5px solid #ff1801", borderBottom: "5px solid #ff1801"}}>
                                     <span style={textBlack}>WINNERS</span>
-                                    <span className="text-center" style={textBold}>{countDifferentWinners()}</span>
+                                    <span className="text-center" style={{...textBold, fontSize: "30px"}}>{countDifferentWinners()}</span>
                                     <div></div>
                                 </Container>
                             </Col>
