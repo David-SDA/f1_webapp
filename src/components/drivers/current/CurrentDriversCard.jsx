@@ -32,7 +32,7 @@ export default function CurrentDriversCard({
     return (
         <Col md={6} lg={4} xl={3} className="mb-2">
             <Card className="rounded-5 overflow-hidden" style={{height: "300px"}}>
-                <a href="#" className="link-light link-underline-opacity-0 link-underline-opacity-100-hover">
+                <a href={"/currentDrivers/" + driverId} className="link-light link-underline-opacity-0 link-underline-opacity-100-hover">
                     <Card.Header className="d-flex flex-row justify-content-between align-items-center text-white rounded-top-5 pt-3 pb-3" style={{backgroundColor: currentConstructorColor[currentDriversTeamId[driverId]]}}>
                         <Image src={flagsNationality[nationality]} rounded className="me-1 border" style={{height: 25}} />
                         <p className="mb-0"><span style={textRegular}>{givenName}</span> <span style={textBold}>{familyName}</span></p>

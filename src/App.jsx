@@ -20,6 +20,7 @@ import AllTracksPage from './components/tracks/all/AllTracksPage';
 import AllTracksOnePage from './components/tracks/all/AllTracksOnePage';
 import CurrentDriversPage from './components/drivers/current/CurrentDriversPage';
 import NotFoundPage from './components/NotFoundPage';
+import CurrentDriversOnePage from './components/drivers/current/CurrentDriversOnePage';
 
 function App() {
     return (
@@ -38,6 +39,7 @@ function App() {
                     <Route path='/allTracks' element={<AllTracksPage />} />
                     <Route path='/allTracks/:circuitId' element={<AllTracksOnePage />} />
                     <Route path='/currentDrivers' element={<CurrentDriversPage />} />
+                    <Route path='/currentDrivers/:driverId' element={<CurrentDriversOnePage />} />
                     <Route path='*' element={<NotFoundPage />} />
                 </Routes>
             </div>
