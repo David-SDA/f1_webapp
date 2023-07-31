@@ -141,22 +141,22 @@ export default function AllTracksOnePage(){
                             </Col>
                         </Row>
                     </Col>
-                    <Col lg={12} className="mb-3">
+                    <Col lg={12} className="mb-3 p-1 p-sm-2">
                         <p className="h2 fst-italic" style={textRegular}>All winners</p>
                         <Container className="d-flex flex-column p-1 rounded-3" style={{backgroundColor: "#38383f"}}>
                             <Row className="bg-white m-1 p-1 w-auto rounded-3">
-                                <Col sm={5} md={5} lg={5}>
+                                <Col xs={6} sm={5} md={5} lg={5} className="p-0">
                                     <p className="mb-0 text-center" style={textBlack}>
                                         DRIVER
                                     </p>
                                 </Col>
-                                <Col sm={2} md={2} lg={2}>
+                                <Col xs={3} sm={2} md={2} lg={2} className="p-0">
                                     <p className="mb-0 text-center" style={textBlack}>
                                         WINS
                                     </p>
                                 </Col>
-                                <Col sm={5} md={5} lg={5}>
-                                    <p className="mb-0 text-center" style={textBlack}>
+                                <Col xs={3} sm={5} md={5} lg={5} className="p-0">
+                                    <p className="mb-0 text-sm-center" style={textBlack}>
                                         YEARS
                                     </p>
                                 </Col>
@@ -164,15 +164,15 @@ export default function AllTracksOnePage(){
                             {
                                 sortedWinners.slice(0, showAllWinners ? sortedWinners.length : 5).map(([driver, { wins, years}]) => (
                                     <Row key={driver} className="bg-white m-1 p-1 w-auto rounded-3">
-                                        <Col sm={5} md={5} lg={5} className="d-flex justify-content-center align-items-center">
+                                        <Col xs={6} sm={5} md={5} lg={5} className="d-flex justify-content-center align-items-center">
                                             <a href="#" className="link-dark link-underline-opacity-0 link-opacity-50-hover" >
                                                 <p className="text-center mb-0" style={textBold}>{driver}</p>
                                             </a>
                                         </Col>
-                                        <Col sm={2} md={2} lg={2} className="d-flex justify-content-center align-items-center">
+                                        <Col xs={3} sm={2} md={2} lg={2} className="d-flex justify-content-center align-items-center">
                                             <p className="text-center mb-0" style={textBold}>{wins}</p>
                                         </Col>
-                                        <Col sm={5} md={5} lg={5} className="d-flex justify-content-center align-items-center">
+                                        <Col xs={3} sm={5} md={5} lg={5} className="d-flex justify-content-center align-items-center">
                                             <p className="text-center mb-0" style={textRegular}>
                                                 {
                                                     years.map((year, index) => (
@@ -197,21 +197,24 @@ export default function AllTracksOnePage(){
                             }
                         </Container>
                     </Col>
-                    <Col lg={12}>
+                    <Col lg={12} className="mb-3 p-1 p-sm-2">
                         <p className="h2 fst-italic" style={textRegular}>All Races</p>
                         <Container className="d-flex flex-column p-1 rounded-3" style={{backgroundColor: "#38383f"}}>
                             <Row className="bg-white m-1 p-1 w-auto rounded-3">
-                                <Col sm={2} md={2} lg={3}>
+                                <Col xs={3} sm={2} md={2} lg={3} className="p-0">
                                     <p className="mb-0 text-center" style={textBlack}>
                                         SEASON
                                     </p>
                                 </Col>
-                                <Col sm={8} md={8} lg={6}>
-                                    <p className="mb-0 text-center" style={textBlack}>
+                                <Col xs={6} sm={8} md={8} lg={6} className="p-0">
+                                    <p className="d-none d-sm-block mb-0 text-center" style={textBlack}>
                                         GRAND PRIX NAME
                                     </p>
+                                    <p className="d-block d-sm-none mb-0 text-center" style={textBlack}>
+                                        GP
+                                    </p>
                                 </Col>
-                                <Col sm={2} md={2} lg={3}>
+                                <Col xs={3} sm={2} md={2} lg={3} className="p-0">
                                     <p className="mb-0 text-center" style={textBlack}>
                                         DATE
                                     </p>
@@ -222,21 +225,21 @@ export default function AllTracksOnePage(){
                                     let raceDate = new Date(race?.date);
                                     return (
                                         <Row key={index} className="bg-white m-1 p-2 w-auto rounded-3">
-                                            <Col sm={2} md={2} lg={3}>
+                                            <Col xs={3} sm={2} md={2} lg={3}>
                                                 <p className="mb-0 text-center" style={textBold}>
                                                     <a href="#" className="link-dark link-underline-opacity-0 link-opacity-50-hover">
                                                         {race?.season}
                                                     </a>
                                                 </p>
                                             </Col>
-                                            <Col sm={8} md={8} lg={6}>
+                                            <Col xs={6} sm={8} md={8} lg={6}>
                                                 <p className="mb-0 text-center" style={textBold}>
                                                     <a href="#" className="link-dark link-underline-opacity-0 link-opacity-50-hover">
                                                         {race?.raceName}
                                                     </a>
                                                 </p>
                                             </Col>
-                                            <Col sm={2} md={2} lg={3}>
+                                            <Col xs={3} sm={2} md={2} lg={3}>
                                                 <p className="mb-0 text-center" style={textRegular}>
                                                     {raceDate.toLocaleDateString("en-GB", {day: "2-digit", month: "short"})}
                                                 </p>
