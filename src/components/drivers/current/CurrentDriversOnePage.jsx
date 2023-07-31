@@ -1,19 +1,25 @@
 import React, { useEffect, useState } from "react";
 
-import { Col, Container, Row, Spinner } from "react-bootstrap";
+import { currentDrivers } from "../../../constants/currentDrivers";
+import { flagsNationality } from "../../../constants/flagsNationality";
+import { currentConstructorSmallText } from "../../../constants/currentConstructorSmallText";
+
+import { Col, Container, Image, Row, Spinner } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 
 export default function CurrentDriversOnePage(){
     let { driverId } = useParams();
 
-    const [driver, setDriver] = useState([]);
+    const [standing, setStanding] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     const fetchInfo = async () => {
         try{
-            const response1 = await fetch("http://ergast.com/api/f1/current/drivers/" + driverId + ".json");
+            const response1 = await fetch("http://ergast.com/api/f1/current/drivers/" + driverId + "/driverStandings.json");
+
             const data1 = await response1.json();
-            setDriver(data1.MRData.DriverTable.Drivers[0]);
+
+            setStanding(data1.MRData.StandingsTable.StandingsLists[0]);
         }catch(error){
             console.log(error);
         }finally{
@@ -46,17 +52,59 @@ export default function CurrentDriversOnePage(){
         );
     }
     else{
+        // calcul de l'âge
+        const dateOfBirth = new Date(standing?.DriverStandings[0]?.Driver?.dateOfBirth);
+        const today = new Date();
+        let age = today.getFullYear() - dateOfBirth.getFullYear();
+        let monthDiff = today.getMonth() - today.getMonth();
+
+        if(monthDiff < 0 || (monthDiff === 0 && today.getDate() < dateOfBirth.getDate())){
+            age--;
+        }
+
         return (
             <Container>
                 <h1 className="fst-italic mt-1">
-                    <span style={textRegular}>{driver?.givenName}</span> <span style={textBold}>{driver?.familyName}</span>
+                    <span style={textRegular}>{standing?.DriverStandings[0]?.Driver?.givenName}</span> <span style={textBold}>{standing?.DriverStandings[0]?.Driver?.familyName}</span>
                 </h1>
-                <Row>
-                    <Col lg={4} className="bg-info">
-                        test
+                <Row className="mb-2 mb-md-0">
+                    <Col md={6} lg={4} className="d-flex justify-content-center align-items-center mb-2 mb-md-0">
+                        <Image src={currentDrivers[driverId]} className="img-fluid rounded-4" style={{maxHeight: "300px", objectFit: "contain"}} />
                     </Col>
-                    <Col lg={8} className="bg-danger">
-                        test
+                    <Col md={6} lg={8} className="d-flex flex-column justify-content-center">
+                        <Row>
+                            <Col lg={6} className="mb-3">
+                                <Container className="d-flex flex-column justify-content-around rounded-4" style={{height: "100px", borderRight: "5px solid #ff1801", borderBottom: "5px solid #ff1801"}}>
+                                    <p className="mb-0" style={textBlack}>NATIONALITY</p>
+                                    <div className="d-flex flex-row justify-content-center align-items-center">
+                                        <Image src={flagsNationality[standing?.DriverStandings[0]?.Driver?.nationality]} rounded className="me-1 border" style={{height: 25}} />
+                                        <p className="mb-0" style={{...textBold, fontSize: "24px"}}>{standing?.DriverStandings[0]?.Driver?.nationality}</p>
+                                    </div>
+                                    <div></div>
+                                </Container>
+                            </Col>
+                            <Col lg={6} className="mb-3">
+                                <Container className="d-flex flex-column justify-content-around rounded-4" style={{height: "100px", borderRight: "5px solid #ff1801", borderBottom: "5px solid #ff1801"}}>
+                                    <p className="mb-0" style={textBlack}>DATE OF BIRTH</p>
+                                    <p className="text-center mb-0" style={{...textBold, fontSize: "24px"}}>{dateOfBirth.toLocaleDateString("en")} ({age} y/o)</p>
+                                    <div></div>
+                                </Container>
+                            </Col>
+                            <Col lg={6} className="mb-3">
+                                <Container className="d-flex flex-column justify-content-around rounded-4" style={{height: "100px", borderRight: "5px solid #ff1801", borderBottom: "5px solid #ff1801"}}>
+                                    <p className="mb-0" style={textBlack}>NUMBER</p>
+                                    <p className="text-center mb-0" style={{...textBold, fontSize: "24px"}}>{standing?.DriverStandings[0]?.Driver?.permanentNumber}</p>
+                                    <div></div>
+                                </Container>
+                            </Col>
+                            <Col lg={6}>
+                                <Container className="d-flex flex-column justify-content-around rounded-4" style={{height: "100px", borderRight: "5px solid #ff1801", borderBottom: "5px solid #ff1801"}}>
+                                    <p className="mb-0" style={textBlack}>TEAM</p>
+                                    <p className="text-center mb-0" style={{...textBold, fontSize: "24px"}}>{currentConstructorSmallText[standing?.DriverStandings[0]?.Constructors[0]?.constructorId]}</p>
+                                    <div></div>
+                                </Container>
+                            </Col>
+                        </Row>
                     </Col>
                 </Row>
             </Container>
