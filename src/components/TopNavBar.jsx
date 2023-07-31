@@ -30,7 +30,7 @@ export default function TopNavBar(){
                             <NavDropdown.Item href="/allTracks">All</NavDropdown.Item>
                         </NavDropdown>
                         <NavDropdown title="Drivers" id="basic-nav-dropdown" style={navListStyle}>
-                            <NavDropdown.Item href="#">Current</NavDropdown.Item>
+                            <NavDropdown.Item href="/currentDrivers">Current</NavDropdown.Item>
                             <NavDropdown.Item href="#">All</NavDropdown.Item>
                         </NavDropdown>
                         <NavDropdown title="Constructors" id="basic-nav-dropdown" style={navListStyle}>

@@ -18,6 +18,7 @@ import ConstructorChampionsPage from './components/champions/constructor/Constru
 import CurrentTracksPage from './components/tracks/current/CurrentTracksPage';
 import AllTracksPage from './components/tracks/all/AllTracksPage';
 import AllTracksOnePage from './components/tracks/all/AllTracksOnePage';
+import CurrentDriversPage from './components/drivers/current/CurrentDriversPage';
 import NotFoundPage from './components/NotFoundPage';
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
                     <Route path='/currentTracks' element={<CurrentTracksPage />} />
                     <Route path='/allTracks' element={<AllTracksPage />} />
                     <Route path='/allTracks/:circuitId' element={<AllTracksOnePage />} />
+                    <Route path='/currentDrivers' element={<CurrentDriversPage />} />
                     <Route path='*' element={<NotFoundPage />} />
                 </Routes>
             </div>
