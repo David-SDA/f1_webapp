@@ -19,7 +19,7 @@ export default function CurrentDriversThisSeasonRacesHeaderContainer(){
     }
     
     return (
-        <Row className="bg-white mt-2 mt-sm-0 ms-1 me-1 mb-2 p-1 rounded">
+        <Row className="bg-white mt-sm-0 ms-1 me-1 p-1 rounded">
             <Col sm={1} md={1} lg={1} className="d-none d-sm-block p-0">
                 <p className="d-none d-md-block mb-0 text-center" style={textBlack}>ROUND</p>
                 <p className="d-block d-md-none mb-0 text-center" style={textBlack}>R</p>

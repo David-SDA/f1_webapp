@@ -25,7 +25,7 @@ export default function CurrentDriversThisSeasonRacesContentContainer({
         letterSpacing: "0.0005rem",
     }
     return (
-        <Row className="bg-white ms-1 me-1 mb-2 p-1 rounded">
+        <Row className="bg-white ms-1 me-1 mt-2 p-1 rounded">
             <Col sm={1} md={1} lg={1} className="d-none d-sm-flex justify-content-center align-items-center p-0">
                 <p className="mb-0 text-center" style={textBlack}>{round}</p>
             </Col>
