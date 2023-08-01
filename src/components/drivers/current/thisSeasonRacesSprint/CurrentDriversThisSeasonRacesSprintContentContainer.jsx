@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
 
-export default function CurrentDriversThisSeasonRacesContentContainer({
+export default function CurrentDriversThisSeasonRacesSprintContentContainer({
     round,
     raceName,
     grid,

@@ -2,16 +2,16 @@ import React, { useEffect, useState } from "react";
 
 import CurrentDriversDetailsContainer from "./CurrentDriversDetailsContainer";
 import CurrentDriversThisSeasonStatsContainer from "./CurrentDriversThisSeasonStatsContainer";
-import CurrentDriversThisSeasonRacesHeaderContainer from "./thisSeasonRaces/CurrentDriversThisSeasonRacesHeaderContainer";
-import CurrentDriversThisSeasonRacesContentContainer from "./thisSeasonRaces/CurrentDriversThisSeasonRacesContentContainer";
+import CurrentDriversThisSeasonRacesSprintHeaderContainer from "./thisSeasonRacesSprint/CurrentDriversThisSeasonRacesSprintHeaderContainer";
+import CurrentDriversThisSeasonRacesSprintContentContainer from "./thisSeasonRacesSprint/CurrentDriversThisSeasonRacesSprintContentContainer";
 import CurrentDriversThisSeasonQualifyingHeaderContainer from "./thisSeasonQualifying/CurrentDriversThisSeasonQualifyingHeaderContainer";
+import CurrentDriversThisSeasonQualifyingContentContainer from "./thisSeasonQualifying/CurrentDriversThisSeasonQualifyingContentContainer";
 import { currentDrivers } from "../../../constants/currentDrivers";
 import { flagsNationality } from "../../../constants/flagsNationality";
 import { currentConstructorSmallText } from "../../../constants/currentConstructorSmallText";
 
-import { Col, Container, Row, Spinner } from "react-bootstrap";
+import { Container, Spinner } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import CurrentDriversThisSeasonQualifyingContentContainer from "./thisSeasonQualifying/CurrentDriversThisSeasonQualifyingContentContainer";
 
 export default function CurrentDriversOnePage(){
     let { driverId } = useParams();
@@ -19,6 +19,7 @@ export default function CurrentDriversOnePage(){
     const [standing, setStanding] = useState([]);
     const [driverResults, setDriverResults] = useState([]);
     const [driverQualifyings, setDriverQualifyings] = useState([]);
+    const [driverSprints, setDriverSprints] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     const fetchInfo = async () => {
@@ -26,14 +27,17 @@ export default function CurrentDriversOnePage(){
             const response1 = await fetch("http://ergast.com/api/f1/current/drivers/" + driverId + "/driverStandings.json");
             const response2 = await fetch("http://ergast.com/api/f1/current/drivers/" + driverId + "/results.json");
             const response3 = await fetch("http://ergast.com/api/f1/current/drivers/" + driverId + "/qualifying.json")
+            const response4 = await fetch("http://ergast.com/api/f1/current/drivers/" + driverId + "/sprint.json")
 
             const data1 = await response1.json();
             const data2 = await response2.json();
             const data3 = await response3.json();
+            const data4 = await response4.json();
 
             setStanding(data1.MRData.StandingsTable.StandingsLists[0]);
             setDriverResults(data2.MRData.RaceTable.Races);
             setDriverQualifyings(data3.MRData.RaceTable.Races);
+            setDriverSprints(data4.MRData.RaceTable.Races);
         }catch(error){
             console.log(error);
         }finally{
@@ -99,11 +103,11 @@ export default function CurrentDriversOnePage(){
                 />
                 <h2 className="fst-italic mt-2" style={textRegular}>RACES</h2>
                 <Container className="d-flex flex-column mb-2 pt-3 pb-3 rounded" style={{backgroundColor: "#38383f"}}>
-                    <CurrentDriversThisSeasonRacesHeaderContainer />
+                    <CurrentDriversThisSeasonRacesSprintHeaderContainer />
                     {
                         [...driverResults].reverse().map((driverResult, index) => {
                             return (
-                                <CurrentDriversThisSeasonRacesContentContainer
+                                <CurrentDriversThisSeasonRacesSprintContentContainer
                                     key={index}
                                     round={driverResult?.round}
                                     raceName={driverResult?.raceName}
@@ -131,6 +135,26 @@ export default function CurrentDriversOnePage(){
                                     q1={driverQualifying?.QualifyingResults[0]?.Q1}
                                     q2={driverQualifying?.QualifyingResults[0]?.Q2}
                                     q3={driverQualifying?.QualifyingResults[0]?.Q3}
+                                />
+                            );
+                        })
+                    }
+                </Container>
+                <h2 className="fst-italic mt-2" style={textRegular}>SPRINTS</h2>
+                <Container className="d-flex flex-column mb-2 pt-3 pb-3 rounded" style={{backgroundColor: "#38383f"}}>
+                    <CurrentDriversThisSeasonRacesSprintHeaderContainer />
+                    {
+                        [...driverSprints].reverse().map((driverSprint, index) => {
+                            return (
+                                <CurrentDriversThisSeasonRacesSprintContentContainer
+                                    key={index}
+                                    round={driverSprint?.round}
+                                    raceName={driverSprint?.raceName}
+                                    grid={driverSprint?.SprintResults[0]?.grid}
+                                    position={driverSprint?.SprintResults[0]?.positionText}
+                                    time={driverSprint?.SprintResults[0]?.Time?.time}
+                                    status={driverSprint?.SprintResults[0]?.status}
+                                    points={driverSprint?.SprintResults[0]?.points}
                                 />
                             );
                         })

@@ -2,7 +2,7 @@ import React from "react";
 
 import { Col, Row } from "react-bootstrap";
 
-export default function CurrentDriversThisSeasonRacesHeaderContainer(){
+export default function CurrentDriversThisSeasonRacesSprintHeaderContainer(){
     const textBlack = {
         fontFamily: "Formula1-Black",
         letterSpacing: "0.0005rem",
