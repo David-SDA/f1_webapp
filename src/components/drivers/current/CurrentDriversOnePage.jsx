@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 
+import CurrentDriversDetailsContainer from "./CurrentDriversDetailsContainer";
+import CurrentDriversThisSeasonStatsContainer from "./CurrentDriversThisSeasonStatsContainer";
 import { currentDrivers } from "../../../constants/currentDrivers";
 import { flagsNationality } from "../../../constants/flagsNationality";
 import { currentConstructorSmallText } from "../../../constants/currentConstructorSmallText";
 
 import { Col, Container, Image, Row, Spinner } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import CurrentDriversDetailsContainer from "./CurrentDriversDetailsContainer";
 
 export default function CurrentDriversOnePage(){
     let { driverId } = useParams();
@@ -87,36 +88,12 @@ export default function CurrentDriversOnePage(){
                     team={currentConstructorSmallText[standing?.DriverStandings[0]?.Constructors[0]?.constructorId]}
                 />
                 <h2 className="fst-italic mt-2" style={textRegular}>THIS SEASON, AFTER ROUND {standing?.round}</h2>
-                <Row className="mb-2">
-                    <Col lg={3} className="mb-3">
-                        <Container className="d-flex flex-column justify-content-around rounded-4" style={{height: "100px", borderRight: "5px solid #ff1801", borderBottom: "5px solid #ff1801"}}>
-                            <p className="mb-0" style={textBlack}>POSITION IN STANDINGS</p>
-                            <p className="text-center mb-0" style={{...textBold, fontSize: "24px"}}>{standing?.DriverStandings[0]?.positionText}</p>
-                            <div></div>
-                        </Container>
-                    </Col>
-                    <Col lg={3} className="mb-3">
-                        <Container className="d-flex flex-column justify-content-around rounded-4" style={{height: "100px", borderRight: "5px solid #ff1801", borderBottom: "5px solid #ff1801"}}>
-                            <p className="mb-0" style={textBlack}>POINTS</p>
-                            <p className="text-center mb-0" style={{...textBold, fontSize: "24px"}}>{standing?.DriverStandings[0]?.points}</p>
-                            <div></div>
-                        </Container>
-                    </Col>
-                    <Col lg={3} className="mb-3">
-                        <Container className="d-flex flex-column justify-content-around rounded-4" style={{height: "100px", borderRight: "5px solid #ff1801", borderBottom: "5px solid #ff1801"}}>
-                            <p className="mb-0" style={textBlack}>WINS</p>
-                            <p className="text-center mb-0" style={{...textBold, fontSize: "24px"}}>{standing?.DriverStandings[0]?.wins}</p>
-                            <div></div>
-                        </Container>
-                    </Col>
-                    <Col lg={3} className="mb-3">
-                        <Container className="d-flex flex-column justify-content-around rounded-4" style={{height: "100px", borderRight: "5px solid #ff1801", borderBottom: "5px solid #ff1801"}}>
-                            <p className="mb-0" style={textBlack}>PODIUMS</p>
-                            <p className="text-center mb-0" style={{...textBold, fontSize: "24px"}}>{nbPodiums}</p>
-                            <div></div>
-                        </Container>
-                    </Col>
-                </Row>
+                <CurrentDriversThisSeasonStatsContainer
+                    position={standing?.DriverStandings[0]?.positionText}
+                    points={standing?.DriverStandings[0]?.points}
+                    wins={standing?.DriverStandings[0]?.wins}
+                    nbPodiums={nbPodiums}
+                />
             </Container>
         );
     }
