@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import CurrentDriversCard from "./CurrentDriversCard";
+import CurrentDriversCardContainer from "./CurrentDriversCardContainer";
 
 import { Container, Row, Spinner } from "react-bootstrap";
 
@@ -43,7 +43,7 @@ export default function CurrentDriversPage(){
                     {
                         drivers.map((driver, index) => {
                             return (
-                                <CurrentDriversCard
+                                <CurrentDriversCardContainer
                                     key={index}
                                     driverId={driver?.driverId}
                                     nationality={driver?.nationality}

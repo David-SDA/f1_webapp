@@ -7,7 +7,7 @@ import { currentDrivers } from "../../../constants/currentDrivers";
 
 import { Card, Col, Image } from "react-bootstrap";
 
-export default function CurrentDriversCard({
+export default function CurrentDriversCardContainer({
     driverId,
     nationality,
     givenName,
