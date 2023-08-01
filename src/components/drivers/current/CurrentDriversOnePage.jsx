@@ -3,13 +3,15 @@ import React, { useEffect, useState } from "react";
 import CurrentDriversDetailsContainer from "./CurrentDriversDetailsContainer";
 import CurrentDriversThisSeasonStatsContainer from "./CurrentDriversThisSeasonStatsContainer";
 import CurrentDriversThisSeasonRacesHeaderContainer from "./thisSeasonRaces/CurrentDriversThisSeasonRacesHeaderContainer";
+import CurrentDriversThisSeasonRacesContentContainer from "./thisSeasonRaces/CurrentDriversThisSeasonRacesContentContainer";
+import CurrentDriversThisSeasonQualifyingHeaderContainer from "./thisSeasonQualifying/CurrentDriversThisSeasonQualifyingHeaderContainer";
 import { currentDrivers } from "../../../constants/currentDrivers";
 import { flagsNationality } from "../../../constants/flagsNationality";
 import { currentConstructorSmallText } from "../../../constants/currentConstructorSmallText";
 
 import { Col, Container, Row, Spinner } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import CurrentDriversThisSeasonRacesContentContainer from "./thisSeasonRaces/CurrentDriversThisSeasonRacesContentContainer";
+import CurrentDriversThisSeasonQualifyingContentContainer from "./thisSeasonQualifying/CurrentDriversThisSeasonQualifyingContentContainer";
 
 export default function CurrentDriversOnePage(){
     let { driverId } = useParams();
@@ -67,11 +69,6 @@ export default function CurrentDriversOnePage(){
         letterSpacing: "0.0005rem",
     }
 
-    const textBlack = {
-        fontFamily: "Formula1-Black",
-        letterSpacing: "0.0005rem",
-    }
-
     if(isLoading){
         return(
             <Spinner animation="border" style={{color: "#ff1801"}} />
@@ -122,98 +119,19 @@ export default function CurrentDriversOnePage(){
                 </Container>
                 <h2 className="fst-italic mt-2" style={textRegular}>QUALIFYING</h2>
                 <Container className="d-flex flex-column mb-2 pt-3 pb-3 rounded" style={{backgroundColor: "#38383f"}}>
-                    <Row className="bg-white mt-sm-0 ms-1 me-1 p-1 rounded">
-                        <Col sm={1} md={1} lg={1} className="d-none d-sm-block p-0">
-                            <p className="d-none d-md-block mb-0 text-center" style={textBlack}>ROUND</p>
-                            <p className="d-block d-md-none mb-0 text-center" style={textBlack}>R</p>
-                        </Col>
-                        <Col xs={8} sm={4} md={4} lg={4} className="p-0">
-                            <p className="d-none d-sm-block mb-0 text-center" style={textBlack}>GRAND PRIX</p>
-                            <p className="d-block d-sm-none mb-0 text-center" style={textBlack}>GP</p>
-                        </Col>
-                        <Col xs={4} sm={1} md={1} lg={1} className="p-0">
-                            <p className="d-none d-lg-block mb-0 text-center" style={textBlack}>POSITION</p>
-                            <p className="d-block d-lg-none mb-0 text-center" style={textBlack}>POS</p>
-                            
-                        </Col>
-                        <Col sm={2} md={2} lg={2} className="d-none d-sm-block p-0">
-                            <p className="mb-0 text-center" style={textBlack}>Q1</p>
-                        </Col>
-                        <Col sm={2} md={2} lg={2} className="d-none d-sm-block">
-                            <p className="mb-0 text-center" style={textBlack}>Q2</p>
-                        </Col>
-                        <Col sm={2} md={2} lg={2} className="d-none d-sm-block">
-                            <p className="mb-0 text-center" style={textBlack}>Q3</p>
-                        </Col>
-                    </Row>
+                    <CurrentDriversThisSeasonQualifyingHeaderContainer />
                     {
                         [...driverQualifyings].reverse().map((driverQualifying, index) => {
                             return (
-                                <Row className="bg-white ms-1 me-1 mt-2 p-1 rounded" key={index}>
-                                    <Col sm={1} md={1} lg={1} className="d-none d-sm-flex p-0 justify-content-center align-items-center ">
-                                        <p className="mb-0 text-center" style={textBlack}>{driverQualifying?.round}</p>
-                                    </Col>
-                                    <Col xs={8} sm={4} md={4} lg={4} className="d-flex justify-content-center align-items-center p-0">
-                                        <a href="#" className="link-dark link-underline-opacity-0 link-underline-opacity-50-hover">
-                                            <p className="d-flex d-lg-none align-items-center mb-0 text-center" style={{...textBold, minHeight: "3em"}}>{driverQualifying?.raceName}</p>
-                                            <p className="d-none d-lg-flex align-items-center mb-0 text-center" style={textBold}>{driverQualifying?.raceName}</p>
-                                        </a>
-                                    </Col>
-                                    <Col xs={4} sm={1} md={1} lg={1} className="d-flex justify-content-center align-items-center p-0">
-                                        <p className="mb-0 text-center" style={textBold}>{driverQualifying?.QualifyingResults[0]?.position}</p>
-                                    </Col>
-                                    <Col sm={2} md={2} lg={2} className="d-none d-sm-flex justify-content-center align-items-center p-0">
-                                        <p className="mb-0 text-center" style={textRegular}>
-                                            {
-                                                driverQualifying?.QualifyingResults[0]?.Q1 ? (
-                                                    <>
-                                                        <span className="d-none d-md-block rounded-5 p-1" style={{backgroundColor: "#e8e8e8"}}>{driverQualifying?.QualifyingResults[0]?.Q1}</span>
-                                                        <span className="d-block d-md-none rounded-5 p-1" style={{backgroundColor: "#e8e8e8", fontSize: 14}}>{driverQualifying?.QualifyingResults[0]?.Q1}</span>
-                                                    </>
-                                                ) : (
-                                                    <>
-                                                        <span className="d-none d-md-block rounded-5 p-1" style={{backgroundColor: "#e8e8e8"}}>--:--:---</span>
-                                                        <span className="d-block d-md-none rounded-5 p-1" style={{backgroundColor: "#e8e8e8", fontSize: 14}}>--:--:---</span>
-                                                    </>
-                                                )
-                                            }
-                                        </p>
-                                    </Col>
-                                    <Col sm={2} md={2} lg={2} className="d-none d-sm-flex justify-content-center align-items-center p-0">
-                                        <p className="mb-0 text-center" style={textRegular}>
-                                            {
-                                                driverQualifying?.QualifyingResults[0]?.Q2 ? (
-                                                    <>
-                                                        <span className="d-none d-md-block rounded-5 p-1" style={{backgroundColor: "#e8e8e8"}}>{driverQualifying?.QualifyingResults[0]?.Q2}</span>
-                                                        <span className="d-block d-md-none rounded-5 p-1" style={{backgroundColor: "#e8e8e8", fontSize: 14}}>{driverQualifying?.QualifyingResults[0]?.Q2}</span>
-                                                    </>
-                                                ) : (
-                                                    <>
-                                                        <span className="d-none d-md-block rounded-5 p-1" style={{backgroundColor: "#e8e8e8"}}>--:--:---</span>
-                                                        <span className="d-block d-md-none rounded-5 p-1" style={{backgroundColor: "#e8e8e8", fontSize: 14}}>--:--:---</span>
-                                                    </>
-                                                )
-                                            }
-                                        </p>
-                                    </Col>
-                                    <Col sm={2} md={2} lg={2} className="d-none d-sm-flex justify-content-center align-items-center p-0">
-                                        <p className="mb-0 text-center" style={textRegular}>
-                                            {
-                                                driverQualifying?.QualifyingResults[0]?.Q3 ? (
-                                                    <>
-                                                        <span className="d-none d-md-block rounded-5 p-1" style={{backgroundColor: "#e8e8e8"}}>{driverQualifying?.QualifyingResults[0]?.Q3}</span>
-                                                        <span className="d-block d-md-none rounded-5 p-1" style={{backgroundColor: "#e8e8e8", fontSize: 14}}>{driverQualifying?.QualifyingResults[0]?.Q3}</span>
-                                                    </>
-                                                ) : (
-                                                    <>
-                                                        <span className="d-none d-md-block rounded-5 p-1" style={{backgroundColor: "#e8e8e8"}}>--:--:---</span>
-                                                        <span className="d-block d-md-none rounded-5 p-1" style={{backgroundColor: "#e8e8e8", fontSize: 14}}>--:--:---</span>
-                                                    </>
-                                                )
-                                            }
-                                        </p>
-                                    </Col>
-                                </Row>
+                                <CurrentDriversThisSeasonQualifyingContentContainer
+                                    key={index}
+                                    round={driverQualifying?.round}
+                                    raceName={driverQualifying?.raceName}
+                                    position={driverQualifying?.QualifyingResults[0]?.position}
+                                    q1={driverQualifying?.QualifyingResults[0]?.Q1}
+                                    q2={driverQualifying?.QualifyingResults[0]?.Q2}
+                                    q3={driverQualifying?.QualifyingResults[0]?.Q3}
+                                />
                             );
                         })
                     }

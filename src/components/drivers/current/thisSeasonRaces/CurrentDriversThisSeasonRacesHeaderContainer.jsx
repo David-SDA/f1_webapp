@@ -3,16 +3,6 @@ import React from "react";
 import { Col, Row } from "react-bootstrap";
 
 export default function CurrentDriversThisSeasonRacesHeaderContainer(){
-    const textRegular = {
-        fontFamily: "Formula1-Regular",
-        letterSpacing: "0.0005rem",
-    }
-
-    const textBold = {
-        fontFamily: "Formula1-Bold",
-        letterSpacing: "0.0005rem",
-    }
-
     const textBlack = {
         fontFamily: "Formula1-Black",
         letterSpacing: "0.0005rem",
