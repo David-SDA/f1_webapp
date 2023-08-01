@@ -12,12 +12,10 @@ export default function CurrentDriversDetailsContainer({
     team,
 }){
     // calcul de l'âge
-    const birth = new Date(dateOfBirth);
     const today = new Date();
-    let age = today.getFullYear() - birth.getFullYear();
-    let monthDiff = today.getMonth() - today.getMonth();
+    let age = today.getFullYear() - dateOfBirth.getFullYear();
 
-    if(monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())){
+    if(today.getMonth() < dateOfBirth.getMonth(0) || (today.getMonth() === dateOfBirth.getMonth() && today.getDate() < dateOfBirth.getDate())){
         age--;
     }
 
@@ -51,7 +49,7 @@ export default function CurrentDriversDetailsContainer({
                     <Col lg={6} className="mb-3">
                         <Container className="d-flex flex-column justify-content-around rounded-4" style={{height: "100px", borderRight: "5px solid #ff1801", borderBottom: "5px solid #ff1801"}}>
                             <p className="mb-0" style={textBlack}>DATE OF BIRTH</p>
-                            <p className="text-center mb-0" style={{...textBold, fontSize: "24px"}}>{dateOfBirth} ({age} y/o)</p>
+                            <p className="text-center mb-0" style={{...textBold, fontSize: "24px"}}>{dateOfBirth.toLocaleDateString("en")} ({age} y/o)</p>
                             <div></div>
                         </Container>
                     </Col>

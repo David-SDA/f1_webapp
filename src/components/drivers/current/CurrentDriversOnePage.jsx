@@ -72,7 +72,7 @@ export default function CurrentDriversOnePage(){
     }
     else{
         const dateOfBirth = new Date(standing?.DriverStandings[0]?.Driver?.dateOfBirth);
-        
+
         return (
             <Container>
                 <h1 className="fst-italic mt-1">
@@ -82,7 +82,7 @@ export default function CurrentDriversOnePage(){
                     image={currentDrivers[driverId]}
                     flagNationality={flagsNationality[standing?.DriverStandings[0]?.Driver?.nationality]}
                     nationality={standing?.DriverStandings[0]?.Driver?.nationality}
-                    dateOfBirth={dateOfBirth.toLocaleDateString("en")}
+                    dateOfBirth={dateOfBirth}
                     permanentNumber={standing?.DriverStandings[0]?.Driver?.permanentNumber}
                     team={currentConstructorSmallText[standing?.DriverStandings[0]?.Constructors[0]?.constructorId]}
                 />
