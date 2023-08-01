@@ -11,19 +11,19 @@ export default function CurrentDriversOnePage(){
     let { driverId } = useParams();
 
     const [standing, setStanding] = useState([]);
-    const [raceResults, setRaceResults] = useState([]);
+    const [driverResults, setDriverResults] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     const fetchInfo = async () => {
         try{
             const response1 = await fetch("http://ergast.com/api/f1/current/drivers/" + driverId + "/driverStandings.json");
-            const response2 = await fetch("http://ergast.com/api/f1/current/drivers/" + {driverId} + "/results.json")
+            const response2 = await fetch("http://ergast.com/api/f1/current/drivers/" + driverId + "/results.json")
 
             const data1 = await response1.json();
             const data2 = await response2.json();
 
             setStanding(data1.MRData.StandingsTable.StandingsLists[0]);
-            setRaceResults(data2.MRData.RaceTable.Races[0]);
+            setDriverResults(data2.MRData.RaceTable.Races);
         }catch(error){
             console.log(error);
         }finally{
@@ -31,9 +31,23 @@ export default function CurrentDriversOnePage(){
         }
     }
 
-    useEffect(() => {
+    useEffect(() => {    
         fetchInfo();
     }, [])
+    
+    // Calcul du nombre de podiums
+    const getPodiums = () => {
+        let podiums = 0;
+        for(const driverResult of driverResults){
+            const position = driverResult?.Results[0]?.position;
+            if(["1", "2", "3"].includes(position)){
+                podiums++;
+            }
+        }
+        return podiums;
+    }
+
+    let nbPodiums = getPodiums();
 
     const textRegular = {
         fontFamily: "Formula1-Regular",
@@ -137,7 +151,7 @@ export default function CurrentDriversOnePage(){
                     <Col lg={3} className="mb-3">
                         <Container className="d-flex flex-column justify-content-around rounded-4" style={{height: "100px", borderRight: "5px solid #ff1801", borderBottom: "5px solid #ff1801"}}>
                             <p className="mb-0" style={textBlack}>PODIUMS</p>
-                            <p className="text-center mb-0" style={{...textBold, fontSize: "24px"}}>..</p>
+                            <p className="text-center mb-0" style={{...textBold, fontSize: "24px"}}>{nbPodiums}</p>
                             <div></div>
                         </Container>
                     </Col>
