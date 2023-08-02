@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 
+import CurrentConstructorsCard from "./CurrentConstructorsCard";
 import { currentConstructorColor } from "../../../constants/currentConstructorColor";
 import { flagsNationality } from "../../../constants/flagsNationality";
 import { currentConstructorImage } from "../../../constants/currentConstructorImage";
 
-import { Card, Col, Container, Image, Row, Spinner } from "react-bootstrap";
-import CurrentConstructorsCard from "./CurrentConstructorsCard";
+import { Container, Row, Spinner } from "react-bootstrap";
 
 export default function CurrentConstructorsPage(){
     const [constructors, setConstructors] = useState([]);
@@ -47,6 +47,7 @@ export default function CurrentConstructorsPage(){
                             return (
                                 <CurrentConstructorsCard
                                     key={index}
+                                    constructorId={constructor?.constructorId}
                                     color={currentConstructorColor[constructor?.constructorId]}
                                     imageFlag={flagsNationality[constructor?.nationality]}
                                     name={constructor?.name}
