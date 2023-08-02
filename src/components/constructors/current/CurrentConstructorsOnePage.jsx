@@ -6,6 +6,7 @@ import { flagsNationality } from "../../../constants/flagsNationality";
 
 import { Col, Container, Image, Row, Spinner } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+import CurrentConstructorsThieSeasonStatsContainer from "./CurrentConstructorsThisSeasonStatsContainer";
 
 export default function CurrentConstuctorsOnePage(){
     let { constructorId } = useParams();
@@ -70,6 +71,11 @@ export default function CurrentConstuctorsOnePage(){
                     drivers={drivers}
                 />
                 <h2 className="fst-italic mt-2" style={textRegular}>THIS SEASON, AFTER ROUND {standing?.round}</h2>
+                <CurrentConstructorsThieSeasonStatsContainer
+                    position={standing?.ConstructorStandings[0]?.positionText}
+                    points={standing?.ConstructorStandings[0]?.points}
+                    wins={standing?.ConstructorStandings[0]?.wins}
+                />
             </Container>
         );
     }
