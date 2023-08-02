@@ -19,5 +19,6 @@ export const flagsNationality = {
     "New Zealander": require("../assets/countryFlags/newZealand.jpg"),
     "South African": require("../assets/countryFlags/southAfrica.jpg"),
     "Spanish": require("../assets/countryFlags/spain.jpg"),
+    "Swiss" : require("../assets/countryFlags/switzerland.jpg"),
     "Thai": require("../assets/countryFlags/thailand.png"),
 }
