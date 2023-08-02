@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import CurrentConstructorsCard from "./CurrentConstructorsCard";
+import CurrentConstructorsCardContainer from "./CurrentConstructorsCardContainer";
 import { currentConstructorColor } from "../../../constants/currentConstructorColor";
 import { flagsNationality } from "../../../constants/flagsNationality";
 import { currentConstructorImage } from "../../../constants/currentConstructorImage";
@@ -45,7 +45,7 @@ export default function CurrentConstructorsPage(){
                     {
                         constructors.map((constructor, index) => {
                             return (
-                                <CurrentConstructorsCard
+                                <CurrentConstructorsCardContainer
                                     key={index}
                                     constructorId={constructor?.constructorId}
                                     color={currentConstructorColor[constructor?.constructorId]}

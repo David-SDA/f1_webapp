@@ -2,7 +2,7 @@ import React from "react";
 
 import { Card, Col, Image } from "react-bootstrap";
 
-export default function CurrentConstructorsCard({
+export default function CurrentConstructorsCardContainer({
     constructorId,
     color,
     imageFlag,

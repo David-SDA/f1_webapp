@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 
+import CurrentConstructorsDetailsContainer from "./CurrentConstructorsDetailsContainer";
 import { currentConstructorImage } from "../../../constants/currentConstructorImage";
 import { flagsNationality } from "../../../constants/flagsNationality";
-import { currentDriversSideImage } from "../../../constants/currentDriversSideImage";
 
 import { Col, Container, Image, Row, Spinner } from "react-bootstrap";
 import { useParams } from "react-router-dom";
@@ -63,49 +63,12 @@ export default function CurrentConstuctorsOnePage(){
                         <span style={textBold}>{standing?.ConstructorStandings[0]?.Constructor?.name}</span>
                     </a>
                 </h1>
-                <Row className="mb-2 mb-md-0">
-                    <Col md={6} lg={4} className="d-flex justify-content-center align-items-center mb-2 mb-md-0">
-                        <Image src={currentConstructorImage[constructorId]} className="img-fluid rounded-4" style={{maxHeight: "300px", objectFit: "contain"}} />
-                    </Col>
-                    <Col md={6} lg={8} className="d-flex flex-column justify-content-center">
-                        <Row className="d-flex justify-content-center">
-                            <Col lg={12} className="mb-2">
-                                <Container className="d-flex flex-column justify-content-around rounded-4" style={{height: "100px", borderRight: "5px solid #ff1801", borderBottom: "5px solid #ff1801"}}>
-                                    <p className="mb-0" style={textBlack}>NATIONALITY</p>
-                                    <div className="d-flex flex-row justify-content-center align-items-center">
-                                        <Image src={flagsNationality[standing?.ConstructorStandings[0]?.Constructor?.nationality]} rounded className="me-1 border" style={{height: 25}} />
-                                        <p className="mb-0" style={{...textBold, fontSize: "24px"}}>{standing?.ConstructorStandings[0]?.Constructor?.nationality}</p>
-                                    </div>
-                                    <div></div>
-                                </Container>
-                            </Col>
-                            {
-                                drivers.map((driver, index) => {
-                                    return (
-                                        <Col lg={6} className="mb-3" key={index}>
-                                            <Container className="d-flex flex-column justify-content-between rounded-4" style={{height: "200px", borderRight: "5px solid #ff1801", borderBottom: "5px solid #ff1801"}}>
-                                                <div className="d-flex justify-content-between">
-                                                    <div className="d-flex">
-                                                        <Image src={flagsNationality[driver?.nationality]} rounded className="me-1 border" style={{height: 25}} />
-                                                        <p className="mb-0 fst-italic">
-                                                            <span style={textRegular}>{driver?.givenName}</span> <span style={textBold}>{driver?.familyName}</span>
-                                                        </p>
-                                                    </div>
-                                                    <p className="mb-0 fst-italic" style={{...textBlack, fontSize: 20}}>
-                                                        {driver?.permanentNumber}
-                                                    </p>
-                                                </div>
-                                                <div className="d-flex justify-content-center">
-                                                    <Image src={currentDriversSideImage[driver?.driverId]} style={{height: 160, width: 160}} />
-                                                </div>
-                                            </Container>
-                                        </Col>
-                                    );
-                                })
-                            }
-                        </Row>
-                    </Col>
-                </Row>
+                <CurrentConstructorsDetailsContainer
+                    image={currentConstructorImage[constructorId]}
+                    flag={flagsNationality[standing?.ConstructorStandings[0]?.Constructor?.nationality]}
+                    nationality={standing?.ConstructorStandings[0]?.Constructor?.nationality}
+                    drivers={drivers}
+                />
                 <h2 className="fst-italic mt-2" style={textRegular}>THIS SEASON, AFTER ROUND {standing?.round}</h2>
             </Container>
         );
