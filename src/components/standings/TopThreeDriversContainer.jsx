@@ -42,6 +42,7 @@ export default function TopThreeDriversContainer(){
                                 name={driver?.Driver?.familyName}
                                 points={driver?.points}
                                 color={currentConstructorColor[driver?.Constructors[0]?.constructorId]}
+                                driverId={driver?.Driver?.driverId}
                                 key={index}
                             />
                         );

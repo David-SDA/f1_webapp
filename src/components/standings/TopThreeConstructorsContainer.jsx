@@ -42,6 +42,7 @@ export default function TopThreeConstructorsContainer(){
                                 name={currentConstructorSmallText[constructor?.Constructor?.constructorId]}
                                 points={constructor?.points}
                                 color={currentConstructorColor[constructor?.Constructor?.constructorId]}
+                                constructorId={constructor?.Constructor?.constructorId}
                                 key={index}
                             />
                         );
