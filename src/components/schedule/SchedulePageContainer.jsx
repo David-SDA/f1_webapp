@@ -68,7 +68,7 @@ export default function SchedulePageContainer() {
                             
                             return (
                                 <Col sm={12} md={6} lg={4} className="mb-3" key={index}>
-                                    <a href={"/schedule/" + race?.round + "/" + format} className="link-dark link-underline-opacity-0 link-opacity-50-hover">
+                                    <a href={"/schedule/" + race?.round + "/" + format} className="link-dark link-underline-opacity-0 link-opacity-75-hover">
                                         <Container style={myBorder} >
                                             <SmallRoundFlagContainer round={race?.round} country={race?.Circuit?.Location?.country} />
                                             <DatesContainer dateDebut={dateDebut} dateFin={dateFin} />
