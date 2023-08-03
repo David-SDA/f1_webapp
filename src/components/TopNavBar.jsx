@@ -31,7 +31,7 @@ export default function TopNavBar(){
                         </NavDropdown>
                         <NavDropdown title="Drivers" id="basic-nav-dropdown" style={navListStyle}>
                             <NavDropdown.Item href="/currentDrivers">Current</NavDropdown.Item>
-                            <NavDropdown.Item href="#">All</NavDropdown.Item>
+                            <NavDropdown.Item href="/allDrivers">All</NavDropdown.Item>
                         </NavDropdown>
                         <NavDropdown title="Constructors" id="basic-nav-dropdown" style={navListStyle}>
                             <NavDropdown.Item href="/currentConstructors">Current</NavDropdown.Item>
