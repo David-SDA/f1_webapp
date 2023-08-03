@@ -3,6 +3,8 @@ import React from "react";
 import { Col, Row } from "react-bootstrap";
 
 export default function DriverStandingsContentContainer({
+    driverId,
+    teamId,
     position,
     color,
     givenName,
@@ -56,20 +58,20 @@ export default function DriverStandingsContentContainer({
             </Col>
             <Col className="p-0" xs={3} sm={3} md={4} lg={4}>
                     <p className="m-0 d-none d-sm-block">
-                        <a href="#" className="link-dark link-underline-opacity-0 link-opacity-75-hover">
+                        <a href={"/currentDrivers/" + driverId} className="link-dark link-underline-opacity-0 link-underline-opacity-50-hover">
                             <span className="d-none d-md-inline" style={textRegular}>{givenName} </span>
                             <span style={textBold}>{familyName}</span>
                         </a>
                     </p>
                     <p className="m-0 d-block d-sm-none">
-                        <a href="#" className="link-dark link-underline-opacity-0 link-opacity-75-hover">
+                        <a href={"/currentDrivers/" + driverId} className="link-dark link-underline-opacity-0 link-underline-opacity-50-hover">
                             <span style={textBold}>{code}</span>
                         </a>
                     </p>
             </Col>
             <Col className="p-0 d-none d-sm-block" sm={4} md={3} lg={3}>
                 <p className="m-0 text-center">
-                    <a href="##" className="link-dark link-underline-opacity-0 link-opacity-75-hover">
+                    <a href={"/currentConstructors/" + teamId} className="link-dark link-underline-opacity-0 link-underline-opacity-50-hover">
                         <span style={textRegular}>{team}</span>
                     </a>
                 </p>

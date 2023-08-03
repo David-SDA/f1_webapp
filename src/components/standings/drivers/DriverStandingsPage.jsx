@@ -48,6 +48,8 @@ export default function DriverStandingsPage() {
                             return (
                                 <DriverStandingsContentContainer
                                     key={index}
+                                    driverId={driver?.Driver?.driverId}
+                                    teamId={driver?.Constructors[0]?.constructorId}
                                     position={driver?.positionText}
                                     color={currentConstructorColor[driver?.Constructors[0]?.constructorId]}
                                     givenName={driver?.Driver?.givenName}
