@@ -3,6 +3,7 @@ import React from "react";
 import { Col, Row } from "react-bootstrap";
 
 export default function ConstructorStandingsContentContainer({
+    teamId,
     position,
     color,
     team,
@@ -47,12 +48,12 @@ export default function ConstructorStandingsContentContainer({
             </Col>
             <Col className="p-0" xs={5} sm={6} md={4} lg={4}>
                 <p className="m-0 d-none d-sm-block">
-                    <a href="##" className="link-dark link-underline-opacity-0 link-opacity-75-hover">
+                    <a href={"/currentConstructors/" + teamId} className="link-dark link-underline-opacity-0 link-underline-opacity-50-hover">
                         <span style={textBold}>{team}</span>
                     </a>
                 </p>
                 <p className="m-0 d-block d-sm-none">
-                    <a href="##" className="link-dark link-underline-opacity-0 link-opacity-75-hover">
+                    <a href={"/currentConstructors/" + teamId} className="link-dark link-underline-opacity-0 link-underline-opacity-50-hover">
                         <span style={{fontFamily: "Formula1-Bold", fontSize: 15, letterSpacing: "0.0005rem", color: isSelected ? "#ffffff" : ""}}>{team}</span>
                     </a>
                 </p>

@@ -48,6 +48,7 @@ export default function ConstructorStandingsPage() {
                             return (
                                 <ConstructorStandingsContentContainer
                                     key={index}
+                                    teamId={team?.Constructor?.constructorId}
                                     position={team?.positionText}
                                     color={currentConstructorColor[team?.Constructor?.constructorId]}
                                     team={currentConstructorSmallText[team?.Constructor?.constructorId]}
