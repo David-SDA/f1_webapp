@@ -24,7 +24,6 @@ export default function CurrentDriversPage(){
         fetchInfo();
     }, [])
 
-
     const textRegular = {
         fontFamily: "Formula1-Regular",
         letterSpacing: "0.0005rem",
