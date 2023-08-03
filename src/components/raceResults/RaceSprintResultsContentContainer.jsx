@@ -4,6 +4,7 @@ import { Col, Row } from "react-bootstrap";
 
 export default function RaceSprintResultsContentContainer({
     type,
+    driverId,
     position,
     startingPosition,
     color,
@@ -43,7 +44,7 @@ export default function RaceSprintResultsContentContainer({
     };
 
     return (
-        <a href="#" className="link-dark link-underline-opacity-0 link-opacity-75-hover">
+        <a href={"/currentDrivers/" + driverId} className="link-dark link-underline-opacity-0 link-opacity-75-hover">
             <Row className="d-flex flex-nowrap flex-row justify-content-around align-items-center bg-white m-1 p-1 p-sm-2 rounded-3">                    
                 <Col className="p-0" xs={1} sm={1} md={1} lg={1}>
                     <p className="m-0 text-center text-xs" style={wideText}>

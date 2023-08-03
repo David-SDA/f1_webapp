@@ -42,6 +42,7 @@ export default function RaceResultsContainer({round}){
                             return (
                                 <RaceSprintResultsContentContainer
                                     type={"Race"}
+                                    driverId={result?.Driver?.driverId}
                                     position={result?.positionText}
                                     startingPosition={""}
                                     color={currentConstructorColor[result?.Constructor?.constructorId]}

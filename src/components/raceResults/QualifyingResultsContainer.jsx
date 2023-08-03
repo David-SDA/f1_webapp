@@ -41,6 +41,7 @@ export default function QualifyingResultsContainer({round}){
                         results.map((result, index) => {
                             return (
                                 <QualifyingResultsContentContainer
+                                    driverId={result?.Driver?.driverId}
                                     position={result?.position}
                                     color={currentConstructorColor[result?.Constructor?.constructorId]}
                                     firstName={result?.Driver?.givenName}
