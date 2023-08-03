@@ -20,15 +20,16 @@ export default function CurrentConstructorsThisSeasonRacesSprintContentContainer
     }
     
     return (
-        <Row className="bg-white mt-2 ms-1 me-1 p-1 rounded">
+        <Row className="bg-white mt-2 ms-1 me-1 p-1 rounded d-flex justify-content-center align-items-center p-0">
             <Col sm={1} md={1} lg={1} className="d-none d-sm-block p-0">
                 <p className="mb-0 text-center" style={textBlack}>{round}</p>
             </Col>
             {
-                driver3Position === null ? (
+                driver3Position ? (
                     <Col xs={6} sm={5} md={4} lg={4} className="d-flex justify-content-center p-0">
-                        <p className="d-flex d-sm-none align-items-center mb-0 text-center" style={{...textBold, minHeight: "3em"}}>{race}</p>
-                        <p className="d-none d-sm-flex align-items-center mb-0 text-center" style={textBold}>{race}</p>
+                        <p className="d-flex d-sm-none align-items-center mb-0 text-center" style={{...textBold, minHeight: "5em"}}>{race}</p>
+                        <p className="d-none d-sm-flex d-lg-none align-items-center mb-0 text-center" style={{...textBold, minHeight: "3em"}}>{race}</p>
+                        <p className="d-none d-lg-flex align-items-center mb-0 text-center" style={textBold}>{race}</p>
                     </Col>
                 ) : (
                     <Col xs={8} sm={7} md={6} lg={6} className="d-flex justify-content-center p-0">
@@ -38,7 +39,7 @@ export default function CurrentConstructorsThisSeasonRacesSprintContentContainer
                 )
             }
             {
-                driver3Position === null ? (
+                driver3Position ? (
                     <>
                         <Col xs={2} sm={2} md={2} lg={2} className="p-0">
                             <p className="mb-0 text-center" style={textBold}>{driver1Position}</p>

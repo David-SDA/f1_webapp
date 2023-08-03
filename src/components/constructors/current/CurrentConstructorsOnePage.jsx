@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import CurrentConstructorsDetailsContainer from "./CurrentConstructorsDetailsContainer";
-import CurrentConstructorsThieSeasonStatsContainer from "./CurrentConstructorsThisSeasonStatsContainer";
+import CurrentConstructorsThisSeasonStatsContainer from "./CurrentConstructorsThisSeasonStatsContainer";
 import CurrentConstructorsThisSeasonRacesSprintHeaderContainer from "./thisSeasonRacesSprint/CurrentConstructorsThisSeasonRacesSprintHeaderContainer";
 import CurrentConstructorsThisSeasonRacesSprintContentContainer from "./thisSeasonRacesSprint/CurrentConstructorsThisSeasonRacesSprintContentContainer";
 import { currentConstructorImage } from "../../../constants/currentConstructorImage";
@@ -72,32 +72,77 @@ export default function CurrentConstuctorsOnePage(){
                     drivers={drivers}
                 />
                 <h2 className="fst-italic mt-2" style={textRegular}>THIS SEASON, AFTER ROUND {standing?.round}</h2>
-                <CurrentConstructorsThieSeasonStatsContainer
+                <CurrentConstructorsThisSeasonStatsContainer
                     position={standing?.ConstructorStandings[0]?.positionText}
                     points={standing?.ConstructorStandings[0]?.points}
                     wins={standing?.ConstructorStandings[0]?.wins}
                 />
                 <h2 className="fst-italic mt-2" style={textRegular}>RACES</h2>
                 <Container className="d-flex flex-column mb-2 pt-3 pb-3 rounded" style={{backgroundColor: "#38383f"}}>
-                    <CurrentConstructorsThisSeasonRacesSprintHeaderContainer
-                        driver1={drivers[0]?.familyName}
-                        driver1Code={drivers[0]?.code}
-                        driver2={drivers[1]?.familyName}
-                        driver2Code={drivers[1]?.code}
-                    />
+                    {
+                        drivers[2] ? (
+                            <CurrentConstructorsThisSeasonRacesSprintHeaderContainer
+                                driver1={drivers[0]?.familyName}
+                                driver1Code={drivers[0]?.code}
+                                driver2={drivers[1]?.familyName}
+                                driver2Code={drivers[1]?.code}
+                                driver3={drivers[2]?.familyName}
+                                driver3Code={drivers[2]?.code}
+                            />
+                        ) : (
+                            <CurrentConstructorsThisSeasonRacesSprintHeaderContainer
+                                driver1={drivers[0]?.familyName}
+                                driver1Code={drivers[0]?.code}
+                                driver2={drivers[1]?.familyName}
+                                driver2Code={drivers[1]?.code}
+                            />
+                        )
+                    }
                     {
                         [...results].reverse().map((result, index) => {
                             let totalPoints = parseInt(result?.Results[0]?.points) + parseInt(result?.Results[1]?.points);
-                            return (
-                                <CurrentConstructorsThisSeasonRacesSprintContentContainer
-                                    key={index}
-                                    round={result?.round}
-                                    race={result?.raceName}
-                                    driver1Position={result?.Results[0]?.Driver?.permanentNumber === drivers[0]?.permanentNumber ? result?.Results[0]?.positionText : result?.Results[1]?.positionText}
-                                    driver2Position={result?.Results[1]?.Driver?.permanentNumber === drivers[1]?.permanentNumber ? result?.Results[1]?.positionText : result?.Results[0]?.positionText}
-                                    points={totalPoints}
-                                />
-                            );
+                            
+                            // Si il y a 3 pilotes
+                            if(drivers[2]){
+                                return (
+                                    <CurrentConstructorsThisSeasonRacesSprintContentContainer
+                                        key={index}
+                                        round={result?.round}
+                                        race={result?.raceName}
+                                        driver1Position=
+                                            {
+                                                result?.Results[0]?.Driver?.permanentNumber === drivers[0]?.permanentNumber ?
+                                                    result?.Results[0]?.positionText : result?.Results[1]?.Driver?.permanentNumber === drivers[0]?.permanentNumber ?
+                                                        result?.Results[1]?.positionText : "--"
+                                            }
+                                        driver2Position=
+                                            {
+                                                result?.Results[1]?.Driver?.permanentNumber === drivers[1]?.permanentNumber ?
+                                                    result?.Results[1]?.positionText : result?.Results[0]?.Driver?.permanentNumber === drivers[1]?.permanentNumber ?
+                                                        result?.Results[0]?.positionText : "--"
+                                            }
+                                        driver3Position=
+                                            {
+                                                result?.Results[0]?.Driver?.permanentNumber === drivers[2]?.permanentNumber ?
+                                                    result?.Results[0]?.positionText : result?.Results[1]?.Driver?.permanentNumber === drivers[2]?.permanentNumber ?
+                                                        result?.Results[1]?.position : "--"
+                                            }
+                                        points={totalPoints}
+                                    />
+                                );
+                            }
+                            else{ // Si il y a 2 pilotes
+                                return (
+                                    <CurrentConstructorsThisSeasonRacesSprintContentContainer
+                                        key={index}
+                                        round={result?.round}
+                                        race={result?.raceName}
+                                        driver1Position={result?.Results[0]?.Driver?.permanentNumber === drivers[0]?.permanentNumber ? result?.Results[0]?.positionText : result?.Results[1]?.positionText}
+                                        driver2Position={result?.Results[1]?.Driver?.permanentNumber === drivers[1]?.permanentNumber ? result?.Results[1]?.positionText : result?.Results[0]?.positionText}
+                                        points={totalPoints}
+                                    />
+                                )
+                            }
                         })
                     }
                 </Container>
