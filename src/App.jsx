@@ -25,6 +25,7 @@ import CurrentConstructorsPage from './components/constructors/current/CurrentCo
 import CurrentConstructorsOnePage from './components/constructors/current/CurrentConstructorsOnePage';
 import NotFoundPage from './components/NotFoundPage';
 import AllDriversPage from './components/drivers/all/AllDriversPage';
+import AllDriversOnePage from './components/drivers/all/AllDriversOnePage';
 
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
                     <Route path='/currentDrivers' element={<CurrentDriversPage />} />
                     <Route path='/currentDrivers/:driverId' element={<CurrentDriversOnePage />} />
                     <Route path='/allDrivers' element={<AllDriversPage />} />
+                    <Route path='/allDrivers/:driverId' element={<AllDriversOnePage />} />
                     <Route path='/currentConstructors' element={<CurrentConstructorsPage />} />
                     <Route path='/currentConstructors/:constructorId' element={<CurrentConstructorsOnePage />} />
                     <Route path='*' element={<NotFoundPage />} />
