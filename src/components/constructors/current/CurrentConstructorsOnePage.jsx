@@ -4,11 +4,13 @@ import CurrentConstructorsDetailsContainer from "./CurrentConstructorsDetailsCon
 import CurrentConstructorsThisSeasonStatsContainer from "./CurrentConstructorsThisSeasonStatsContainer";
 import CurrentConstructorsThisSeasonRacesSprintHeaderContainer from "./thisSeasonRacesSprint/CurrentConstructorsThisSeasonRacesSprintHeaderContainer";
 import CurrentConstructorsThisSeasonRacesSprintContentContainer from "./thisSeasonRacesSprint/CurrentConstructorsThisSeasonRacesSprintContentContainer";
+import CurrentConstructorsThisSeasonQualifyingHeaderContainer from "./thisSeasonQualifying/CurrentConstructorsThisSeasonQualifyingHeaderContainer";
 import { currentConstructorImage } from "../../../constants/currentConstructorImage";
 import { flagsNationality } from "../../../constants/flagsNationality";
 
-import { Col, Container, Image, Row, Spinner } from "react-bootstrap";
+import { Container, Spinner } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+import CurrentConstructorsThisSeasonQualifyingContentContainer from "./thisSeasonQualifying/CurrentConstructorsThisSeasonQualifyingContentContainer";
 
 export default function CurrentConstuctorsOnePage(){
     let { constructorId } = useParams();
@@ -17,6 +19,7 @@ export default function CurrentConstuctorsOnePage(){
     const [drivers, setDrivers] = useState([]);
     const [results, setResults] = useState([]);
     const [sprints, setSprints] = useState([]);
+    const [qualifyings, setQualifyings] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     
     const fetchInfo = async () => {
@@ -24,17 +27,20 @@ export default function CurrentConstuctorsOnePage(){
             const response1 = await fetch("http://ergast.com/api/f1/current/constructors/" + constructorId + "/constructorStandings.json");
             const response2 = await fetch("http://ergast.com/api/f1/current/constructors/" + constructorId + "/drivers.json");
             const response3 = await fetch("http://ergast.com/api/f1/current/constructors/" + constructorId + "/results.json?limit=50");
-            const response4 =await fetch("http://ergast.com/api/f1/current/constructors/"+ constructorId + "/sprint.json")
+            const response4 = await fetch("http://ergast.com/api/f1/current/constructors/"+ constructorId + "/sprint.json");
+            const response5 = await fetch("http://ergast.com/api/f1/current/constructors/" + constructorId + "/qualifying.json?limit=50")
 
             const data1 = await response1.json();
             const data2 = await response2.json();
             const data3 = await response3.json();
             const data4 = await response4.json();
+            const data5 = await response5.json();
 
             setStanding(data1.MRData.StandingsTable.StandingsLists[0]);
             setDrivers(data2.MRData.DriverTable.Drivers);
             setResults(data3.MRData.RaceTable.Races);
             setSprints(data4.MRData.RaceTable.Races);
+            setQualifyings(data5.MRData.RaceTable.Races);
         }catch(error){
             console.log(error);
         }finally{
@@ -84,7 +90,7 @@ export default function CurrentConstuctorsOnePage(){
                 <h2 className="fst-italic mt-2" style={textRegular}>RACES</h2>
                 <Container className="d-flex flex-column mb-2 pt-3 pb-3 rounded" style={{backgroundColor: "#38383f"}}>
                     {
-                        drivers[2] ? (
+                        drivers[2] ? ( // Si il y a 3 pilotes
                             <CurrentConstructorsThisSeasonRacesSprintHeaderContainer
                                 driver1={drivers[0]?.familyName}
                                 driver1Code={drivers[0]?.code}
@@ -93,7 +99,7 @@ export default function CurrentConstuctorsOnePage(){
                                 driver3={drivers[2]?.familyName}
                                 driver3Code={drivers[2]?.code}
                             />
-                        ) : (
+                        ) : ( // Si il y a 2 pilotes
                             <CurrentConstructorsThisSeasonRacesSprintHeaderContainer
                                 driver1={drivers[0]?.familyName}
                                 driver1Code={drivers[0]?.code}
@@ -150,10 +156,75 @@ export default function CurrentConstuctorsOnePage(){
                         })
                     }
                 </Container>
+                <h2 className="fst-italic mt-2" style={textRegular}>QUALIFYINGS</h2>
+                <Container className="d-flex flex-column mb-2 pt-3 pb-3 rounded" style={{backgroundColor: "#38383f"}}>
+                    {
+                        drivers[2] ? ( // Si il y a 3 pilotes
+                            <CurrentConstructorsThisSeasonQualifyingHeaderContainer
+                                driver1={drivers[0]?.familyName}
+                                driver1Code={drivers[0]?.code}
+                                driver2={drivers[1]?.familyName}
+                                driver2Code={drivers[1]?.code}
+                                driver3={drivers[2]?.familyName}
+                                driver3Code={drivers[2]?.code}
+                            />
+                        ) : ( // Si il y a 2 pilotes
+                            <CurrentConstructorsThisSeasonQualifyingHeaderContainer
+                                driver1={drivers[0]?.familyName}
+                                driver1Code={drivers[0]?.code}
+                                driver2={drivers[1]?.familyName}
+                                driver2Code={drivers[1]?.code}
+                            />
+                        )
+                    }
+                    {
+                        [...qualifyings].reverse().map((qualifying, index) => {
+                            // Si il y a 3 pilotes
+                            if(drivers[2]){
+                                return (
+                                    <CurrentConstructorsThisSeasonQualifyingContentContainer
+                                        key={index}
+                                        round={qualifying?.round}
+                                        race={qualifying?.raceName}
+                                        driver1Position=
+                                            {
+                                                qualifying?.QualifyingResults[0]?.Driver?.permanentNumber === drivers[0]?.permanentNumber ?
+                                                    qualifying?.QualifyingResults[0]?.position : qualifying?.QualifyingResults[1]?.Driver?.permanentNumber === drivers[0]?.permanentNumber ?
+                                                        qualifying?.QualifyingResults[1]?.position : "--"
+                                            }
+                                        driver2Position=
+                                            {
+                                                qualifying?.QualifyingResults[1]?.Driver?.permanentNumber === drivers[1]?.permanentNumber ?
+                                                    qualifying?.QualifyingResults[1]?.position : qualifying?.QualifyingResults[0]?.Driver?.permanentNumber === drivers[1]?.permanentNumber ?
+                                                        qualifying?.QualifyingResults[0]?.position : "--"
+                                            }
+                                        driver3Position=
+                                            {
+                                                qualifying?.QualifyingResults[0]?.Driver?.permanentNumber === drivers[2]?.permanentNumber ?
+                                                    qualifying?.QualifyingResults[0]?.position : qualifying?.QualifyingResults[1]?.Driver?.permanentNumber === drivers[2]?.permanentNumber ?
+                                                        qualifying?.QualifyingResults[1]?.position : "--"
+                                            }
+                                    />
+                                );
+                            }
+                            else{ // Si il y a 2 pilotes
+                                return (
+                                    <CurrentConstructorsThisSeasonQualifyingContentContainer
+                                        key={index}
+                                        round={qualifying?.round}
+                                        race={qualifying?.raceName}
+                                        driver1Position={qualifying?.QualifyingResults[0]?.Driver?.permanentNumber === drivers[0]?.permanentNumber ? qualifying?.QualifyingResults[0]?.position : qualifying?.QualifyingResults[1]?.position}
+                                        driver2Position={qualifying?.QualifyingResults[1]?.Driver?.permanentNumber === drivers[1]?.permanentNumber ? qualifying?.QualifyingResults[1]?.position : qualifying?.QualifyingResults[0]?.position}
+                                    />
+                                )
+                            }
+                        })
+                    }
+                </Container>
                 <h2 className="fst-italic mt-2" style={textRegular}>SPRINTS</h2>
                 <Container className="d-flex flex-column mb-2 pt-3 pb-3 rounded" style={{backgroundColor: "#38383f"}}>
                     {
-                        drivers[2] ? (
+                        drivers[2] ? ( // Si il y a 3 pilotes
                             <CurrentConstructorsThisSeasonRacesSprintHeaderContainer
                                 driver1={drivers[0]?.familyName}
                                 driver1Code={drivers[0]?.code}
@@ -162,7 +233,7 @@ export default function CurrentConstuctorsOnePage(){
                                 driver3={drivers[2]?.familyName}
                                 driver3Code={drivers[2]?.code}
                             />
-                        ) : (
+                        ) : ( // Si il y a 2 pilotes
                             <CurrentConstructorsThisSeasonRacesSprintHeaderContainer
                                 driver1={drivers[0]?.familyName}
                                 driver1Code={drivers[0]?.code}

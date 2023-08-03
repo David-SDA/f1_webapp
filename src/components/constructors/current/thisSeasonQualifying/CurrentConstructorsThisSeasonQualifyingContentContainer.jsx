@@ -2,13 +2,12 @@ import React from "react";
 
 import { Col, Row } from "react-bootstrap";
 
-export default function CurrentConstructorsThisSeasonRacesSprintContentContainer({
+export default function CurrentConstructorsThisSeasonQualifyingContentContainer({
     round,
     race,
     driver1Position,
     driver2Position,
     driver3Position,
-    points,
 }){
     const textBold = {
         fontFamily: "Formula1-Bold",
@@ -26,7 +25,7 @@ export default function CurrentConstructorsThisSeasonRacesSprintContentContainer
             </Col>
             {
                 driver3Position ? (
-                    <Col xs={6} sm={5} md={4} lg={4} className="d-flex justify-content-center p-0">
+                    <Col xs={6} sm={5} md={5} lg={5} className="d-flex justify-content-center p-0">
                         <a href="#" className="link-dark link-underline-opacity-0 link-underline-opacity-50-hover">
                             <p className="d-flex d-sm-none align-items-center mb-0 text-center" style={{...textBold, minHeight: "5em"}}>{race}</p>
                             <p className="d-none d-sm-flex d-lg-none align-items-center mb-0 text-center" style={{...textBold, minHeight: "3em"}}>{race}</p>
@@ -34,7 +33,7 @@ export default function CurrentConstructorsThisSeasonRacesSprintContentContainer
                         </a>
                     </Col>
                 ) : (
-                    <Col xs={8} sm={7} md={6} lg={6} className="d-flex justify-content-center p-0">
+                    <Col xs={8} sm={7} md={7} lg={7} className="d-flex justify-content-center p-0">
                         <a href="#" className="link-dark link-underline-opacity-0 link-underline-opacity-50-hover">
                             <p className="d-flex d-sm-none align-items-center mb-0 text-center" style={{...textBold, minHeight: "3em"}}>{race}</p>
                             <p className="d-none d-sm-flex align-items-center mb-0 text-center" style={textBold}>{race}</p>
@@ -66,9 +65,6 @@ export default function CurrentConstructorsThisSeasonRacesSprintContentContainer
                     </>
                 )
             }
-            <Col md={1} lg={1} className="d-none d-md-block p-0">
-                <p className="mb-0 text-center" style={textBlack}>{points}</p>
-            </Col>
         </Row>
     );
 }

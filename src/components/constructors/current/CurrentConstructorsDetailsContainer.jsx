@@ -47,22 +47,24 @@ export default function CurrentConstructorsDetailsContainer({
                         drivers.map((driver, index) => {
                             return (
                                 <Col lg={6} className="mb-3" key={index}>
-                                    <Container className="d-flex flex-column justify-content-between rounded-4" style={{height: "200px", borderRight: "5px solid #ff1801", borderBottom: "5px solid #ff1801"}}>
-                                        <div className="d-flex justify-content-between">
-                                            <div className="d-flex">
-                                                <Image src={flagsNationality[driver?.nationality]} rounded className="me-1 border" style={{height: 25}} />
-                                                <p className="mb-0 fst-italic">
-                                                    <span style={textRegular}>{driver?.givenName}</span> <span style={textBold}>{driver?.familyName}</span>
+                                    <a href={"/currentDrivers/" + driver?.driverId} className="link-dark link-underline-opacity-0 link-underline-opacity-50-hover">
+                                        <Container className="d-flex flex-column justify-content-between rounded-4" style={{height: "200px", borderRight: "5px solid #ff1801", borderBottom: "5px solid #ff1801"}}>
+                                            <div className="d-flex justify-content-between">
+                                                <div className="d-flex">
+                                                    <Image src={flagsNationality[driver?.nationality]} rounded className="me-1 border" style={{height: 25}} />
+                                                    <p className="mb-0 fst-italic">
+                                                        <span style={textRegular}>{driver?.givenName}</span> <span style={textBold}>{driver?.familyName}</span>
+                                                    </p>
+                                                </div>
+                                                <p className="mb-0 fst-italic" style={{...textBlack, fontSize: 20}}>
+                                                    {driver?.permanentNumber}
                                                 </p>
                                             </div>
-                                            <p className="mb-0 fst-italic" style={{...textBlack, fontSize: 20}}>
-                                                {driver?.permanentNumber}
-                                            </p>
-                                        </div>
-                                        <div className="d-flex justify-content-center">
-                                            <Image src={currentDriversSideImage[driver?.driverId]} style={{height: 160, width: 160}} />
-                                        </div>
-                                    </Container>
+                                            <div className="d-flex justify-content-center">
+                                                <Image src={currentDriversSideImage[driver?.driverId]} style={{height: 160, width: 160}} />
+                                            </div>
+                                        </Container>
+                                    </a>
                                 </Col>
                             );
                         })
