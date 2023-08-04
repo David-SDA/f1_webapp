@@ -78,6 +78,19 @@ export default function AllDriversOnePage(){
         return championships;
     }
 
+    const seasonsByTeams = {};
+
+    for(const driverStanding of driverStandings){
+        const season = driverStanding?.season;
+        const team = driverStanding?.DriverStandings[0]?.Constructors[0]?.name;
+
+        if(!seasonsByTeams[team]){
+            seasonsByTeams[team] = [];
+        }
+
+        seasonsByTeams[team].push(season);
+    }
+
     let nbPodiums = getPodiums();
     let nbWins = getWins();
     let nbChampionships = getChampionships();
@@ -137,6 +150,20 @@ export default function AllDriversOnePage(){
                                                 <Image src={flagsNationality[team?.nationality]} rounded className="me-1 border" style={{height: 20}} />
                                                 <span className="fst-italic" style={textRegular}>{team?.nationality}</span>
                                             </Card.Subtitle>
+                                            <Card.Body className="text-center ps-0 pe-0" style={{...textRegular, height: "6rem"}}>
+                                                (
+                                                    {
+                                                        seasonsByTeams[team.name]?.map((season, seasonIndex) => {
+                                                            return (
+                                                                <span key={seasonIndex}>
+                                                                    {season}
+                                                                    {seasonIndex !== seasonsByTeams[team.name].length - 1 ? ", " : ""}
+                                                                </span>
+                                                            );
+                                                        }) || null
+                                                    }
+                                                )
+                                            </Card.Body>
                                         </Card>
                                     </Col>
                                 );
