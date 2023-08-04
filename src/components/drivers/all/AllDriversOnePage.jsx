@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import AllDriversOneDetailsContainer from "./AllDriversOneDetailsContainer";
 
-import { Card, Col, Container, Image, Row, Spinner } from "react-bootstrap";
+import { Button, Card, Col, Container, Image, Row, Spinner } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import AllDriversOneTeamContainer from "./AllDriversOneTeamsContainer";
 
@@ -14,6 +14,7 @@ export default function AllDriversOnePage(){
     const [driverStandings, setDriverStandings] = useState([]);
     const [teams, setTeams] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [showAllRaces, setShowAllRaces] = useState(false);
 
     const fetchInfo = async () => {
         try{
@@ -90,6 +91,10 @@ export default function AllDriversOnePage(){
         seasonsByTeams[team].push(season);
     }
 
+    const handleDisplayMoreRaces = () => {
+        setShowAllRaces(!showAllRaces);
+    }
+
     let nbPodiums = getPodiums();
     let nbWins = getWins();
     let nbChampionships = getChampionships();
@@ -154,7 +159,7 @@ export default function AllDriversOnePage(){
                 <h1 className="fst-italic mt-1" style={textRegular}>
                     RACES
                 </h1>
-                <Container className="mb-2 pt-3 pb-3 ps-1 pe-1 rounded" style={{backgroundColor: "#38383f"}}>
+                <Container className="d-flex flex-column justify-content-center mb-2 pt-3 pb-3 ps-1 pe-1 rounded" style={{backgroundColor: "#38383f"}}>
                     <Row className="bg-white mt-sm-0 ms-1 me-1 p-1 rounded">
                         <Col sm={1} md={1} lg={1} className="d-none d-sm-block p-0">
                             <p className="d-none d-lg-block mb-0 text-center" style={textBlack}>ROUND</p>
@@ -177,7 +182,7 @@ export default function AllDriversOnePage(){
                         </Col>
                     </Row>
                     {
-                        [...results].reverse().map((result, index) => {
+                        results.slice().reverse().slice(0, showAllRaces ? results.length : 5).map((result, index) => {
                             return (
                                 <Row className="bg-white mt-2 ms-1 me-1 p-1 rounded" key={index}>
                                     <Col sm={1} md={1} lg={1} className="d-none d-sm-block p-0">
@@ -201,6 +206,13 @@ export default function AllDriversOnePage(){
                                 </Row>
                             );
                         })
+                    }
+                    {
+                        results.length > 5 ? (
+                            <Button variant="outline-light" size="sm" className="align-self-center mt-3" onClick={handleDisplayMoreRaces}>
+                                {showAllRaces ? "Show less" : "Show More"}
+                            </Button>
+                        ) : ("")
                     }
                 </Container>
             </Container>
