@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 
 import AllDriversOneDetailsContainer from "./AllDriversOneDetailsContainer";
 
-import { Col, Container, Image, Row, Spinner } from "react-bootstrap";
+import { Card, Col, Container, Image, Row, Spinner } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+import { flagsNationality } from "../../../constants/flagsNationality";
 
 export default function AllDriversOnePage(){
     let { driverId } = useParams();
@@ -119,6 +120,30 @@ export default function AllDriversOnePage(){
                     nbPodiums={nbPodiums}
                     nbTeams={teams.length}
                 />
+                <h1 className="fst-italic mt-1" style={textRegular}>
+                    TEAMS
+                </h1>
+                <Container className="mb-2 pt-3 pb-3 rounded" style={{backgroundColor: "#38383f"}}>
+                    <Row className="d-flex justify-content-around">
+                        {
+                            teams.map((team, index) => {
+                                return (
+                                    <Col md={6} lg={4} xl={3} className="mt-1 mb-1" key={index}>
+                                        <Card className="p-2">
+                                            <Card.Title className="d-flex justify-content-center" style={textBold}>
+                                                {team?.name}
+                                            </Card.Title>
+                                            <Card.Subtitle className="d-flex justify-content-center align-items-center">
+                                                <Image src={flagsNationality[team?.nationality]} rounded className="me-1 border" style={{height: 20}} />
+                                                <span className="fst-italic" style={textRegular}>{team?.nationality}</span>
+                                            </Card.Subtitle>
+                                        </Card>
+                                    </Col>
+                                );
+                            })
+                        }
+                    </Row>
+                </Container>
             </Container>
         );
     }
