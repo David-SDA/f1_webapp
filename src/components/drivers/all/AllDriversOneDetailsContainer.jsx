@@ -48,7 +48,7 @@ export default function AllDriversOneDetailsContainer({
             <Col md={6} lg={4} className="mb-3">
                 <Container className="d-flex flex-column justify-content-around rounded-4" style={{height: "100px", borderRight: "5px solid #ff1801", borderBottom: "5px solid #ff1801"}}>
                     <p className="mb-0" style={textBlack}>FIRST RACE</p>
-                    <p className="text-center mb-0" style={{...textBold, fontSize: "20px"}}>{firstSeason} {firstRace}</p>
+                    <a href="#" className="link-dark link-underline-opacity-0 link-underline-opacity-50-hover"><p className="text-center mb-0" style={{...textBold, fontSize: "20px"}}>{firstSeason} {firstRace}</p></a>
                     <div></div>
                 </Container>
             </Col>
