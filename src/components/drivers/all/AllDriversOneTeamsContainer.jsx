@@ -13,13 +13,18 @@ export default function AllDriversOneTeamContainer({
     
     for(const driverStanding of driverStandings){
         const season = driverStanding?.season;
-        const team = driverStanding?.DriverStandings[0]?.Constructors[0]?.name;
+        const teams = driverStanding?.DriverStandings[0]?.Constructors;
 
-        if(!seasonsByTeams[team]){
-            seasonsByTeams[team] = [];
+        if(teams && teams.length > 0){
+            for(const team of teams){
+                const teamName = team?.name;
+                if(!seasonsByTeams[teamName]){
+                    seasonsByTeams[teamName] = [];
+                }
+        
+                seasonsByTeams[teamName].push(season);
+            }
         }
-
-        seasonsByTeams[team].push(season);
     }
 
     const textRegular = {
