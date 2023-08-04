@@ -4,7 +4,7 @@ import AllDriversOneDetailsContainer from "./AllDriversOneDetailsContainer";
 
 import { Card, Col, Container, Image, Row, Spinner } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import { flagsNationality } from "../../../constants/flagsNationality";
+import AllDriversOneTeamContainer from "./AllDriversOneTeamsContainer";
 
 export default function AllDriversOnePage(){
     let { driverId } = useParams();
@@ -79,7 +79,6 @@ export default function AllDriversOnePage(){
     }
 
     const seasonsByTeams = {};
-
     for(const driverStanding of driverStandings){
         const season = driverStanding?.season;
         const team = driverStanding?.DriverStandings[0]?.Constructors[0]?.name;
@@ -141,31 +140,12 @@ export default function AllDriversOnePage(){
                         {
                             teams.map((team, index) => {
                                 return (
-                                    <Col md={6} lg={4} xl={3} className="mt-1 mb-1" key={index}>
-                                        <Card className="p-2">
-                                            <Card.Title className="d-flex justify-content-center" style={textBold}>
-                                                {team?.name}
-                                            </Card.Title>
-                                            <Card.Subtitle className="d-flex justify-content-center align-items-center">
-                                                <Image src={flagsNationality[team?.nationality]} rounded className="me-1 border" style={{height: 20}} />
-                                                <span className="fst-italic" style={textRegular}>{team?.nationality}</span>
-                                            </Card.Subtitle>
-                                            <Card.Body className="text-center ps-0 pe-0" style={{...textRegular, height: "6rem"}}>
-                                                (
-                                                    {
-                                                        seasonsByTeams[team.name]?.map((season, seasonIndex) => {
-                                                            return (
-                                                                <span key={seasonIndex}>
-                                                                    {season}
-                                                                    {seasonIndex !== seasonsByTeams[team.name].length - 1 ? ", " : ""}
-                                                                </span>
-                                                            );
-                                                        }) || null
-                                                    }
-                                                )
-                                            </Card.Body>
-                                        </Card>
-                                    </Col>
+                                    <AllDriversOneTeamContainer
+                                        key={index}
+                                        name={team?.name}
+                                        nationality={team?.nationality}
+                                        driverStandings={driverStandings}
+                                    />
                                 );
                             })
                         }
