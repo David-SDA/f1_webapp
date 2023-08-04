@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 
 import AllDriversOneDetailsContainer from "./AllDriversOneDetailsContainer";
+import AllDriversOneTeamContainer from "./AllDriversOneTeamsContainer";
+import AllDriversOneRacesHeaderContainer from "./AllDriversOneRacesHeaderContainer";
 
 import { Button, Card, Col, Container, Image, Row, Spinner } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import AllDriversOneTeamContainer from "./AllDriversOneTeamsContainer";
+import AllDriversOneRacesContentContainer from "./AllDriversOneRacesContentContainer";
 
 export default function AllDriversOnePage(){
     let { driverId } = useParams();
@@ -79,6 +81,7 @@ export default function AllDriversOnePage(){
         return championships;
     }
 
+    // Avoir les années pour lequelles un pilote a couru
     const seasonsByTeams = {};
     for(const driverStanding of driverStandings){
         const season = driverStanding?.season;
@@ -91,6 +94,7 @@ export default function AllDriversOnePage(){
         seasonsByTeams[team].push(season);
     }
 
+    // Gérer le fait d'afficher plus ou moins de courses
     const handleDisplayMoreRaces = () => {
         setShowAllRaces(!showAllRaces);
     }
@@ -106,11 +110,6 @@ export default function AllDriversOnePage(){
 
     const textBold = {
         fontFamily: "Formula1-Bold",
-        letterSpacing: "0.0005rem",
-    }
-
-    const textBlack = {
-        fontFamily: "Formula1-Black",
         letterSpacing: "0.0005rem",
     }
 
@@ -160,50 +159,18 @@ export default function AllDriversOnePage(){
                     RACES
                 </h1>
                 <Container className="d-flex flex-column justify-content-center mb-2 pt-3 pb-3 ps-1 pe-1 rounded" style={{backgroundColor: "#38383f"}}>
-                    <Row className="bg-white mt-sm-0 ms-1 me-1 p-1 rounded">
-                        <Col sm={1} md={1} lg={1} className="d-none d-sm-block p-0">
-                            <p className="d-none d-lg-block mb-0 text-center" style={textBlack}>ROUND</p>
-                            <p className="d-block d-lg-none mb-0 text-center" style={textBlack}>R</p>
-                        </Col>
-                        <Col xs={2} sm={3} md={2} lg={2} className="ps-0 ps-sm-2 pe-0 pe-sm-2">
-                            <p className="d-none d-sm-block mb-0 text-center" style={textBlack}>SEASON</p>
-                            <p className="d-block d-sm-none mb-0 text-center" style={textBlack}>2023</p>
-                        </Col>
-                        <Col xs={8} sm={7} md={7} lg={6}>
-                            <p className="mb-0 text-center" style={textBlack}>RACE</p>
-                        </Col>
-                        <Col md={1} lg={1} className="d-none d-md-block p-0">
-                            <p className="mb-0 text-center" style={textBlack}>GRID</p>
-                        </Col>
-                        <Col xs={2} sm={1} md={1} lg={2} className="p-0">
-                            <p className="d-none d-lg-block mb-0 text-center" style={textBlack}>POSITION</p>
-                            <p className="d-none d-sm-block d-lg-none mb-0 text-center" style={textBlack}>POS</p>
-                            <p className="d-block d-sm-none mb-0 text-center" style={textBlack}>P</p>
-                        </Col>
-                    </Row>
+                    <AllDriversOneRacesHeaderContainer />
                     {
                         results.slice().reverse().slice(0, showAllRaces ? results.length : 5).map((result, index) => {
                             return (
-                                <Row className="bg-white mt-2 ms-1 me-1 p-1 rounded" key={index}>
-                                    <Col sm={1} md={1} lg={1} className="d-none d-sm-block p-0">
-                                        <p className="mb-0 text-center" style={textBlack}>{result?.round}</p>
-                                    </Col>
-                                    <Col xs={2} sm={3} md={2} lg={2} className="d-flex justify-content-center align-items-center ps-0 ps-sm-2 pe-0 pe-sm-2">
-                                        <p className="mb-0 text-center" style={textRegular}>{result?.season}</p>
-                                    </Col>
-                                    <Col xs={8} sm={7} md={7} lg={6} className="d-flex justify-content-center align-items-center">
-                                        <a href="#" className="link-dark link-underline-opacity-0 link-underline-opacity-50-hover">
-                                            <p className="d-flex d-sm-none align-items-center mb-0 text-center" style={{...textBold, minHeight: "3em"}}>{result?.raceName}</p>
-                                            <p className="d-none d-sm-flex align-items-center mb-0 text-center" style={textBold}>{result?.raceName}</p>
-                                        </a>
-                                    </Col>
-                                    <Col md={1} lg={1} className="d-none d-md-block p-0">
-                                        <p className="mb-0 text-center" style={textBlack}>{result?.Results[0]?.grid}</p>
-                                    </Col>
-                                    <Col xs={2} sm={1} md={1} lg={2} className="d-flex justify-content-center align-items-center p-0">
-                                        <p className="mb-0 text-center" style={textBlack}>{result?.Results[0]?.positionText}</p>
-                                    </Col>
-                                </Row>
+                                <AllDriversOneRacesContentContainer
+                                    key={index}
+                                    round={result?.round}
+                                    season={result?.season}
+                                    raceName={result?.raceName}
+                                    grid={result?.Results[0]?.grid}
+                                    position={result?.Results[0]?.positionText}
+                                />
                             );
                         })
                     }
