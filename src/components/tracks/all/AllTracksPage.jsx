@@ -98,7 +98,7 @@ export default function AllTracksPage() {
     else{
         return (
             <Container>
-                <h1 className="fst-italic" style={textRegular}>F1 2023 : Tracks</h1>
+                <h1 className="fst-italic" style={textRegular}>All Tracks</h1>
                 <AllTracksFilterContainer
                     search={search}
                     handleSearchChange={handleSearchChange}
