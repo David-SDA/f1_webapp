@@ -4,6 +4,7 @@ import { currentConstructorColor } from "../../../constants/currentConstructorCo
 import { currentDriversTeamId } from "../../../constants/currentDriversTeamId";
 import { flagsNationality } from "../../../constants/flagsNationality";
 import { currentDrivers } from "../../../constants/currentDrivers";
+import NoImageAvailable from '../../../assets/No_image_available.png';
 
 import { Card, Col, Image } from "react-bootstrap";
 
@@ -33,12 +34,12 @@ export default function CurrentDriversCardContainer({
         <Col md={6} lg={4} xl={3} className="mb-2">
             <Card className="rounded-5 overflow-hidden" style={{height: "300px"}}>
                 <a href={"/currentDrivers/" + driverId} className="link-light link-underline-opacity-0 link-underline-opacity-100-hover">
-                    <Card.Header className="d-flex flex-row justify-content-between align-items-center text-white rounded-top-5 pt-3 pb-3" style={{backgroundColor: currentConstructorColor[currentDriversTeamId[driverId]]}}>
+                    <Card.Header className="d-flex flex-row justify-content-between align-items-center text-white rounded-top-5 pt-3 pb-3" style={{backgroundColor: currentConstructorColor[currentDriversTeamId[driverId]] ? currentConstructorColor[currentDriversTeamId[driverId]] : "#000000"}}>
                         <Image src={flagsNationality[nationality]} rounded className="me-1 border" style={{height: 25}} />
                         <p className="mb-0"><span style={textRegular}>{givenName}</span> <span style={textBold}>{familyName}</span></p>
                         <p className="mb-0 fst-italic mt-1" style={textBlack}>{permanentNumber}</p>
                     </Card.Header>
-                    <Card.Img variant="top" src={currentDrivers[driverId]} className="rounded-0" />
+                    <Card.Img variant="top" src={currentDrivers[driverId] ? currentDrivers[driverId] : NoImageAvailable} className="rounded-0" />
                 </a>
             </Card>
         </Col>
