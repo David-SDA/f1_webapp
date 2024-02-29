@@ -32,3 +32,12 @@ Création d'une application web qui permet d'obtenir des données sur la Formule
 | Un circuit |
 | - |
 | ![Page d'un circuit](https://github.com/David-SDA/f1_webapp/blob/master/images/circuit/page_un_circuit.png) |
+
+### Pilote
+| Pilotes actuels | Tout les pilotes |
+| - | - |
+| ![Page des pilotes actuels](https://github.com/David-SDA/f1_webapp/blob/master/images/pilotes/page_pilotes_actuel.png) | ![Page de tout les pilotes](https://github.com/David-SDA/f1_webapp/blob/master/images/pilotes/page_tout_pilotes.png) |
+
+| Un pilote actuel | Un pilote historique |
+| - | - |
+| ![Page d'un pilote](https://github.com/David-SDA/f1_webapp/blob/master/images/pilotes/page_un_pilote_actuel.png) | ![Page d'un pilote historique](https://github.com/David-SDA/f1_webapp/blob/master/images/pilotes/page_un_pilote_historique.png) |
