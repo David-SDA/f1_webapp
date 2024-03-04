@@ -46,7 +46,7 @@ export default function AllTracksPage() {
     }
 
     const getSortedData = () => {
-        const sortedData = [...tracks]; // On copie les champions que l'on récupère
+        const sortedData = [...tracks]; // On copie les circuits que l'on récupère
         sortedData.sort((a, b) => { // On effectue le tri
             let aValue; // On crée les variables
             let bValue; // pour les comparés
@@ -78,7 +78,7 @@ export default function AllTracksPage() {
 
     // Récupérer les données grâce à la recherche
     const getSearchedData = () =>{
-        return getSortedData().filter((track) =>{ // On filtre les résultat avec le nom complet
+        return getSortedData().filter((track) =>{ // On filtre les résultat avec le nom
             return track?.circuitName.toLowerCase().includes(search.toLowerCase());
         });
     }
