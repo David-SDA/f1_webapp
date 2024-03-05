@@ -4,7 +4,7 @@ import AllDriversOneDetailsContainer from "./AllDriversOneDetailsContainer";
 import AllDriversOneTeamContainer from "./AllDriversOneTeamsContainer";
 import AllDriversOneRacesHeaderContainer from "./AllDriversOneRacesHeaderContainer";
 
-import { Button, Card, Col, Container, Image, Row, Spinner } from "react-bootstrap";
+import { Button, Container, Row, Spinner } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import AllDriversOneRacesContentContainer from "./AllDriversOneRacesContentContainer";
 
