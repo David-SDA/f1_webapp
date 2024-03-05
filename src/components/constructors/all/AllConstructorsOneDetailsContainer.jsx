@@ -5,7 +5,8 @@ import { flagsNationality } from "../../../constants/flagsNationality";
 import { Col, Container, Image, Row } from "react-bootstrap";
 
 export default function AllConstructorsOneDetailsContainer({
-    nationality
+    nationality,
+    nbDrivers
 }){
     const textBold = {
         fontFamily: "Formula1-Bold",
@@ -25,6 +26,15 @@ export default function AllConstructorsOneDetailsContainer({
                     <div className="d-flex flex-row justify-content-center align-items-center">
                         <Image src={flagsNationality[nationality]} rounded className="me-1 border" style={{height: 25}} />
                         <p className="mb-0" style={{...textBold, fontSize: "20px"}}>{nationality}</p>
+                    </div>
+                    <div></div>
+                </Container>
+            </Col>
+            <Col md={6} lg={4}>
+                <Container className="d-flex flex-column justify-content-around rounded-4" style={{height: "100px", borderRight: "5px solid #ff1801", borderBottom: "5px solid #ff1801"}}>
+                    <p className="mb-0" style={textBlack}>DRIVERS</p>
+                    <div className="d-flex flex-row justify-content-center align-items-center">
+                        <p className="mb-0" style={{...textBold, fontSize: "20px"}}>{nbDrivers}</p>
                     </div>
                     <div></div>
                 </Container>

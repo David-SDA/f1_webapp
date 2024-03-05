@@ -8,15 +8,20 @@ export default function AllConstructorsOnePage(){
     let { constructorId } = useParams();
 
     const [constructor, setConstructors] = useState([]);
+    const [drivers, setDrivers] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     const fetchInfo = async () => {
         try{
             const responseConstructor = await fetch("http://ergast.com/api/f1/constructors/" + constructorId + ".json");
+            const responseDrivers = await fetch("http://ergast.com/api/f1/constructors/" + constructorId + "/drivers.json?limit=200");
 
-            const data1 = await responseConstructor.json();
+            const dataConstructor = await responseConstructor.json();
+            const dataDrivers = await responseDrivers.json();
 
-            setConstructors(data1.MRData.ConstructorTable.Constructors[0]);
+            setConstructors(dataConstructor.MRData.ConstructorTable.Constructors[0]);
+            setDrivers(dataDrivers.MRData.DriverTable.Drivers);
+
         }catch(error){
             console.log(error);
         }finally{
@@ -32,7 +37,7 @@ export default function AllConstructorsOnePage(){
         fontFamily: "Formula1-Bold",
         letterSpacing: "0.0005rem",
     }
-
+    
     if(isLoading){
         return(
             <Spinner animation="border" style={{color: "#ff1801"}} />
@@ -44,6 +49,7 @@ export default function AllConstructorsOnePage(){
                 <h1 className="fst-italic mt-1" style={textBold}>{constructor?.name}</h1>
                 <AllConstructorsOneDetailsContainer 
                     nationality={constructor?.nationality}
+                    nbDrivers={drivers.length}
                 />
             </Container>
         )
