@@ -10,6 +10,7 @@ export default function AllConstructorsOnePage(){
     const [constructor, setConstructors] = useState([]);
     const [drivers, setDrivers] = useState([]);
     const [seasons, setSeasons] = useState([]);
+    const [constructorStandings, setConstructorStandings] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     const fetchInfo = async () => {
@@ -17,14 +18,17 @@ export default function AllConstructorsOnePage(){
             const responseConstructor = await fetch("http://ergast.com/api/f1/constructors/" + constructorId + ".json");
             const responseDrivers = await fetch("http://ergast.com/api/f1/constructors/" + constructorId + "/drivers.json?limit=200");
             const responseSeasons = await fetch("http://ergast.com/api/f1/constructors/" + constructorId + "/seasons.json?limit=100");
+            const responseConstructorStandings = await fetch("http://ergast.com/api/f1/constructors/" + constructorId + "/constructorStandings.json?limit=100");
 
             const dataConstructor = await responseConstructor.json();
             const dataDrivers = await responseDrivers.json();
             const dataSeasons = await responseSeasons.json();
-
+            const dataConstructorStandings = await responseConstructorStandings.json();
+            
             setConstructors(dataConstructor.MRData.ConstructorTable.Constructors[0]);
             setDrivers(dataDrivers.MRData.DriverTable.Drivers);
             setSeasons(dataSeasons.MRData.SeasonTable.Seasons);
+            setConstructorStandings(dataConstructorStandings.MRData.StandingsTable.StandingsLists);
         }catch(error){
             console.log(error);
         }finally{
@@ -35,6 +39,18 @@ export default function AllConstructorsOnePage(){
     useEffect(() => {
         fetchInfo();
     }, [])
+
+    // Calcul nombre de titres constructeurs
+    const getTitles = () => {
+        let titles = 0;
+        for(const standing of constructorStandings){
+            const position = standing?.ConstructorStandings[0]?.positionText;
+            if(["1"].includes(position)){
+                titles++;
+            }
+        }
+        return titles;
+    }
 
     const textBold = {
         fontFamily: "Formula1-Bold",
@@ -54,6 +70,7 @@ export default function AllConstructorsOnePage(){
                     nationality={constructor?.nationality}
                     nbDrivers={drivers.length}
                     nbSeasons={seasons.length}
+                    titles={getTitles()}
                 />
             </Container>
         )

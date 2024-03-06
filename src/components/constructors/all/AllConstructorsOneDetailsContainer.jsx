@@ -7,7 +7,8 @@ import { Col, Container, Image, Row } from "react-bootstrap";
 export default function AllConstructorsOneDetailsContainer({
     nationality,
     nbDrivers,
-    nbSeasons
+    nbSeasons,
+    titles,
 }){
     const textBold = {
         fontFamily: "Formula1-Bold",
@@ -45,6 +46,15 @@ export default function AllConstructorsOneDetailsContainer({
                     <p className="mb-0" style={textBlack}>SEASONS</p>
                     <div className="d-flex flex-row justify-content-center align-items-center">
                         <p className="mb-0" style={{...textBold, fontSize: "20px"}}>{nbSeasons}</p>
+                    </div>
+                    <div></div>
+                </Container>
+            </Col>
+            <Col md={6} lg={4}>
+                <Container className="d-flex flex-column justify-content-around rounded-4" style={{height: "100px", borderRight: "5px solid #ff1801", borderBottom: "5px solid #ff1801"}}>
+                    <p className="mb-0" style={textBlack}>CONSTRUCTORS TITLES</p>
+                    <div className="d-flex flex-row justify-content-center align-items-center">
+                        <p className="mb-0" style={{...textBold, fontSize: "20px"}}>{titles}</p>
                     </div>
                     <div></div>
                 </Container>
