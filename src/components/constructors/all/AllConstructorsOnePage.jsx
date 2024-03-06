@@ -15,6 +15,7 @@ export default function AllConstructorsOnePage(){
     const [wins, setWins] = useState();
     const [seconds, setSeconds] = useState();
     const [thirds, setThirds] = useState();
+    const [driverTitles, setDriverTitles] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     const fetchInfo = async () => {
@@ -26,6 +27,7 @@ export default function AllConstructorsOnePage(){
             const responseWins = await fetch("http://ergast.com/api/f1/constructors/" + constructorId + "/results/1.json?limit=400");
             const responseSeconds = await fetch("http://ergast.com/api/f1/constructors/" + constructorId + "/results/2.json?limit=400");
             const responseThirds = await fetch("http://ergast.com/api/f1/constructors/" + constructorId + "/results/3.json?limit=400");
+            const responseDriverTitles = await fetch("http://ergast.com/api/f1/driverStandings/1.json?limit=100");
             
             const dataConstructor = await responseConstructor.json();
             const dataDrivers = await responseDrivers.json();
@@ -34,6 +36,7 @@ export default function AllConstructorsOnePage(){
             const dataWins = await responseWins.json();
             const dataSeconds = await responseSeconds.json();
             const dataThirds = await responseThirds.json();
+            const dataDriverTitles = await responseDriverTitles.json();
             
             setConstructors(dataConstructor.MRData.ConstructorTable.Constructors[0]);
             setDrivers(dataDrivers.MRData.DriverTable.Drivers);
@@ -43,6 +46,7 @@ export default function AllConstructorsOnePage(){
             setWins(dataWins.MRData.total);
             setSeconds(dataSeconds.MRData.total);
             setThirds(dataThirds.MRData.total);
+            setDriverTitles(dataDriverTitles.MRData.StandingsTable.StandingsLists);
         }catch(error){
             console.log(error);
         }finally{
@@ -53,6 +57,18 @@ export default function AllConstructorsOnePage(){
     useEffect(() => {
         fetchInfo();
     }, [])
+
+    const getDriversTitles = () => {
+        let nbDriversTitles = 0;
+        for(const title of driverTitles){
+            // Régler le problème dans le cas où il y a plusieurs constructeurs pilotés dans la même saison
+            const constructor = title?.DriverStandings[0]?.Constructors[0]?.constructorId;
+            if(constructor === constructorId){
+                nbDriversTitles++;
+            }
+        }
+        return nbDriversTitles;
+    }
 
     const textBold = {
         fontFamily: "Formula1-Bold",
@@ -75,6 +91,7 @@ export default function AllConstructorsOnePage(){
                     titles={titles}
                     wins={wins}
                     podiums={parseInt(wins)+parseInt(seconds)+parseInt(thirds)}
+                    driverTitles={getDriversTitles()}
                 />
             </Container>
         )
