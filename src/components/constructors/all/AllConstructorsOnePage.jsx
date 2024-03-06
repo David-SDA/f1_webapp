@@ -12,6 +12,9 @@ export default function AllConstructorsOnePage(){
     const [seasons, setSeasons] = useState([]);
     const [titles, setTitles] = useState();
     const [constructorStandingsFirst, setConstructorStandingsFirst] = useState([]);
+    const [wins, setWins] = useState();
+    const [seconds, setSeconds] = useState();
+    const [thirds, setThirds] = useState();
     const [isLoading, setIsLoading] = useState(true);
 
     const fetchInfo = async () => {
@@ -20,17 +23,26 @@ export default function AllConstructorsOnePage(){
             const responseDrivers = await fetch("http://ergast.com/api/f1/constructors/" + constructorId + "/drivers.json?limit=200");
             const responseSeasons = await fetch("http://ergast.com/api/f1/constructors/" + constructorId + "/seasons.json?limit=100");
             const responseConstructorStandingsFirst = await fetch("http://ergast.com/api/f1/constructors/" + constructorId + "/constructorStandings/1.json");
-
+            const responseWins = await fetch("http://ergast.com/api/f1/constructors/" + constructorId + "/results/1.json?limit=400");
+            const responseSeconds = await fetch("http://ergast.com/api/f1/constructors/" + constructorId + "/results/2.json?limit=400");
+            const responseThirds = await fetch("http://ergast.com/api/f1/constructors/" + constructorId + "/results/3.json?limit=400");
+            
             const dataConstructor = await responseConstructor.json();
             const dataDrivers = await responseDrivers.json();
             const dataSeasons = await responseSeasons.json();
             const dataConstructorStandingsFirst = await responseConstructorStandingsFirst.json();
+            const dataWins = await responseWins.json();
+            const dataSeconds = await responseSeconds.json();
+            const dataThirds = await responseThirds.json();
             
             setConstructors(dataConstructor.MRData.ConstructorTable.Constructors[0]);
             setDrivers(dataDrivers.MRData.DriverTable.Drivers);
             setSeasons(dataSeasons.MRData.SeasonTable.Seasons);
             setTitles(dataConstructorStandingsFirst.MRData.total);
             setConstructorStandingsFirst(dataConstructorStandingsFirst.MRData.StandingsTable.StandingsLists);
+            setWins(dataWins.MRData.total);
+            setSeconds(dataSeconds.MRData.total);
+            setThirds(dataThirds.MRData.total);
         }catch(error){
             console.log(error);
         }finally{
@@ -61,6 +73,8 @@ export default function AllConstructorsOnePage(){
                     nbDrivers={drivers.length}
                     nbSeasons={seasons.length}
                     titles={titles}
+                    wins={wins}
+                    podiums={parseInt(wins)+parseInt(seconds)+parseInt(thirds)}
                 />
             </Container>
         )

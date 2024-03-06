@@ -9,6 +9,8 @@ export default function AllConstructorsOneDetailsContainer({
     nbDrivers,
     nbSeasons,
     titles,
+    wins,
+    podiums,
 }){
     const textBold = {
         fontFamily: "Formula1-Bold",
@@ -55,6 +57,24 @@ export default function AllConstructorsOneDetailsContainer({
                     <p className="mb-0" style={textBlack}>CONSTRUCTORS TITLES</p>
                     <div className="d-flex flex-row justify-content-center align-items-center">
                         <p className="mb-0" style={{...textBold, fontSize: "20px"}}>{titles}</p>
+                    </div>
+                    <div></div>
+                </Container>
+            </Col>
+            <Col md={6} lg={4}>
+                <Container className="d-flex flex-column justify-content-around rounded-4" style={{height: "100px", borderRight: "5px solid #ff1801", borderBottom: "5px solid #ff1801"}}>
+                    <p className="mb-0" style={textBlack}>WINS</p>
+                    <div className="d-flex flex-row justify-content-center align-items-center">
+                        <p className="mb-0" style={{...textBold, fontSize: "20px"}}>{wins}</p>
+                    </div>
+                    <div></div>
+                </Container>
+            </Col>
+            <Col md={6} lg={4}>
+                <Container className="d-flex flex-column justify-content-around rounded-4" style={{height: "100px", borderRight: "5px solid #ff1801", borderBottom: "5px solid #ff1801"}}>
+                    <p className="mb-0" style={textBlack}>PODIUMS</p>
+                    <div className="d-flex flex-row justify-content-center align-items-center">
+                        <p className="mb-0" style={{...textBold, fontSize: "20px"}}>{podiums}</p>
                     </div>
                     <div></div>
                 </Container>
