@@ -16,6 +16,7 @@ export default function AllConstructorsOnePage(){
     const [seconds, setSeconds] = useState();
     const [thirds, setThirds] = useState();
     const [driverTitles, setDriverTitles] = useState([]);
+    const [firstRace, setFirstRace] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     const fetchInfo = async () => {
@@ -28,6 +29,7 @@ export default function AllConstructorsOnePage(){
             const responseSeconds = await fetch("http://ergast.com/api/f1/constructors/" + constructorId + "/results/2.json?limit=400");
             const responseThirds = await fetch("http://ergast.com/api/f1/constructors/" + constructorId + "/results/3.json?limit=400");
             const responseDriverTitles = await fetch("http://ergast.com/api/f1/driverStandings/1.json?limit=100");
+            const responseFirstRace = await fetch("http://ergast.com/api/f1/constructors/" + constructorId + "/races.json?limit=1");
             
             const dataConstructor = await responseConstructor.json();
             const dataDrivers = await responseDrivers.json();
@@ -37,6 +39,7 @@ export default function AllConstructorsOnePage(){
             const dataSeconds = await responseSeconds.json();
             const dataThirds = await responseThirds.json();
             const dataDriverTitles = await responseDriverTitles.json();
+            const dataFirstRace = await responseFirstRace.json();
             
             setConstructors(dataConstructor.MRData.ConstructorTable.Constructors[0]);
             setDrivers(dataDrivers.MRData.DriverTable.Drivers);
@@ -47,6 +50,7 @@ export default function AllConstructorsOnePage(){
             setSeconds(dataSeconds.MRData.total);
             setThirds(dataThirds.MRData.total);
             setDriverTitles(dataDriverTitles.MRData.StandingsTable.StandingsLists);
+            setFirstRace(dataFirstRace.MRData.RaceTable.Races[0]);
         }catch(error){
             console.log(error);
         }finally{
@@ -101,6 +105,7 @@ export default function AllConstructorsOnePage(){
                     wins={wins}
                     podiums={parseInt(wins)+parseInt(seconds)+parseInt(thirds)}
                     driverTitles={getDriversTitles()}
+                    firstRace={firstRace?.season + " " + firstRace?.raceName}
                 />
             </Container>
         )
