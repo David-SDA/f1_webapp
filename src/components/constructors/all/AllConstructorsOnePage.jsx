@@ -124,17 +124,34 @@ export default function AllConstructorsOnePage(){
                                 CONSTRUCTOR TITLES
                             </h1>
                             <Container className="d-flex flex-column justify-content-center mb-2 pt-3 pb-3 ps-1 pe-1 rounded" style={{backgroundColor: "#38383f"}}>
-                                <Row className="bg-white mt-sm-0 ms-1 me-1 p-1 rounded">
-                                    <Col xs={4} className="p-0">
+                                <Row className="bg-white ms-1 me-1 p-1 rounded">
+                                    <Col xs={4} className="ps-0 pe-0">
                                         <p className="mb-0 text-center" style={textBlack}>SEASON</p>
                                     </Col>
-                                    <Col xs={4} className="ps-0 ps-sm-2 pe-0 pe-sm-2">
+                                    <Col xs={4} className="ps-0 pe-0">
                                         <p className="mb-0 text-center" style={textBlack}>POINTS</p>
                                     </Col>
-                                    <Col xs={4}>
+                                    <Col xs={4} className="ps-0 pe-0">
                                         <p className="mb-0 text-center" style={textBlack}>WINS</p>
                                     </Col>
                                 </Row>
+                                {
+                                    constructorStandingsFirst.map((season, index) => {
+                                        return (
+                                            <Row className="bg-white mt-2 ms-1 me-1 p-1 rounded" key={index}>
+                                                <Col xs={4} className="ps-0 pe-0">
+                                                    <p className="mb-0 text-center" style={textBlack}>{season?.season}</p>
+                                                </Col>
+                                                <Col xs={4} className="ps-0 pe-0">
+                                                    <p className="mb-0 text-center" style={textBlack}>{season?.ConstructorStandings[0]?.points}</p>
+                                                </Col>
+                                                <Col xs={4} className="ps-0 pe-0">
+                                                    <p className="mb-0 text-center" style={textBlack}>{season?.ConstructorStandings[0]?.wins}</p>
+                                                </Col>
+                                            </Row>
+                                        )
+                                    })
+                                }
                             </Container>
                         </>
                     ) : ("")
