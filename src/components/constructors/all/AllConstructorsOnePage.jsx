@@ -61,10 +61,19 @@ export default function AllConstructorsOnePage(){
     const getDriversTitles = () => {
         let nbDriversTitles = 0;
         for(const title of driverTitles){
-            // Régler le problème dans le cas où il y a plusieurs constructeurs pilotés dans la même saison
-            const constructor = title?.DriverStandings[0]?.Constructors[0]?.constructorId;
-            if(constructor === constructorId){
-                nbDriversTitles++;
+            if(title?.DriverStandings[0]?.Constructors.length > 1){
+                for(let index = 0; index < title?.DriverStandings[0]?.Constructors.length; index++) {
+                    const constructor = title?.DriverStandings[0]?.Constructors[index]?.constructorId;
+                    if(constructor === constructorId){
+                        nbDriversTitles++;
+                    }
+                }
+            }
+            else{
+                const constructor = title?.DriverStandings[0]?.Constructors[0]?.constructorId;
+                if(constructor === constructorId){
+                    nbDriversTitles++;
+                }
             }
         }
         return nbDriversTitles;
