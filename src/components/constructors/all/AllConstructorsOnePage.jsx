@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { Container, Spinner } from "react-bootstrap";
+import { Container, Spinner, Row, Col } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import AllConstructorsOneDetailsContainer from "./AllConstructorsOneDetailsContainer";
 
@@ -87,6 +87,16 @@ export default function AllConstructorsOnePage(){
         fontFamily: "Formula1-Bold",
         letterSpacing: "0.0005rem",
     }
+
+    const textRegular = {
+        fontFamily: "Formula1-Regular",
+        letterSpacing: "0.0005rem",
+    }
+
+    const textBlack = {
+        fontFamily: "Formula1-Black",
+        letterSpacing: "0.0005rem",
+    }
     
     if(isLoading){
         return(
@@ -107,6 +117,28 @@ export default function AllConstructorsOnePage(){
                     driverTitles={getDriversTitles()}
                     firstRace={firstRace?.season + " " + firstRace?.raceName}
                 />
+                {
+                    titles > 0 ? (
+                        <>
+                            <h1 className="fst-italic mt-3" style={textRegular}>
+                                CONSTRUCTOR TITLES
+                            </h1>
+                            <Container className="d-flex flex-column justify-content-center mb-2 pt-3 pb-3 ps-1 pe-1 rounded" style={{backgroundColor: "#38383f"}}>
+                                <Row className="bg-white mt-sm-0 ms-1 me-1 p-1 rounded">
+                                    <Col xs={4} className="p-0">
+                                        <p className="mb-0 text-center" style={textBlack}>SEASON</p>
+                                    </Col>
+                                    <Col xs={4} className="ps-0 ps-sm-2 pe-0 pe-sm-2">
+                                        <p className="mb-0 text-center" style={textBlack}>POINTS</p>
+                                    </Col>
+                                    <Col xs={4}>
+                                        <p className="mb-0 text-center" style={textBlack}>WINS</p>
+                                    </Col>
+                                </Row>
+                            </Container>
+                        </>
+                    ) : ("")
+                }
             </Container>
         )
     }
