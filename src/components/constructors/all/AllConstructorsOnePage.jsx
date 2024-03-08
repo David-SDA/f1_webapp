@@ -68,7 +68,7 @@ export default function AllConstructorsOnePage(){
         let nbDriversTitles = 0;
         for(const title of driverTitles){
             if(title?.DriverStandings[0]?.Constructors.length > 1){
-                for(let index = 0; index < title?.DriverStandings[0]?.Constructors.length; index++) {
+                for(let index = 0; index < title?.DriverStandings[0]?.Constructors.length; index++){
                     const constructor = title?.DriverStandings[0]?.Constructors[index]?.constructorId;
                     if(constructor === constructorId){
                         nbDriversTitles++;
@@ -85,6 +85,35 @@ export default function AllConstructorsOnePage(){
         return nbDriversTitles;
     }
 
+    const driverChampions = []
+
+    for(const title of driverTitles){
+        if(title?.DriverStandings[0]?.Constructors.length > 1){
+            for(let index = 0; index < title?.DriverStandings[0]?.Constructors.length; index++){
+                if(title?.DriverStandings[0]?.Constructors[index]?.constructorId === constructorId){
+                    const championsDetails = {
+                        driverName : title?.DriverStandings[0]?.Driver?.givenName + " " + title?.DriverStandings[0]?.Driver?.familyName,
+                        season: title?.season,
+                        points : title?.DriverStandings[0]?.points,
+                        wins: title?.DriverStandings[0]?.wins
+                    };
+                    driverChampions.push(championsDetails);
+                }
+            }
+        }
+        else{
+            if(title.DriverStandings[0]?.Constructors[0]?.constructorId === constructorId){
+                const championsDetails = {
+                    driverName : title.DriverStandings[0]?.Driver?.givenName + " " + title?.DriverStandings[0]?.Driver?.familyName,
+                    season: title.season,
+                    points : title.DriverStandings[0]?.points,
+                    wins: title.DriverStandings[0]?.wins
+                };
+                driverChampions.push(championsDetails);
+            }
+        }
+    }
+    console.log(driverChampions);
     const textBold = {
         fontFamily: "Formula1-Bold",
         letterSpacing: "0.0005rem",
@@ -92,11 +121,6 @@ export default function AllConstructorsOnePage(){
 
     const textRegular = {
         fontFamily: "Formula1-Regular",
-        letterSpacing: "0.0005rem",
-    }
-
-    const textBlack = {
-        fontFamily: "Formula1-Black",
         letterSpacing: "0.0005rem",
     }
     
