@@ -94,6 +94,11 @@ export default function AllConstructorsOnePage(){
         fontFamily: "Formula1-Regular",
         letterSpacing: "0.0005rem",
     }
+
+    const textBlack = {
+        fontFamily: "Formula1-Black",
+        letterSpacing: "0.0005rem",
+    }
     
     if(isLoading){
         return(
@@ -114,6 +119,18 @@ export default function AllConstructorsOnePage(){
                     driverTitles={getDriversTitles()}
                     firstRace={firstRace?.season + " " + firstRace?.raceName}
                 />
+                {
+                    titles > 0 ? (
+                        <>
+                            <h1 className="fst-italic mt-3" style={textRegular}>
+                                DRIVERS TITLES
+                            </h1>
+                            <Container className="d-flex flex-column justify-content-center mb-2 pt-3 pb-3 ps-1 pe-1 rounded" style={{backgroundColor: "#38383f"}}>
+                            
+                            </Container>
+                        </>
+                    ) : ("")
+                }
                 {
                     titles > 0 ? (
                         <>
