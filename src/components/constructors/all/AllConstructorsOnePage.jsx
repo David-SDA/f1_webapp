@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 
-import { Container, Spinner, Row, Col, Card, Image } from "react-bootstrap";
+import { Container, Spinner, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import { flagsNationality } from "../../../constants/flagsNationality";
+
 import AllConstructorsOneDetailsContainer from "./AllConstructorsOneDetailsContainer";
 import AllConstructorsTitleListHeader from "./AllConstructorsTitleListHeader";
 import AllConstructorsTitleListContent from "./AllConstructorsTitleListContent";
+import AllConstructorsOneDriverContainer from "./AllConstructorsOneDriverContainer";
 
 export default function AllConstructorsOnePage(){
     let { constructorId } = useParams();
@@ -167,22 +168,12 @@ export default function AllConstructorsOnePage(){
                                     {
                                         Object.keys(driverChampions).map((driver, index) => {
                                             return (
-                                                <Col md={6} lg={4} xl={3} className="mt-1 mb-1" key={index}>
-                                                    <Card>
-                                                        <a href="#" className="p-2 link-dark link-underline-opacity-0 link-opacity-75-hover">
-                                                            <Card.Title className="d-flex justify-content-center" style={textBold}>
-                                                                {driver}
-                                                            </Card.Title>
-                                                            <Card.Subtitle className="d-flex justify-content-center align-items-center">
-                                                                <Image src={flagsNationality[driverChampions[driver].nationality]} rounded className="me-1 border" style={{height: 20}} />
-                                                                <span className="fst-italic" style={textRegular}>{driverChampions[driver].nationality}</span>
-                                                            </Card.Subtitle>
-                                                            <Card.Body className="text-center ps-0 pe-0" style={{...textRegular, height: "6rem"}}>
-                                                                {driverChampions[driver].seasons.join(', ')}
-                                                            </Card.Body>
-                                                        </a>
-                                                    </Card>
-                                                </Col>
+                                                <AllConstructorsOneDriverContainer
+                                                    key={index}
+                                                    driver={driver}
+                                                    nationality={driverChampions[driver].nationality}
+                                                    seasons={driverChampions[driver].seasons}
+                                                />
                                             )
                                         })
                                     }
