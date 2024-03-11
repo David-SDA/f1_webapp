@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 
-import { Container, Spinner, Row, Col } from "react-bootstrap";
+import { Container, Spinner, Row, Col, Card, Image } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+import { flagsNationality } from "../../../constants/flagsNationality";
 import AllConstructorsOneDetailsContainer from "./AllConstructorsOneDetailsContainer";
 import AllConstructorsTitleListHeader from "./AllConstructorsTitleListHeader";
 import AllConstructorsTitleListContent from "./AllConstructorsTitleListContent";
@@ -94,10 +95,14 @@ export default function AllConstructorsOnePage(){
                     const driver = title?.DriverStandings[0]?.Driver?.givenName + " " + title?.DriverStandings[0]?.Driver?.familyName;
                     const season = title?.season;
                     if(driverChampions[driver]){
-                        driverChampions[driver].push(season);
+                        driverChampions[driver].seasons.push(season);
                     }
                     else{
-                        driverChampions[driver] = [season];
+                        const nationality = title?.DriverStandings[0]?.Driver?.nationality;
+                        driverChampions[driver] = {
+                            nationality: nationality,
+                            seasons: [season]
+                        };
                     }
                 }
             }
@@ -107,10 +112,14 @@ export default function AllConstructorsOnePage(){
                 const driver = title?.DriverStandings[0]?.Driver?.givenName + " " + title?.DriverStandings[0]?.Driver?.familyName;
                 const season = title?.season;
                 if(driverChampions[driver]){
-                    driverChampions[driver].push(season);
+                    driverChampions[driver].seasons.push(season);
                 }
                 else{
-                    driverChampions[driver] = [season];
+                    const nationality = title?.DriverStandings[0]?.Driver?.nationality;
+                    driverChampions[driver] = {
+                        nationality: nationality,
+                        seasons: [season]
+                    };
                 }
             }
         }
@@ -148,13 +157,36 @@ export default function AllConstructorsOnePage(){
                     firstRace={firstRace?.season + " " + firstRace?.raceName}
                 />
                 {
-                    titles > 0 ? (
+                    driverChampions !== null ? (
                         <>
                             <h1 className="fst-italic mt-3" style={textRegular}>
                                 DRIVERS TITLES
                             </h1>
                             <Container className="d-flex flex-column justify-content-center mb-2 pt-3 pb-3 ps-1 pe-1 rounded" style={{backgroundColor: "#38383f"}}>
-                            
+                                <Row className="d-flex justify-content-around">
+                                    {
+                                        Object.keys(driverChampions).map((driver, index) => {
+                                            return (
+                                                <Col md={6} lg={4} xl={3} className="mt-1 mb-1" key={index}>
+                                                    <Card>
+                                                        <a href="#" className="p-2 link-dark link-underline-opacity-0 link-opacity-75-hover">
+                                                            <Card.Title className="d-flex justify-content-center" style={textBold}>
+                                                                {driver}
+                                                            </Card.Title>
+                                                            <Card.Subtitle className="d-flex justify-content-center align-items-center">
+                                                                <Image src={flagsNationality[driverChampions[driver].nationality]} rounded className="me-1 border" style={{height: 20}} />
+                                                                <span className="fst-italic" style={textRegular}>{driverChampions[driver].nationality}</span>
+                                                            </Card.Subtitle>
+                                                            <Card.Body className="text-center ps-0 pe-0" style={{...textRegular, height: "6rem"}}>
+                                                                {driverChampions[driver].seasons.join(', ')}
+                                                            </Card.Body>
+                                                        </a>
+                                                    </Card>
+                                                </Col>
+                                            )
+                                        })
+                                    }
+                                </Row>
                             </Container>
                         </>
                     ) : ("")
