@@ -15,7 +15,7 @@ export default function TopNavBar(){
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ms-auto">
-                        <Nav.Link href="#" style={navListStyle}>Seasons</Nav.Link>
+                        <Nav.Link href="/seasons" style={navListStyle}>Seasons</Nav.Link>
                         <Nav.Link href="/schedule" style={navListStyle}>Schedule</Nav.Link>
                         <NavDropdown title="Standings" id="basic-nav-dropdown" style={navListStyle}>
                             <NavDropdown.Item href="/driverStandings">Drivers</NavDropdown.Item>
