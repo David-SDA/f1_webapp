@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 
-import { Card, Col, Container, Row, Spinner } from "react-bootstrap";
+import { Container, Row, Spinner } from "react-bootstrap";
+
+import SeasonsCardContainer from "./SeasonsCardContainer";
 
 export default function SeasonsPage(){
     const [seasons, setSeasons] = useState([]);
@@ -30,10 +32,6 @@ export default function SeasonsPage(){
         fontFamily: "Formula1-Regular",
         letterSpacing: "0.0005rem",
     }
-    const textBold = {
-        fontFamily: "Formula1-Bold",
-        letterSpacing: "0.0005rem",
-    }
 
     if(isLoading){
         return(
@@ -48,15 +46,10 @@ export default function SeasonsPage(){
                     {
                         seasons.slice().reverse().map((season, index) => {
                             return (
-                                <Col m={6} md={4} lg={3} xl={2} className="mb-2 p-1" key={index}>
-                                    <a href={"#"} className="link-dark link-underline-opacity-0 link-underline-opacity-50-hover">
-                                        <Card>
-                                            <Card.Body>
-                                                <Card.Title className="text-center" style={textBold}>{season?.season}</Card.Title>
-                                            </Card.Body>
-                                        </Card>
-                                    </a>
-                                </Col>
+                                <SeasonsCardContainer
+                                    key={index}
+                                    season={season?.season}
+                                />
                             );
                         })
                     }
