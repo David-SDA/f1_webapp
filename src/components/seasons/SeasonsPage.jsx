@@ -1,11 +1,53 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-import { Container } from "react-bootstrap";
+import { Container, Spinner } from "react-bootstrap";
 
 export default function SeasonsPage(){
-    return (
-        <Container>
-            <h1>Seasons</h1>
-        </Container>
-    )
+    const [seasons, setSeasons] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+
+    const fetchInfo = async () => {
+        try{
+            const seasonsResponse = await fetch("http://ergast.com/api/f1/seasons.json?limit=100");
+
+            const seasonsData = await seasonsResponse.json();
+            
+            setSeasons(seasonsData.MRData.SeasonTable.Seasons);
+        }
+        catch(error){
+            console.log(error);
+        }
+        finally{
+            setIsLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        fetchInfo();
+    }, [])
+
+    const textRegular = {
+        fontFamily: "Formula1-Regular",
+        letterSpacing: "0.0005rem",
+    }
+
+    if(isLoading){
+        return(
+            <Spinner animation="border" style={{color: "#ff1801"}} />
+        );
+    }
+    else{
+        return (
+            <Container>
+                <h1 className="fst-italic mt-1" style={textRegular}>Seasons</h1>
+                {
+                    seasons.slice().reverse().map((season, index) => {
+                        return (
+                            <p key={index}>{season?.season}</p>
+                        );
+                    })
+                }
+            </Container>
+        )
+    }
 }
