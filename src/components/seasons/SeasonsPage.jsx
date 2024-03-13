@@ -6,7 +6,7 @@ import SeasonsCardContainer from "./SeasonsCardContainer";
 
 export default function SeasonsPage(){
     const [seasons, setSeasons] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     const fetchInfo = async () => {
         try{
