@@ -29,6 +29,7 @@ import AllDriversOnePage from './components/drivers/all/AllDriversOnePage';
 import AllConstructorsPage from './components/constructors/all/AllConstructorsPage';
 import AllConstructorsOnePage from './components/constructors/all/AllConstructorsOnePage';
 import SeasonsPage from './components/seasons/SeasonsPage';
+import OneSeasonPage from './components/seasons/OneSeasonPage';
 
 
 function App() {
@@ -56,6 +57,7 @@ function App() {
                     <Route path='/allConstructors' element={<AllConstructorsPage />} />
                     <Route path='/allConstructors/:constructorId' element={<AllConstructorsOnePage />} />
                     <Route path='/seasons' element={<SeasonsPage />} />
+                    <Route path='/seasons/:season' element={<OneSeasonPage />} />
                     <Route path='*' element={<NotFoundPage />} />
                 </Routes>
             </div>
