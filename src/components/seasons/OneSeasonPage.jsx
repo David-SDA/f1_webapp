@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 
-import { Col, Container, Row, Spinner } from "react-bootstrap";
+import { Container, Row, Spinner } from "react-bootstrap";
 
 import { useParams } from "react-router-dom";
 import NotFoundPage from "../NotFoundPage";
+import OneSeasonOneRace from "./OneSeasonOneRace";
 
 const isValidSeason = (year) => {
     const currentYear = new Date().getFullYear();
@@ -57,10 +58,6 @@ export default function OneSeasonPage(){
         fontFamily: "Formula1-Bold",
         letterSpacing: "0.0005rem",
     }
-    const textWide = {
-        fontFamily: "Formula1-Wide",
-        letterSpacing: "0.0005rem",
-    }
 
     if(!seasonValid){
         return <NotFoundPage />;
@@ -72,7 +69,6 @@ export default function OneSeasonPage(){
         );
     }
     else{
-        console.log(races);
         return (
             <Container>
                 <h1 className="fst-italic mt-1" style={textBold}>{season} Season</h1>
@@ -81,12 +77,13 @@ export default function OneSeasonPage(){
                     <Row className="d-flex justify-content-around">
                         {
                             races.map((race, index) => {
-
                                 return (
-                                    <Col xs={6} sm={4} md={3} lg={2} className="bg-white m-1 rounded" style={textRegular} key={index}>
-                                        <p><span style={textWide}>{race?.round}</span> : <i>{new Date(race?.date).toLocaleDateString('en-US', { day: '2-digit', month: 'short' })}</i></p>
-                                        <p style={textBold}>{race?.raceName}</p>
-                                    </Col>
+                                    <OneSeasonOneRace
+                                        key={index}
+                                        round={race?.round}
+                                        date={race?.date}
+                                        raceName={race?.raceName}
+                                    />
                                 )
                             })
                         }
