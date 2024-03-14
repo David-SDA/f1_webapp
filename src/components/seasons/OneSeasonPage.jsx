@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { Container, Spinner } from "react-bootstrap";
+import { Col, Container, Row, Spinner } from "react-bootstrap";
 
 import { useParams } from "react-router-dom";
 import NotFoundPage from "../NotFoundPage";
@@ -53,6 +53,10 @@ export default function OneSeasonPage(){
         fontFamily: "Formula1-Regular",
         letterSpacing: "0.0005rem",
     }
+    const textBold = {
+        fontFamily: "Formula1-Bold",
+        letterSpacing: "0.0005rem",
+    }
 
     if(!seasonValid){
         return <NotFoundPage />;
@@ -67,7 +71,21 @@ export default function OneSeasonPage(){
         console.log(races);
         return (
             <Container>
-                <h1 className="fst-italic mt-1" style={textRegular}>{season} Season</h1>
+                <h1 className="fst-italic mt-1" style={textBold}>{season} Season</h1>
+                <h2 className="fst-italic mt-1" style={textRegular}>TEAMS</h2>
+                <Container className="mb-2 pt-3 pb-3 rounded" style={{backgroundColor: "#38383f"}}>
+                    <Row className="d-flex justify-content-around">
+                        {
+                            races.map((race, index) => {
+                                return (
+                                    <Col className="bg-white" key={index}>
+                                        {race?.raceName}
+                                    </Col>
+                                )
+                            })
+                        }
+                    </Row>
+                </Container>
             </Container>
         )
     }
