@@ -49,9 +49,9 @@ Création d'une application web qui permet d'obtenir des données sur la Formule
 
 | Constructeurs historiques | Un constructeur historique |
 | - | - |
-| ![Page des constructeurs historiques](https://github.com/David-SDA/f1_webapp/blob/master/images/constructeur/page_tout_constructeurs.png) | ![Page un constructeur](https://github.com/David-SDA/f1_webapp/blob/master/images/constructeur/page_un_constructeur_historique.png) |
+| ![Page des constructeurs historiques](https://github.com/David-SDA/f1_webapp/blob/master/images/constructeur/page_tout_constructeurs.png) | ![Page un constructeur historique](https://github.com/David-SDA/f1_webapp/blob/master/images/constructeur/page_un_constructeur_historique.png) |
 
 ### Saison
-| Liste des saisons | Un constructeur actuel |
+| Liste des saisons | Une saison |
 | - | - |
-| ![Page des constructeurs actuels](https://github.com/David-SDA/f1_webapp/blob/master/images/saison/page_tout_saisons.png) | *à venir* |
+| ![Page des saisons](https://github.com/David-SDA/f1_webapp/blob/master/images/saison/page_tout_saisons.png) | ![Page du saison](https://github.com/David-SDA/f1_webapp/blob/master/images/saison/page_une_saison.png) |
