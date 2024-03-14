@@ -57,6 +57,10 @@ export default function OneSeasonPage(){
         fontFamily: "Formula1-Bold",
         letterSpacing: "0.0005rem",
     }
+    const textWide = {
+        fontFamily: "Formula1-Wide",
+        letterSpacing: "0.0005rem",
+    }
 
     if(!seasonValid){
         return <NotFoundPage />;
@@ -72,14 +76,16 @@ export default function OneSeasonPage(){
         return (
             <Container>
                 <h1 className="fst-italic mt-1" style={textBold}>{season} Season</h1>
-                <h2 className="fst-italic mt-1" style={textRegular}>TEAMS</h2>
+                <h2 className="fst-italic mt-1" style={textRegular}>CALENDAR</h2>
                 <Container className="mb-2 pt-3 pb-3 rounded" style={{backgroundColor: "#38383f"}}>
                     <Row className="d-flex justify-content-around">
                         {
                             races.map((race, index) => {
+
                                 return (
-                                    <Col className="bg-white" key={index}>
-                                        {race?.raceName}
+                                    <Col xs={6} sm={4} md={3} lg={2} className="bg-white m-1 rounded" style={textRegular} key={index}>
+                                        <p><span style={textWide}>{race?.round}</span> : <i>{new Date(race?.date).toLocaleDateString('en-US', { day: '2-digit', month: 'short' })}</i></p>
+                                        <p style={textBold}>{race?.raceName}</p>
                                     </Col>
                                 )
                             })
