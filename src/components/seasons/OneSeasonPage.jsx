@@ -22,16 +22,20 @@ export default function OneSeasonPage(){
     const { season } = useParams();
 
     const [races, setRaces] = useState([]);
+    const [driverStandings, setDriverStandings] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [seasonValid, setSeasonValid] = useState(true);
 
     const fetchInfo = async () => {
         try{
             const racesResponse = await fetch("http://ergast.com/api/f1/" + season + ".json");
+            const driverStandingsResponse = await fetch("http://ergast.com/api/f1/" + season + "/driverStandings.json");
 
             const racesData = await racesResponse.json();
+            const driverStandingsData = await driverStandingsResponse.json();
             
             setRaces(racesData.MRData.RaceTable.Races);
+            setDriverStandings(driverStandingsData.MRData.StandingsTable.StandingsLists[0].DriverStandings);
         }
         catch(error){
             console.log(error);
@@ -88,6 +92,15 @@ export default function OneSeasonPage(){
                             })
                         }
                     </Row>
+                </Container>
+                <Container className="mb-2 pt-3 pb-3 rounded" style={{backgroundColor: "#38383f"}}>
+                    {
+                        driverStandings.map((driver, index) => {
+                            return (
+                                <p className="bg-white" key={index}>{driver?.Driver?.givenName} {driver?.Driver?.familyName}</p>
+                            )
+                        })
+                    }
                 </Container>
             </Container>
         )
