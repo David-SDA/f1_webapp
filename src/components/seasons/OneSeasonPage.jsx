@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { Container, Row, Spinner } from "react-bootstrap";
+import { Col, Container, Row, Spinner } from "react-bootstrap";
 
 import { useParams } from "react-router-dom";
 import NotFoundPage from "../NotFoundPage";
@@ -62,6 +62,14 @@ export default function OneSeasonPage(){
         fontFamily: "Formula1-Bold",
         letterSpacing: "0.0005rem",
     }
+    const textBlack = {
+        fontFamily: "Formula1-Black",
+        letterSpacing: "0.0005rem",
+    }
+    const textWide = {
+        fontFamily: "Formula1-Wide",
+        letterSpacing: "0.0005rem",
+    }
 
     if(!seasonValid){
         return <NotFoundPage />;
@@ -93,11 +101,77 @@ export default function OneSeasonPage(){
                         }
                     </Row>
                 </Container>
+                <h2 className="fst-italic mt-1" style={textRegular}>DRIVER STANDINGS</h2>
                 <Container className="mb-2 pt-3 pb-3 rounded" style={{backgroundColor: "#38383f"}}>
+                    <Row className="d-flex flex-nowrap flex-row justify-content-around align-items-center bg-white m-1 p-1 p-sm-2 rounded-3">
+                        <Col className="p-0" xs={1} sm={1} md={1} lg={1}>
+                            <p className="m-0 text-center d-none d-lg-block" style={textBlack}>
+                                POSITION
+                            </p>
+                            <p className="m-0 text-center d-block d-lg-none" style={textBlack}>
+                                POS
+                            </p>
+                        </Col>
+                        <Col className="p-0" xs={5} sm={3} md={4} lg={4}>
+                            <p className="m-0 d-none d-sm-block" style={textBlack}>
+                                DRIVER
+                            </p>
+                            <p className="m-0 d-block d-sm-none" style={textBlack}>
+                                DRI
+                            </p>
+                        </Col>
+                        <Col className="p-0 d-none d-sm-block" sm={3} md={4} lg={3}>
+                            <p className="m-0 text-center" style={textBlack}>
+                                TEAM
+                            </p>
+                        </Col>
+                        <Col className="p-0 d-none d-md-block" sm={1} md={1} lg={1}>
+                            <p className="m-0 text-center" style={textBlack}>
+                                WINS
+                            </p>
+                        </Col>
+                        <Col className="p-0" xs={3} sm={1} md={1} lg={1}>
+                            <p className="m-0 text-center d-none d-lg-block" style={textBlack}>
+                                POINTS
+                            </p>
+                            <p className="m-0 text-center d-block d-lg-none" style={textBlack}>
+                                PTS
+                            </p>
+                        </Col>
+                    </Row>
                     {
                         driverStandings.map((driver, index) => {
                             return (
-                                <p className="bg-white" key={index}>{driver?.Driver?.givenName} {driver?.Driver?.familyName}</p>
+                                <Row className="d-flex flex-nowrap flex-row justify-content-around align-items-center bg-white m-1 p-1 p-sm-2 rounded-3" key={index}>
+                                    <Col className="p-0" xs={1} sm={1} md={1} lg={1}>
+                                        <p className="m-0 text-center d-block" style={textWide}>
+                                            {driver?.position}
+                                        </p>
+                                    </Col>
+                                    <Col className="p-0" xs={5} sm={3} md={4} lg={4}>
+                                        <p className="m-0 d-none d-sm-block">
+                                            <span style={textRegular}>{driver?.Driver?.givenName}</span> <span style={textBold}>{driver?.Driver?.familyName}</span>
+                                        </p>
+                                        <p className="m-0 d-block d-sm-none" style={textBold}>
+                                            {driver?.Driver?.familyName}
+                                        </p>
+                                    </Col>
+                                    <Col className="p-0 d-none d-sm-block" sm={3} md={4} lg={3}>
+                                        <p className="m-0 text-center" style={textRegular}>
+                                            {driver?.Constructors[0]?.name}
+                                        </p>
+                                    </Col>
+                                    <Col className="p-0 d-none d-md-block" sm={1} md={1} lg={1}>
+                                        <p className="m-0 text-center" style={textBold}>
+                                            {driver?.wins}
+                                        </p>
+                                    </Col>
+                                    <Col className="p-0" xs={3} sm={1} md={1} lg={1}>
+                                        <p className="m-0 text-center d-block" style={textBold}>
+                                            {driver?.points}
+                                        </p>
+                                    </Col>
+                                </Row>
                             )
                         })
                     }
