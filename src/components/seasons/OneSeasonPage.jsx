@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import NotFoundPage from "../NotFoundPage";
 import OneSeasonOneRace from "./OneSeasonOneRace";
 import OneSeasonDriverStandingsHeader from "./OneSeasonDriverStandingsHeader";
+import OneSeasonDriverStandingsContent from "./OneSeasonDriverStandingsContent";
 
 const isValidSeason = (year) => {
     const currentYear = new Date().getFullYear();
@@ -63,10 +64,6 @@ export default function OneSeasonPage(){
         fontFamily: "Formula1-Bold",
         letterSpacing: "0.0005rem",
     }
-    const textWide = {
-        fontFamily: "Formula1-Wide",
-        letterSpacing: "0.0005rem",
-    }
 
     if(!seasonValid){
         return <NotFoundPage />;
@@ -104,36 +101,15 @@ export default function OneSeasonPage(){
                     {
                         driverStandings.map((driver, index) => {
                             return (
-                                <Row className="d-flex flex-nowrap flex-row justify-content-around align-items-center bg-white m-1 p-1 p-sm-2 rounded-3" key={index}>
-                                    <Col className="p-0" xs={1} sm={1} md={1} lg={1}>
-                                        <p className="m-0 text-center d-block" style={textWide}>
-                                            {driver?.position}
-                                        </p>
-                                    </Col>
-                                    <Col className="p-0" xs={5} sm={3} md={4} lg={4}>
-                                        <p className="m-0 d-none d-sm-block">
-                                            <span style={textRegular}>{driver?.Driver?.givenName}</span> <span style={textBold}>{driver?.Driver?.familyName}</span>
-                                        </p>
-                                        <p className="m-0 d-block d-sm-none" style={textBold}>
-                                            {driver?.Driver?.familyName}
-                                        </p>
-                                    </Col>
-                                    <Col className="p-0 d-none d-sm-block" sm={3} md={4} lg={3}>
-                                        <p className="m-0 text-center" style={textRegular}>
-                                            {driver?.Constructors[0]?.name}
-                                        </p>
-                                    </Col>
-                                    <Col className="p-0 d-none d-md-block" sm={1} md={1} lg={1}>
-                                        <p className="m-0 text-center" style={textBold}>
-                                            {driver?.wins}
-                                        </p>
-                                    </Col>
-                                    <Col className="p-0" xs={3} sm={1} md={1} lg={1}>
-                                        <p className="m-0 text-center d-block" style={textBold}>
-                                            {driver?.points}
-                                        </p>
-                                    </Col>
-                                </Row>
+                                <OneSeasonDriverStandingsContent
+                                    key={index}
+                                    position={driver?.position}
+                                    givenName={driver?.Driver?.givenName}
+                                    familyName={driver?.Driver?.familyName}
+                                    name={driver?.Constructors[0]?.name}
+                                    wins={driver?.wins}
+                                    points={driver?.points}
+                                />
                             )
                         })
                     }
