@@ -54,4 +54,4 @@ Création d'une application web qui permet d'obtenir des données sur la Formule
 ### Saison
 | Liste des saisons | Une saison |
 | - | - |
-| ![Page des saisons](https://github.com/David-SDA/f1_webapp/blob/master/images/saison/page_tout_saisons.png) | ![Page du saison](https://github.com/David-SDA/f1_webapp/blob/master/images/saison/page_une_saison.png) |
+| ![Page des saisons](https://github.com/David-SDA/f1_webapp/blob/master/images/saison/page_tout_saisons.png) | ![Page d'une saison](https://github.com/David-SDA/f1_webapp/blob/master/images/saison/page_exemple_une_saison.png) |
