@@ -75,6 +75,10 @@ export default function OneSeasonPage(){
         fontFamily: "Formula1-Black",
         letterSpacing: "0.0005rem",
     }
+    const textWide = {
+        fontFamily: "Formula1-Wide",
+        letterSpacing: "0.0005rem",
+    }
 
     if(!seasonValid){
         return <NotFoundPage />;
@@ -131,6 +135,34 @@ export default function OneSeasonPage(){
                             <h2 className="fst-italic mt-1" style={textRegular}>CONSTRUCTORS STANDINGS</h2>
                             <Container className="mb-2 pt-3 pb-3 rounded" style={{backgroundColor: "#38383f"}}>
                                 <OneSeasonConstructorStandingsHeader />
+                                {
+                                    constructorStandings.map((constructor, index) => {
+                                        return (
+                                            <Row className="d-flex flex-nowrap flex-row justify-content-around align-items-center bg-white m-1 p-1 p-sm-2 rounded-3" key={index}>
+                                                <Col className="p-0" xs={1} sm={1} md={1} lg={1}>
+                                                    <p className="m-0 text-center" style={textWide}>
+                                                        {constructor?.position}
+                                                    </p>
+                                                </Col>
+                                                <Col className="p-0" xs={5} sm={6} md={7} lg={7}>
+                                                    <p className="m-0" style={textBold}>
+                                                        {constructor?.Constructor?.name}
+                                                    </p>
+                                                </Col>
+                                                <Col className="p-0 d-none d-md-block" xs={3} sm={2} md={1} lg={1}>
+                                                    <p className="m-0 text-center" style={textBold}>
+                                                        {constructor?.wins}
+                                                    </p>
+                                                </Col>
+                                                <Col className="p-0" xs={3} sm={2} md={1} lg={1}>
+                                                    <p className="m-0 text-center" style={textBold}>
+                                                        {constructor?.points}
+                                                    </p>
+                                                </Col>
+                                            </Row>
+                                        )
+                                    })
+                                }
                             </Container>
                         </>
                         
