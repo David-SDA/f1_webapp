@@ -7,6 +7,7 @@ import NotFoundPage from "../NotFoundPage";
 import OneSeasonOneRace from "./OneSeasonOneRace";
 import OneSeasonDriverStandingsHeader from "./OneSeasonDriverStandingsHeader";
 import OneSeasonDriverStandingsContent from "./OneSeasonDriverStandingsContent";
+import OneSeasonConstructorStandingsHeader from "./OneSeasonConstructorStandingsHeader";
 
 const isValidSeason = (year) => {
     const currentYear = new Date().getFullYear();
@@ -129,34 +130,7 @@ export default function OneSeasonPage(){
                         <>
                             <h2 className="fst-italic mt-1" style={textRegular}>CONSTRUCTORS STANDINGS</h2>
                             <Container className="mb-2 pt-3 pb-3 rounded" style={{backgroundColor: "#38383f"}}>
-                                <Row className="d-flex flex-nowrap flex-row justify-content-around align-items-center bg-white m-1 p-1 p-sm-2 rounded-3">
-                                    <Col className="p-0" xs={1} sm={1} md={1} lg={1}>
-                                        <p className="m-0 text-center d-none d-lg-block" style={textBlack}>
-                                            POSITION
-                                        </p>
-                                        <p className="m-0 text-center d-block d-lg-none" style={textBlack}>
-                                            POS
-                                        </p>
-                                    </Col>
-                                    <Col className="p-0" xs={5} sm={6} md={7} lg={7}>
-                                        <p className="m-0" style={textBlack}>
-                                            TEAM
-                                        </p>
-                                    </Col>
-                                    <Col className="p-0 d-none d-md-block" xs={3} sm={2} md={1} lg={1}>
-                                        <p className="m-0 text-center" style={textBlack}>
-                                            WINS
-                                        </p>
-                                    </Col>
-                                    <Col className="p-0" xs={3} sm={2} md={1} lg={1}>
-                                        <p className="m-0 text-center d-none d-lg-block" style={textBlack}>
-                                            POINTS
-                                        </p>
-                                        <p className="m-0 text-center d-block d-lg-none" style={textBlack}>
-                                            PTS
-                                        </p>
-                                    </Col>
-                                </Row>
+                                <OneSeasonConstructorStandingsHeader />
                             </Container>
                         </>
                         
