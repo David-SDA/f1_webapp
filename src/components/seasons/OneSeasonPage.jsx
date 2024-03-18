@@ -25,6 +25,7 @@ export default function OneSeasonPage(){
 
     const [races, setRaces] = useState([]);
     const [driverStandings, setDriverStandings] = useState([]);
+    const [constructorStandings, setConstructorStandings] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [seasonValid, setSeasonValid] = useState(true);
 
@@ -32,12 +33,17 @@ export default function OneSeasonPage(){
         try{
             const racesResponse = await fetch("http://ergast.com/api/f1/" + season + ".json");
             const driverStandingsResponse = await fetch("http://ergast.com/api/f1/" + season + "/driverStandings.json");
+            const constructorStandingsResponse = await fetch("http://ergast.com/api/f1/" + season + "/constructorStandings.json");
 
             const racesData = await racesResponse.json();
             const driverStandingsData = await driverStandingsResponse.json();
+            const constructorStandingsData = await constructorStandingsResponse.json();
             
             setRaces(racesData.MRData.RaceTable.Races);
             setDriverStandings(driverStandingsData.MRData.StandingsTable.StandingsLists[0].DriverStandings);
+            if(constructorStandingsData.MRData.total != 0){
+                setConstructorStandings(constructorStandingsData.MRData.StandingsTable.StandingsLists[0].ConstructorStandings);
+            }
         }
         catch(error){
             console.log(error);
@@ -114,6 +120,16 @@ export default function OneSeasonPage(){
                         })
                     }
                 </Container>
+                {
+                    constructorStandings.length !== 0 ? (
+                        <>
+                            <h2 className="fst-italic mt-1" style={textRegular}>CONSTRUCTORS STANDINGS</h2>
+                        </>
+                        
+                    ) : (
+                        <i style={textRegular}>No constructors championship at the time</i>
+                    )
+                }
             </Container>
         )
     }
