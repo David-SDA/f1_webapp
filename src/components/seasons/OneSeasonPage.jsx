@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { Col, Container, Row, Spinner } from "react-bootstrap";
+import { Container, Row, Spinner } from "react-bootstrap";
 
 import { useParams } from "react-router-dom";
 import NotFoundPage from "../NotFoundPage";
@@ -8,6 +8,7 @@ import OneSeasonOneRace from "./OneSeasonOneRace";
 import OneSeasonDriverStandingsHeader from "./OneSeasonDriverStandingsHeader";
 import OneSeasonDriverStandingsContent from "./OneSeasonDriverStandingsContent";
 import OneSeasonConstructorStandingsHeader from "./OneSeasonConstructorStandingsHeader";
+import OneSeasonConstructorStandingsContent from "./OneSeasonConstructorStandingsContent";
 
 const isValidSeason = (year) => {
     const currentYear = new Date().getFullYear();
@@ -71,14 +72,6 @@ export default function OneSeasonPage(){
         fontFamily: "Formula1-Bold",
         letterSpacing: "0.0005rem",
     }
-    const textBlack = {
-        fontFamily: "Formula1-Black",
-        letterSpacing: "0.0005rem",
-    }
-    const textWide = {
-        fontFamily: "Formula1-Wide",
-        letterSpacing: "0.0005rem",
-    }
 
     if(!seasonValid){
         return <NotFoundPage />;
@@ -138,28 +131,13 @@ export default function OneSeasonPage(){
                                 {
                                     constructorStandings.map((constructor, index) => {
                                         return (
-                                            <Row className="d-flex flex-nowrap flex-row justify-content-around align-items-center bg-white m-1 p-1 p-sm-2 rounded-3" key={index}>
-                                                <Col className="p-0" xs={1} sm={1} md={1} lg={1}>
-                                                    <p className="m-0 text-center" style={textWide}>
-                                                        {constructor?.position}
-                                                    </p>
-                                                </Col>
-                                                <Col className="p-0" xs={5} sm={6} md={7} lg={7}>
-                                                    <p className="m-0" style={textBold}>
-                                                        {constructor?.Constructor?.name}
-                                                    </p>
-                                                </Col>
-                                                <Col className="p-0 d-none d-md-block" xs={3} sm={2} md={1} lg={1}>
-                                                    <p className="m-0 text-center" style={textBold}>
-                                                        {constructor?.wins}
-                                                    </p>
-                                                </Col>
-                                                <Col className="p-0" xs={3} sm={2} md={1} lg={1}>
-                                                    <p className="m-0 text-center" style={textBold}>
-                                                        {constructor?.points}
-                                                    </p>
-                                                </Col>
-                                            </Row>
+                                            <OneSeasonConstructorStandingsContent
+                                                key={index}
+                                                position={constructor?.position}
+                                                name={constructor?.Constructor?.name}
+                                                wins={constructor?.wins}
+                                                points={constructor?.points}
+                                            />
                                         )
                                     })
                                 }
