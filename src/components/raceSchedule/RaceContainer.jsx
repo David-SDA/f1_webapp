@@ -6,26 +6,57 @@ import ScheduleSprintWeekendContainer from './ScheduleSprintWeekendContainer';
 
 import { Container, Spinner } from "react-bootstrap";
 
-export default function RaceContainer({round, onDateReceived}){
+export default function RaceContainer({round}){
     const [race, setRace] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     const fetchInfo = async () => {
         try{
+            // Vérification si les données sont en cache
+            const cachedRace = localStorage.getItem('race-' + round);
+            // On récupère la date actuelle
+            const currentDateTime = new Date().getTime();
+            //console.log('Fetching race data...');
+
+            // Si les données sont en cache
+            if(cachedRace){
+                // On extrait les données du cache
+                const { raceData, timestamp } = JSON.parse(cachedRace);
+                // On extrait la date de la course
+                const raceDateTime = new Date(raceData.date + 'T' + raceData.time).getTime();
+                //console.log('Found cached data:', raceData);
+
+                // Si la date actuelle est avant la date de la course + 5 heures, on utilise les données du cache
+                if(currentDateTime < raceDateTime + 5 * 60 * 60 * 1000){
+                    //console.log('Using cached data...');
+                    setRace(raceData);
+                    setIsLoading(false);
+                    return;
+                }
+                else{
+                    //console.log('Cached data is outdated. Removing...');
+                    localStorage.removeItem('race-' + round);
+                }
+            }
+            //console.log('Making API call...');
+            // On fait l'appel API ainsi que la sauvegarde dans le cache
             const response = await fetch('https://ergast.com/api/f1/current/' + round + '.json');
             const data = await response.json();
-            setRace(data.MRData.RaceTable.Races[0]);
-            onDateReceived(data.MRData.RaceTable.Races[0].date + 'T' + data.MRData.RaceTable.Races[0].time);
-        }catch(error){
-            console.log(error);
-        }finally{
+            const raceData = data.MRData.RaceTable.Races[0];
+            setRace(raceData);
+            localStorage.setItem('race-' + round, JSON.stringify({ raceData, timestamp: new Date().getTime() }));
+        }
+        catch(error){
+            console.log('Error fetching race data:', error);
+        }
+        finally{
             setIsLoading(false);
         }
     };
 
     useEffect(() => {
         fetchInfo();
-    }, [onDateReceived]);
+    }, [round]);
 
     let dateFP1 = new Date(race?.FirstPractice?.date + 'T' + race?.FirstPractice?.time);
     let dateFP2 = new Date(race?.SecondPractice?.date + 'T' + race?.SecondPractice?.time);
