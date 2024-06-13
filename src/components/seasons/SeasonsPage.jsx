@@ -10,11 +10,40 @@ export default function SeasonsPage(){
 
     const fetchInfo = async () => {
         try{
+            // Vérification si les données sont en cache
+            const cachedSeasons = localStorage.getItem('seasons');
+            // On détermine la date actuelle
+            const currentDateTime = new Date().getTime();
+            //console.log('Fetching seasons data...');
+
+            // Si les données sont en cache
+            if(cachedSeasons){
+                // On extrait les données du cache
+                const { seasons, timestamp } = JSON.parse(cachedSeasons);
+                // On extrait la date de la fin de l'année
+                const endOfYear = new Date(new Date().getFullYear(), 11, 31, 23, 59, 59).getTime();
+                //console.log('Found cached data:', seasons);
+
+                // Si la date actuelle est avant la date du lendemain, on utilise les données du cache
+                if(currentDateTime < endOfYear){
+                    console.log('Using cached data...');
+                    setSeasons(seasons);
+                    setIsLoading(false);
+                    return;
+                }
+                else{
+                    console.log('Cached data is outdated. Removing...');
+                    localStorage.removeItem('seasons');
+                }
+            }
+            //console.log('Making API call...');
+            // On fait l'appel API ainsi que la sauvegarde dans le cache
             const seasonsResponse = await fetch("http://ergast.com/api/f1/seasons.json?limit=100");
 
             const seasonsData = await seasonsResponse.json();
-            
-            setSeasons(seasonsData.MRData.SeasonTable.Seasons);
+            const seasons = seasonsData.MRData.SeasonTable.Seasons;
+            setSeasons(seasons);
+            localStorage.setItem('seasons', JSON.stringify({ seasons, timestamp: new Date().getTime() }));
         }
         catch(error){
             console.log(error);
