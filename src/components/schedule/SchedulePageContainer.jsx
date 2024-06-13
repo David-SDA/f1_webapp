@@ -22,8 +22,46 @@ export default function SchedulePageContainer() {
     const [thirds, setThirds] = useState([]); // Les troisièmes des courses déjà couru
     const [isLoading, setIsLoading] = useState(true);
 
+    // Fonction pour connaitre le prochain lundi
+    const getNextMonday = () => {
+        const d = new Date();
+        d.setDate(d.getDate() + (((1 + 7 - d.getDay()) % 7) || 7));
+        d.setHours(0, 0, 0, 0);
+        return d.getTime();
+    };
+
     const fetchInfo = async () => {
         try{
+            // Vérification si les données sont en cache
+            const cachedData = localStorage.getItem('nowSchedule');            
+            // On détermine la date actuelle
+            const currentDateTime = new Date().getTime();
+            //console.log('Fetching schedule data...');
+
+            // Si les données sont en cache
+            if(cachedData){
+                // On extrait les données du cache
+                const { schedule, winners, seconds, thirds } = JSON.parse(cachedData);
+                const nextMonday = getNextMonday();
+                //console.log('Found cached data:', schedule);
+
+                // Si la date actuelle est avant le prochain lundi, on utilise les données du cache
+                if(currentDateTime < nextMonday){
+                    //console.log('Using cached data...');
+                    setSchedule(schedule);
+                    setWinners(winners);
+                    setSeconds(seconds);
+                    setThirds(thirds);
+                    setIsLoading(false);
+                    return;
+                }
+                else{
+                    //console.log('Cached data is outdated. Removing...');
+                    localStorage.removeItem('nowSchedule');
+                }
+            }
+            //console.log('Making API call...');
+            // On fait l'appel API ainsi que la sauvegarde dans le cache
             const responseSchedule = await fetch("http://ergast.com/api/f1/current.json");
             const responseWinners = await fetch("http://ergast.com/api/f1/current/results/1.json");
             const responseSeconds = await fetch("http://ergast.com/api/f1/current/results/2.json");
@@ -34,10 +72,17 @@ export default function SchedulePageContainer() {
             const dataSeconds = await responseSeconds.json();
             const dataThirds = await responseThirds.json();
 
-            setSchedule(dataSchedule.MRData.RaceTable.Races);
-            setWinners(dataWinners.MRData.RaceTable.Races);
-            setSeconds(dataSeconds.MRData.RaceTable.Races);
-            setThirds(dataThirds.MRData.RaceTable.Races);
+            const schedule = dataSchedule.MRData.RaceTable.Races;
+            const winners = dataWinners.MRData.RaceTable.Races;
+            const seconds = dataSeconds.MRData.RaceTable.Races;
+            const thirds = dataThirds.MRData.RaceTable.Races;
+
+            setSchedule(schedule);
+            setWinners(winners);
+            setSeconds(seconds);
+            setThirds(thirds);
+
+            localStorage.setItem('nowSchedule', JSON.stringify({ schedule, winners, seconds, thirds }));
         }catch(error){
             console.log(error);
         }finally{
@@ -57,7 +102,7 @@ export default function SchedulePageContainer() {
     else{
         return (
             <Container className="mt-2">
-                <h2 className="mb-4 p-3 fst-italic" style={{fontFamily: "Formula1-Regular"}}>F1 2023 Schedule</h2>
+                <h2 className="mb-4 p-3 fst-italic" style={{fontFamily: "Formula1-Regular"}}>F1 2024 Schedule</h2>
                 <Row className="d-flex flex-wrap">
                     {
                         schedule.map((race, index) => {
