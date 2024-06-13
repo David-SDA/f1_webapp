@@ -19,20 +19,20 @@ export default function SeasonsPage(){
             // Si les données sont en cache
             if(cachedSeasons){
                 // On extrait les données du cache
-                const { seasons, timestamp } = JSON.parse(cachedSeasons);
+                const { seasons } = JSON.parse(cachedSeasons);
                 // On extrait la date de la fin de l'année
                 const endOfYear = new Date(new Date().getFullYear(), 11, 31, 23, 59, 59).getTime();
                 //console.log('Found cached data:', seasons);
 
-                // Si la date actuelle est avant la date du lendemain, on utilise les données du cache
+                // Si la date actuelle est avant la fin de l'année, on utilise les données du cache
                 if(currentDateTime < endOfYear){
-                    console.log('Using cached data...');
+                    //console.log('Using cached data...');
                     setSeasons(seasons);
                     setIsLoading(false);
                     return;
                 }
                 else{
-                    console.log('Cached data is outdated. Removing...');
+                    //console.log('Cached data is outdated. Removing...');
                     localStorage.removeItem('seasons');
                 }
             }
@@ -43,7 +43,7 @@ export default function SeasonsPage(){
             const seasonsData = await seasonsResponse.json();
             const seasons = seasonsData.MRData.SeasonTable.Seasons;
             setSeasons(seasons);
-            localStorage.setItem('seasons', JSON.stringify({ seasons, timestamp: new Date().getTime() }));
+            localStorage.setItem('seasons', JSON.stringify({ seasons }));
         }
         catch(error){
             console.log(error);
