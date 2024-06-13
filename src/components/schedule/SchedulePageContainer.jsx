@@ -83,9 +83,11 @@ export default function SchedulePageContainer() {
             setThirds(thirds);
 
             localStorage.setItem('nowSchedule', JSON.stringify({ schedule, winners, seconds, thirds }));
-        }catch(error){
+        }
+        catch(error){
             console.log(error);
-        }finally{
+        }
+        finally{
             setIsLoading(false);
         }
     }
