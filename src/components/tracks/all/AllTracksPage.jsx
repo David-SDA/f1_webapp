@@ -16,12 +16,44 @@ export default function AllTracksPage() {
 
     const fetchInfo = async () => {
         try{
+            // Vérification si les données sont en cache
+            const cachedAllTracks = localStorage.getItem('all_tracks');
+            // On détermine la date actuelle
+            const currentDateTime = new Date().getTime();
+            //console.log('Fetching all tracks data...');
+
+            // Si les données sont en cache
+            if(cachedAllTracks){
+                // On extrait les données du cache
+                const { allTracks } = JSON.parse(cachedAllTracks);
+                // On extrait la date de la fin de l'année
+                const endOfYear = new Date(new Date().getFullYear(), 11, 31, 23, 59, 59).getTime();
+                //console.log('Found cached data:', allTracks);
+
+                // Si la date actuelle est avant la fin de l'année, on utilise les données du cache
+                if(currentDateTime < endOfYear){
+                    //console.log('Using cached data...');
+                    setTracks(allTracks);
+                    setIsLoading(false);
+                    return;
+                }
+                else{
+                    //console.log('Cached data is outdated. Removing...');
+                    localStorage.removeItem('all_tracks');
+                }
+            }
+            //console.log('Making API call...');
+            // On fait l'appel API ainsi que la sauvegarde dans le cache
             const response = await fetch("http://ergast.com/api/f1/circuits.json?limit=100");
             const data = await response.json();
-            setTracks(data.MRData.CircuitTable.Circuits);
-        }catch(error){
+            const allTracks = data.MRData.CircuitTable.Circuits;
+            setTracks(allTracks);
+            localStorage.setItem('all_tracks', JSON.stringify({ allTracks }));
+        }
+        catch(error){
             console.log(error);
-        }finally{
+        }
+        finally{
             setIsLoading(false);
         }
     }
