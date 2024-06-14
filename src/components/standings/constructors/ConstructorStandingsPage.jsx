@@ -12,14 +12,53 @@ export default function ConstructorStandingsPage() {
     const [isLoading, setIsLoading] = useState(true);
     const [selectedTeamIndex, setSelectedTeamIndex] = useState(0);
 
+    // Fonction pour connaitre le prochain lundi
+    const getNextMonday = () => {
+        const d = new Date();
+        d.setDate(d.getDate() + (((1 + 7 - d.getDay()) % 7) || 7));
+        d.setHours(0, 0, 0, 0);
+        return d.getTime();
+    };
+
     const fetchInfo = async () => {
         try{
+            // Vérification si les données sont en cache
+            const cachedData = localStorage.getItem('nowConstructorStandings');
+            // On détermine la date actuelle
+            const currentDateTime = new Date().getTime();
+            //console.log('Fetching constructor standings data...');
+
+            // Si les données sont en cache
+            if(cachedData){
+                // On extrait les données du cache
+                const { standings } = JSON.parse(cachedData);
+                const nextMonday = getNextMonday();
+                //console.log('Found cached data:', standings);
+
+                // Si la date actuelle est avant le prochain lundi, on utilise les données du cache
+                if(currentDateTime < nextMonday){
+                    //console.log('Using cached data...');
+                    setStandings(standings);
+                    setIsLoading(false);
+                    return;
+                }
+                else{
+                    //console.log('Cached data is outdated. Removing...');
+                    localStorage.removeItem('nowConstructorStandings');
+                }
+            }
+            //console.log('Making API call...');
+            // On fait l'appel API ainsi que la sauvegarde dans le cache
             const response = await fetch("https://ergast.com/api/f1/current/constructorStandings.json");
             const data = await response.json();
-            setStandings(data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings);
-        }catch(error){
+            const standings = data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings;
+            setStandings(standings);
+            localStorage.setItem('nowConstructorStandings', JSON.stringify({ standings }));
+        }
+        catch(error){
             console.log(error);
-        }finally{
+        }
+        finally{
             setIsLoading(false);
         }
     };
@@ -40,7 +79,7 @@ export default function ConstructorStandingsPage() {
     else{
         return (
             <Container className="p-0">
-                <h1 className="fst-italic" style={{fontFamily: "Formula1-Regular"}}>F1 2023 : Constructor Standings</h1>
+                <h1 className="fst-italic" style={{fontFamily: "Formula1-Regular"}}>F1 2024 : Constructor Standings</h1>
                 <Container className="rounded p-1 mb-3" style={{backgroundColor: "#38383f"}}>
                     <ConstructorStandingsHeaderContainer />
                     {
