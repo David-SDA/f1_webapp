@@ -15,12 +15,44 @@ export default function ConstructorChampionsPage() {
 
     const fetchInfo = async () => {
         try{
+            // Vérification si les données sont en cache
+            const cachedConstructorChampions = localStorage.getItem('constructor_champions');
+            // On détermine la date actuelle
+            const currentDateTime = new Date().getTime();
+            //console.log('Fetching champions data...');
+
+            // Si les données sont en cache
+            if(cachedConstructorChampions){
+                // On extrait les données du cache
+                const { constructorChampions } = JSON.parse(cachedConstructorChampions);
+                // On extrait la date de la fin de l'année
+                const endOfYear = new Date(new Date().getFullYear(), 11, 31, 23, 59, 59).getTime();
+                //console.log('Found cached data:', constructorChampions);
+
+                // Si la date actuelle est avant la fin de l'année, on utilise les données du cache
+                if(currentDateTime < endOfYear){
+                    //console.log('Using cached data...');
+                    setChampions(constructorChampions);
+                    setIsLoading(false);
+                    return;
+                }
+                else{
+                    //console.log('Cached data is outdated. Removing...');
+                    localStorage.removeItem('constructor_champions');
+                }
+            }
+            //console.log('Making API call...');
+            // On fait l'appel API ainsi que la sauvegarde dans le cache
             const response = await fetch("http://ergast.com/api/f1/constructorStandings/1.json?limit=100");
             const data = await response.json();
-            setChampions(data.MRData.StandingsTable.StandingsLists);
-        }catch(error){
+            const constructorChampions = data.MRData.StandingsTable.StandingsLists;
+            setChampions(constructorChampions);
+            localStorage.setItem('constructor_champions', JSON.stringify({ constructorChampions }));
+        }
+        catch(error){
             console.log(error);
-        }finally{
+        }
+        finally{
             setIsLoading(false);
         }
     };
