@@ -12,12 +12,44 @@ export default function CurrentTracksPage() {
 
     const fetchInfo = async () => {
         try{
+            // Vérification si les données sont en cache
+            const cachedCurrentTracks = localStorage.getItem('current_tracks');
+            // On détermine la date actuelle
+            const currentDateTime = new Date().getTime();
+            //console.log('Fetching current tracks data...');
+
+            // Si les données sont en cache
+            if(cachedCurrentTracks){
+                // On extrait les données du cache
+                const { currentTracks } = JSON.parse(cachedCurrentTracks);
+                // On extrait la date de la fin de l'année
+                const endOfYear = new Date(new Date().getFullYear(), 11, 31, 23, 59, 59).getTime();
+                //console.log('Found cached data:', currentTracks);
+
+                // Si la date actuelle est avant la fin de l'année, on utilise les données du cache
+                if(currentDateTime < endOfYear){
+                    //console.log('Using cached data...');
+                    setTracks(currentTracks);
+                    setIsLoading(false);
+                    return;
+                }
+                else{
+                    //console.log('Cached data is outdated. Removing...');
+                    localStorage.removeItem('current_tracks');
+                }
+            }
+            //console.log('Making API call...');
+            // On fait l'appel API ainsi que la sauvegarde dans le cache
             const response = await fetch("http://ergast.com/api/f1/current/circuits.json");
             const data = await response.json();
-            setTracks(data.MRData.CircuitTable.Circuits);
-        }catch(error){
+            const currentTracks = data.MRData.CircuitTable.Circuits;
+            setTracks(currentTracks);
+            localStorage.setItem('current_tracks', JSON.stringify({ currentTracks }));
+        }
+        catch(error){
             console.log(error);
-        }finally{
+        }
+        finally{
             setIsLoading(false);
         }
     }
@@ -53,7 +85,7 @@ export default function CurrentTracksPage() {
     else{
         return (
             <Container>
-                <h1 className="fst-italic" style={textRegular}>F1 2023 : Tracks</h1>
+                <h1 className="fst-italic" style={textRegular}>F1 2024 : Tracks</h1>
                 <Row>
                     {
                         sortedData.map((track, index) => {
