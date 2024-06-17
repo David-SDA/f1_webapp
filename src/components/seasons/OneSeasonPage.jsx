@@ -31,8 +31,45 @@ export default function OneSeasonPage(){
     const [isLoading, setIsLoading] = useState(true);
     const [seasonValid, setSeasonValid] = useState(true);
 
+    // Fonction pour connaitre le prochain lundi
+    const getNextMonday = () => {
+        const d = new Date();
+        d.setDate(d.getDate() + (((1 + 7 - d.getDay()) % 7) || 7));
+        d.setHours(0, 0, 0, 0);
+        return d.getTime();
+    };
+
     const fetchInfo = async () => {
         try{
+            // Vérification si les données sont en cache
+            const cachedData = localStorage.getItem('season_' + season);
+            // On détermine la date actuelle
+            const currentDateTime = new Date().getTime();
+            //console.log('Fetching season data...');
+
+            // Si les données sont en cache
+            if(cachedData){
+                // On extrait les données du cache
+                const { races, driverStandings, constructorStandings } = JSON.parse(cachedData);
+                const nextMonday = getNextMonday();
+                //console.log('Found cached data:', races);
+
+                // Si la date actuelle est avant le prochain lundi, on utilise les données du cache
+                if(currentDateTime < nextMonday){
+                    //console.log('Using cached data...');
+                    setRaces(races);
+                    setDriverStandings(driverStandings);
+                    setConstructorStandings(constructorStandings);
+                    setIsLoading(false);
+                    return;
+                }
+                else{
+                    //console.log('Cached data is outdated. Removing...');
+                    localStorage.removeItem('season_' + season);
+                }
+            }
+            //console.log('Making API call...');
+            // On fait l'appel API ainsi que la sauvegarde dans le cache
             const racesResponse = await fetch("http://ergast.com/api/f1/" + season + ".json");
             const driverStandingsResponse = await fetch("http://ergast.com/api/f1/" + season + "/driverStandings.json");
             const constructorStandingsResponse = await fetch("http://ergast.com/api/f1/" + season + "/constructorStandings.json");
@@ -40,12 +77,19 @@ export default function OneSeasonPage(){
             const racesData = await racesResponse.json();
             const driverStandingsData = await driverStandingsResponse.json();
             const constructorStandingsData = await constructorStandingsResponse.json();
+
+            const races = racesData.MRData.RaceTable.Races;
+            setRaces(races);
             
-            setRaces(racesData.MRData.RaceTable.Races);
-            setDriverStandings(driverStandingsData.MRData.StandingsTable.StandingsLists[0].DriverStandings);
+            const driverStandings = driverStandingsData.MRData.StandingsTable.StandingsLists[0].DriverStandings;
+            setDriverStandings(driverStandings);
+
             if(constructorStandingsData.MRData.total != 0){
-                setConstructorStandings(constructorStandingsData.MRData.StandingsTable.StandingsLists[0].ConstructorStandings);
+                const constructorStandings = constructorStandingsData.MRData.StandingsTable.StandingsLists[0].ConstructorStandings;
+                setConstructorStandings(constructorStandings);
             }
+
+            localStorage.setItem('season_' + season, JSON.stringify({races, driverStandings, constructorStandings}));
         }
         catch(error){
             console.log(error);
