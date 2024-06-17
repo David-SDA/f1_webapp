@@ -21,7 +21,7 @@ export default function RaceContainer({round}){
             // Si les données sont en cache
             if(cachedRace){
                 // On extrait les données du cache
-                const { raceData, timestamp } = JSON.parse(cachedRace);
+                const { raceData } = JSON.parse(cachedRace);
                 // On extrait la date de la course
                 const raceDateTime = new Date(raceData.date + 'T' + raceData.time).getTime();
                 //console.log('Found cached data:', raceData);
