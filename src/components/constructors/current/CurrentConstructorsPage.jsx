@@ -13,12 +13,44 @@ export default function CurrentConstructorsPage(){
 
     const fetchInfo = async () => {
         try{
+            // Vérification si les données sont en cache
+            const cachedCurrentConstructors = localStorage.getItem('current_constructors');
+            // On détermine la date actuelle
+            const currentDateTime = new Date().getTime();
+            //console.log('Fetching current constructors data...');
+
+            // Si les données sont en cache
+            if(cachedCurrentConstructors){
+                // On extrait les données du cache
+                const { currentConstructors } = JSON.parse(cachedCurrentConstructors);
+                // On extrait la date de la fin de l'année
+                const endOfYear = new Date(new Date().getFullYear(), 11, 31, 23, 59, 59).getTime();
+                //console.log('Found cached data:', currentConstructors);
+
+                // Si la date actuelle est avant la fin de l'année, on utilise les données du cache
+                if(currentDateTime < endOfYear){
+                    //console.log('Using cached data...');
+                    setConstructors(currentConstructors);
+                    setIsLoading(false);
+                    return;
+                }
+                else{
+                    //console.log('Cached data is outdated. Removing...');
+                    localStorage.removeItem('current_constructors');
+                }
+            }
+            //console.log('Making API call...');
+            // On fait l'appel API ainsi que la sauvegarde dans le cache
             const response = await fetch("http://ergast.com/api/f1/current/constructors.json");
             const data = await response.json();
-            setConstructors(data.MRData.ConstructorTable.Constructors);
-        }catch(error){
+            const currentConstructors = data.MRData.ConstructorTable.Constructors;
+            setConstructors(currentConstructors);
+            localStorage.setItem('current_constructors', JSON.stringify({ currentConstructors }));
+        }
+        catch(error){
             console.log(error);
-        }finally{
+        }
+        finally{
             setIsLoading(false);
         }
     }
@@ -40,7 +72,7 @@ export default function CurrentConstructorsPage(){
     else{
         return (
             <Container>
-                <h1 className="fst-italic mt-1" style={textRegular}>F1 2023 : Constructors</h1>
+                <h1 className="fst-italic mt-1" style={textRegular}>F1 2024 : Constructors</h1>
                 <Row>
                     {
                         constructors.map((constructor, index) => {

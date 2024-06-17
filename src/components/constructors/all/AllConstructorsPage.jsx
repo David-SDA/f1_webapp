@@ -15,12 +15,44 @@ export default function AllConstructorsPage(){
 
     const fetchInfo = async () => {
         try{
+            // Vérification si les données sont en cache
+            const cachedAllConstructors = localStorage.getItem('all_constructors');
+            // On détermine la date actuelle
+            const currentDateTime = new Date().getTime();
+            //console.log('Fetching all constructors data...');
+
+            // Si les données sont en cache
+            if(cachedAllConstructors){
+                // On extrait les données du cache
+                const { allConstructors } = JSON.parse(cachedAllConstructors);
+                // On extrait la date de la fin de l'année
+                const endOfYear = new Date(new Date().getFullYear(), 11, 31, 23, 59, 59).getTime();
+                //console.log('Found cached data:', allConstructors);
+
+                // Si la date actuelle est avant la fin de l'année, on utilise les données du cache
+                if(currentDateTime < endOfYear){
+                    //console.log('Using cached data...');
+                    setConstructors(allConstructors);
+                    setIsLoading(false);
+                    return;
+                }
+                else{
+                    //console.log('Cached data is outdated. Removing...');
+                    localStorage.removeItem('all_constructors');
+                }
+            }
+            //console.log('Making API call...');
+            // On fait l'appel API ainsi que la sauvegarde dans le cache
             const response = await fetch("http://ergast.com/api/f1/constructors.json?limit=250");
             const data = await response.json();
-            setConstructors(data.MRData.ConstructorTable.Constructors);
-        }catch(error){
+            const allConstructors = data.MRData.ConstructorTable.Constructors;
+            setConstructors(allConstructors);
+            localStorage.setItem('all_constructors', JSON.stringify({ allConstructors }));
+        }
+        catch(error){
             console.log(error);
-        }finally{
+        }
+        finally{
             setIsLoading(false);
         }
     }
