@@ -8,14 +8,53 @@ export default function CurrentDriversPage(){
     const [drivers, setDrivers] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
+    const getNextMonday = () => {
+        const d = new Date();
+        d.setDate(d.getDate() + (((1 + 7 - d.getDay()) % 7) || 7));
+        d.setHours(0, 0, 0, 0);
+        return d.getTime();
+    };
+
     const fetchInfo = async () => {
         try{
+            // Vérification si les données sont en cache
+            const cachedDrivers = localStorage.getItem('current_drivers');
+            // On détermine la date actuelle
+            const currentDateTime = new Date().getTime();
+            //console.log('Fetching current drivers data...');
+
+            // Si les données sont en cache
+            if(cachedDrivers){
+                // On extrait les données du cache
+                const { currentDrivers } = JSON.parse(cachedDrivers);
+                // On obtient le prochain lundi
+                const nextMonday = getNextMonday();
+                //console.log('Found cached data:', currentDrivers);
+
+                // Si la date actuelle est avant le prochain lundi, on utilise les données du cache
+                if(currentDateTime < nextMonday){
+                    //console.log('Using cached data...');
+                    setDrivers(currentDrivers);
+                    setIsLoading(false);
+                    return;
+                }
+                else{
+                    //console.log('Cached data is outdated. Removing...');
+                    localStorage.removeItem('current_drivers');
+                }
+            }
+            //console.log('Making API call...');
+            // On fait l'appel API ainsi que la sauvegarde dans le cache
             const response = await fetch("http://ergast.com/api/f1/current/drivers.json");
             const data = await response.json();
-            setDrivers(data.MRData.DriverTable.Drivers);
-        }catch(error){
+            const currentDrivers = data.MRData.DriverTable.Drivers;
+            setDrivers(currentDrivers);
+            localStorage.setItem('current_drivers', JSON.stringify({ currentDrivers }));
+        }
+        catch(error){
             console.log(error);
-        }finally{
+        }
+        finally{
             setIsLoading(false);
         }
     }
@@ -37,7 +76,7 @@ export default function CurrentDriversPage(){
     else{
         return (
             <Container>
-                <h1 className="fst-italic mt-1" style={textRegular}>F1 2023 : Drivers</h1>
+                <h1 className="fst-italic mt-1" style={textRegular}>F1 2024 : Drivers</h1>
                 <Row>
                     {
                         drivers.map((driver, index) => {

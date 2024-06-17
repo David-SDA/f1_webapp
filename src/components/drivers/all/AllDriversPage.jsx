@@ -15,9 +15,39 @@ export default function AllDriversPage(){
 
     const fetchInfo = async () => {
         try{
+            // Vérification si les données sont en cache
+            const cachedAllDrivers = localStorage.getItem('all_drivers');
+            // On détermine la date actuelle
+            const currentDateTime = new Date().getTime();
+            console.log('Fetching all drivers data...');
+
+            // Si les données sont en cache
+            if(cachedAllDrivers){
+                // On extrait les données du cache
+                const { allDrivers } = JSON.parse(cachedAllDrivers);
+                // On extrait la date de la fin de l'année
+                const endOfYear = new Date(new Date().getFullYear(), 11, 31, 23, 59, 59).getTime();
+                console.log('Found cached data:', allDrivers);
+
+                // Si la date actuelle est avant la fin de l'année, on utilise les données du cache
+                if(currentDateTime < endOfYear){
+                    console.log('Using cached data...');
+                    setDrivers(allDrivers);
+                    setIsLoading(false);
+                    return;
+                }
+                else{
+                    console.log('Cached data is outdated. Removing...');
+                    localStorage.removeItem('all_drivers');
+                }
+            }
+            console.log('Making API call...');
+            // On fait l'appel API ainsi que la sauvegarde dans le cache
             const response = await fetch("http://ergast.com/api/f1/drivers.json?limit=1000");
             const data = await response.json();
-            setDrivers(data.MRData.DriverTable.Drivers);
+            const allDrivers = data.MRData.DriverTable.Drivers;
+            setDrivers(allDrivers);
+            localStorage.setItem('all_drivers', JSON.stringify({ allDrivers }));
         }catch(error){
             console.log(error);
         }finally{
