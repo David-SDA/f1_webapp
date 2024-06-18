@@ -18,22 +18,58 @@ export default function AllTracksOnePage(){
 
     const fetchInfo = async () => {
         try{
-            const [response1, response2, response3] = await Promise.all([
-                fetch("http://ergast.com/api/f1/circuits/"+ circuitId + ".json"),
-                fetch("http://ergast.com/api/f1/circuits/"+ circuitId + "/results/1.json?limit=100"),
-                fetch("http://ergast.com/api/f1/circuits/"+ circuitId + "/races.json?limit=100"),
-            ]);
-            
-            const data1 = await response1.json();
-            const data2 = await response2.json();
-            const data3 = await response3.json();
+            // Vérification si les données sont en cache
+            const cachedData = localStorage.getItem('allTracks' + circuitId);
+            // On détermine la date actuelle
+            const currentDateTime = new Date().getTime();
+            //console.log('Fetching track data...');
 
-            setCircuit(data1.MRData.CircuitTable.Circuits[0]);
-            setWinners(data2.MRData.RaceTable.Races);
-            setRaces(data3.MRData.RaceTable.Races);
-        }catch(error){
+            // Si les données sont en cache
+            if(cachedData){
+                // On extrait les données du cache
+                const { circuit, winners, races } = JSON.parse(cachedData);
+                // On extrait la date de la fin de l'année
+                const endOfYear = new Date(new Date().getFullYear(), 11, 31, 23, 59, 59).getTime()
+                //console.log('Found cached data:', circuit);
+
+                // Si la date actuelle est avant la fin de l'année, on utilise les données du cache
+                if(currentDateTime < endOfYear){
+                    //console.log('Using cached data...');
+                    setCircuit(circuit);
+                    setWinners(winners);
+                    setRaces(races);
+                    setIsLoading(false);
+                    return;
+                }
+                else{
+                    //console.log('Cached data is outdated. Removing...');
+                    localStorage.removeItem('allTracks' + circuitId);
+                }
+            }
+            //console.log('Fetching data from API...');
+            // On fait l'appel API ainsi que la sauvegarde dans le cache
+            const response1 = await fetch("http://ergast.com/api/f1/circuits/"+ circuitId + ".json");
+            const response2 = await fetch("http://ergast.com/api/f1/circuits/"+ circuitId + "/results/1.json?limit=100");
+            const response3 = await fetch("http://ergast.com/api/f1/circuits/"+ circuitId + "/races.json?limit=100");
+
+            const dataCircuit = await response1.json();
+            const dataWinners = await response2.json();
+            const dataRaces = await response3.json();
+
+            const circuit = dataCircuit.MRData.CircuitTable.Circuits[0];
+            const winners = dataWinners.MRData.RaceTable.Races;
+            const races = dataRaces.MRData.RaceTable.Races;
+
+            setCircuit(circuit);
+            setWinners(winners);
+            setRaces(races);
+            
+            localStorage.setItem('allTracks' + circuitId, JSON.stringify({ circuit, winners, races }));
+        }
+        catch(error){
             console.log(error);
-        }finally{
+        }
+        finally{
             setIsLoading(false);
         }
     }
@@ -162,8 +198,8 @@ export default function AllTracksOnePage(){
                                 </Col>
                             </Row>
                             {
-                                sortedWinners.slice(0, showAllWinners ? sortedWinners.length : 5).map(([driver, { wins, years}]) => (
-                                    <Row key={driver} className="bg-white m-1 p-1 w-auto rounded-3">
+                                sortedWinners.slice(0, showAllWinners ? sortedWinners.length : 5).map(([driver, { wins, years}], index) => (
+                                    <Row key={index} className="bg-white m-1 p-1 w-auto rounded-3">
                                         <Col xs={6} sm={5} md={5} lg={5} className="d-flex justify-content-center align-items-center">
                                             <a href="#" className="link-dark link-underline-opacity-0 link-opacity-50-hover" >
                                                 <p className="text-center mb-0" style={textBold}>{driver}</p>
