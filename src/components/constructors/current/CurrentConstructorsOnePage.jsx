@@ -22,28 +22,77 @@ export default function CurrentConstuctorsOnePage(){
     const [qualifyings, setQualifyings] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     
+    // Fonction pour connaitre le prochain lundi
+    const getNextMonday = () => {
+        const d = new Date();
+        d.setDate(d.getDate() + (((1 + 7 - d.getDay()) % 7) || 7));
+        d.setHours(0, 0, 0, 0);
+        return d.getTime();
+    };
+
     const fetchInfo = async () => {
         try{
+            // Vérification si les données sont en cache
+            const cachedData = localStorage.getItem('nowConstructor' + constructorId);
+            // On détermine la date actuelle
+            const currentDateTime = new Date().getTime();
+            //console.log('Fetching constructor data...');
+
+            // Si les données sont en cache
+            if(cachedData){
+                // On extrait les données du cache
+                const { constructorStanding, constructorDrivers, constructorResults, constructorSprints, constructorQualifyings } = JSON.parse(cachedData);
+                const nextMonday = getNextMonday();
+                //console.log('Found cached data:', constructorStanding);
+
+                // Si la date actuelle est avant le prochain lundi, on utilise les données du cache
+                if(currentDateTime < nextMonday){
+                    //console.log('Using cached data...');
+                    setStanding(constructorStanding);
+                    setDrivers(constructorDrivers);
+                    setResults(constructorResults);
+                    setSprints(constructorSprints);
+                    setQualifyings(constructorQualifyings);
+                    setIsLoading(false);
+                    return;
+                }
+                else{
+                    //console.log('Cached data is outdated. Removing...');
+                    localStorage.removeItem('nowConstructor' + constructorId);
+                }
+            }
+            //console.log('Fetching data from API...');
+            // On fait une requête vers l'API ainsi que la sauvegarde dans le cache
             const response1 = await fetch("http://ergast.com/api/f1/current/constructors/" + constructorId + "/constructorStandings.json");
             const response2 = await fetch("http://ergast.com/api/f1/current/constructors/" + constructorId + "/drivers.json");
             const response3 = await fetch("http://ergast.com/api/f1/current/constructors/" + constructorId + "/results.json?limit=50");
             const response4 = await fetch("http://ergast.com/api/f1/current/constructors/"+ constructorId + "/sprint.json");
             const response5 = await fetch("http://ergast.com/api/f1/current/constructors/" + constructorId + "/qualifying.json?limit=50")
 
-            const data1 = await response1.json();
-            const data2 = await response2.json();
-            const data3 = await response3.json();
-            const data4 = await response4.json();
-            const data5 = await response5.json();
+            const dataConstructorStanding = await response1.json();
+            const dataConstructorDrivers = await response2.json();
+            const dataConstructorResults = await response3.json();
+            const dataConstructorSprints = await response4.json();
+            const dataConstructorQualifyings = await response5.json();
 
-            setStanding(data1.MRData.StandingsTable.StandingsLists[0]);
-            setDrivers(data2.MRData.DriverTable.Drivers);
-            setResults(data3.MRData.RaceTable.Races);
-            setSprints(data4.MRData.RaceTable.Races);
-            setQualifyings(data5.MRData.RaceTable.Races);
-        }catch(error){
+            const constructorStanding = dataConstructorStanding.MRData.StandingsTable.StandingsLists[0];
+            const constructorDrivers = dataConstructorDrivers.MRData.DriverTable.Drivers;
+            const constructorResults = dataConstructorResults.MRData.RaceTable.Races;
+            const constructorSprints = dataConstructorSprints.MRData.RaceTable.Races;
+            const constructorQualifyings = dataConstructorQualifyings.MRData.RaceTable.Races;
+
+            setStanding(constructorStanding);
+            setDrivers(constructorDrivers);
+            setResults(constructorResults);
+            setSprints(constructorSprints);
+            setQualifyings(constructorQualifyings);
+
+            localStorage.setItem('nowConstructor' + constructorId, JSON.stringify({ constructorStanding, constructorDrivers, constructorResults, constructorSprints, constructorQualifyings }));
+        }
+        catch(error){
             console.log(error);
-        }finally{
+        }
+        finally{
             setIsLoading(false);
         }
     }

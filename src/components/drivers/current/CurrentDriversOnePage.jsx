@@ -22,25 +22,72 @@ export default function CurrentDriversOnePage(){
     const [driverSprints, setDriverSprints] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
+    // Fonction pour connaitre le prochain lundi
+    const getNextMonday = () => {
+        const d = new Date();
+        d.setDate(d.getDate() + (((1 + 7 - d.getDay()) % 7) || 7));
+        d.setHours(0, 0, 0, 0);
+        return d.getTime();
+    };
+
     const fetchInfo = async () => {
         try{
+            // Vérification si les données sont en cache
+            const cachedData = localStorage.getItem('nowDriver' + driverId);            
+            // On détermine la date actuelle
+            const currentDateTime = new Date().getTime();
+            //console.log('Fetching driver data...');
+
+            // Si les données sont en cache
+            if(cachedData){
+                // On extrait les données du cache
+                const { driverStanding, driverResults, driverQualifyings, driverSprints } = JSON.parse(cachedData);
+                const nextMonday = getNextMonday();
+                //console.log('Found cached data:', driverStanding);
+
+                // Si la date actuelle est avant le prochain lundi, on utilise les données du cache
+                if(currentDateTime < nextMonday){
+                    //console.log('Using cached data...');
+                    setStanding(driverStanding);
+                    setDriverResults(driverResults);
+                    setDriverQualifyings(driverQualifyings);
+                    setDriverSprints(driverSprints);
+                    setIsLoading(false);
+                    return;
+                }
+                else{
+                    //console.log('Cached data is outdated. Removing...');
+                    localStorage.removeItem('nowDriver' + driverId);
+                }
+            }
+            //console.log('Making API call...');
+            // On fait une requête vers l'API ainsi que la sauvegarde dans le cache
             const response1 = await fetch("http://ergast.com/api/f1/current/drivers/" + driverId + "/driverStandings.json");
             const response2 = await fetch("http://ergast.com/api/f1/current/drivers/" + driverId + "/results.json");
             const response3 = await fetch("http://ergast.com/api/f1/current/drivers/" + driverId + "/qualifying.json")
             const response4 = await fetch("http://ergast.com/api/f1/current/drivers/" + driverId + "/sprint.json")
 
-            const data1 = await response1.json();
-            const data2 = await response2.json();
-            const data3 = await response3.json();
-            const data4 = await response4.json();
+            const dataStanding = await response1.json();
+            const dataDriverResults = await response2.json();
+            const dataDriverQualifyings = await response3.json();
+            const dataDriverSprints = await response4.json();
 
-            setStanding(data1.MRData.StandingsTable.StandingsLists[0]);
-            setDriverResults(data2.MRData.RaceTable.Races);
-            setDriverQualifyings(data3.MRData.RaceTable.Races);
-            setDriverSprints(data4.MRData.RaceTable.Races);
-        }catch(error){
+            const driverStanding = dataStanding.MRData.StandingsTable.StandingsLists[0];
+            const driverResults = dataDriverResults.MRData.RaceTable.Races;
+            const driverQualifyings = dataDriverQualifyings.MRData.RaceTable.Races;
+            const driverSprints = dataDriverSprints.MRData.RaceTable.Races;
+
+            setStanding(driverStanding);
+            setDriverResults(driverResults);
+            setDriverQualifyings(driverQualifyings);
+            setDriverSprints(driverSprints);
+
+            localStorage.setItem('nowDriver' + driverId, JSON.stringify({ driverStanding, driverResults, driverQualifyings, driverSprints }));
+        }
+        catch(error){
             console.log(error);
-        }finally{
+        }
+        finally{
             setIsLoading(false);
         }
     }
