@@ -6,7 +6,7 @@ import ScheduleSprintWeekendContainer from './ScheduleSprintWeekendContainer';
 
 import { Container, Spinner } from "react-bootstrap";
 
-export default function RaceContainer({round}){
+export default function RaceContainer({round, reset}){
     const [race, setRace] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -27,8 +27,14 @@ export default function RaceContainer({round}){
                 //console.log('Found cached data:', raceData);
 
                 // Si la date actuelle est avant la date de la course + 5 heures, on utilise les données du cache
-                if(currentDateTime < raceDateTime + 5 * 60 * 60 * 1000){
-                    //console.log('Using cached data...');
+                if(currentDateTime < raceDateTime + 5 * 60 * 60 * 1000 && reset){
+                    //console.log('Using cached data... with reset after');
+                    setRace(raceData);
+                    setIsLoading(false);
+                    return;
+                }
+                else if(!reset){
+                    //console.log('Using cached data... because not reset');
                     setRace(raceData);
                     setIsLoading(false);
                     return;
@@ -44,7 +50,7 @@ export default function RaceContainer({round}){
             const data = await response.json();
             const raceData = data.MRData.RaceTable.Races[0];
             setRace(raceData);
-            localStorage.setItem('race-' + round, JSON.stringify({ raceData, timestamp: new Date().getTime() }));
+            localStorage.setItem('race-' + round, JSON.stringify({ raceData }));
         }
         catch(error){
             console.log('Error fetching race data:', error);

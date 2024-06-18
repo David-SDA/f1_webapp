@@ -11,7 +11,7 @@ export default function HomePage(){
             <p className="h1 align-self-start fst-italic ms-3 mt-2" style={{fontFamily: "Formula1-Regular"}}>Current Standings</p>
             <SmallStandingsContainer />
             <p className="h1 align-self-start fst-italic ms-3" style={{fontFamily: "Formula1-Regular"}}>Next Race</p>
-            <RaceContainer round={"next"} />
+            <RaceContainer round={"next"} reset={true} />
         </Container>
     );
 }
