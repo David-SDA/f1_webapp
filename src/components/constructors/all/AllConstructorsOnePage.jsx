@@ -23,8 +23,52 @@ export default function AllConstructorsOnePage(){
     const [firstRace, setFirstRace] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
+    // Fonction pour connaitre le prochain lundi
+    const getNextMonday = () => {
+        const d = new Date();
+        d.setDate(d.getDate() + (((1 + 7 - d.getDay()) % 7) || 7));
+        d.setHours(0, 0, 0, 0);
+        return d.getTime();
+    };
+
     const fetchInfo = async () => {
         try{
+            // Vérification si les données sont en cache
+            const cachedData = localStorage.getItem('allConstructor' + constructorId);
+            // On détermine la date actuelle
+            const currentDateTime = new Date().getTime();
+            //console.log('Fetching constructor data...');
+
+            // Si les données sont en cache
+            if(cachedData){
+                // On extrait les données du cache
+                const { constructor, drivers, seasons, titles, constructorStandingsFirst, wins, seconds, thirds, driverTitles, firstRace } = JSON.parse(cachedData);
+                const nextMonday = getNextMonday();
+                //console.log('Found cached data:', constructor);
+
+                // Si la date actuelle est avant le prochain lundi, on utilise les données du cache
+                if(currentDateTime < nextMonday){
+                    //console.log('Using cached data...');
+                    setConstructors(constructor);
+                    setDrivers(drivers);
+                    setSeasons(seasons);
+                    setTitles(titles);
+                    setConstructorStandingsFirst(constructorStandingsFirst);
+                    setWins(wins);
+                    setSeconds(seconds);
+                    setThirds(thirds);
+                    setDriverTitles(driverTitles);
+                    setFirstRace(firstRace);
+                    setIsLoading(false);
+                    return;
+                }
+                else{
+                    //console.log('Cached data is outdated. Removing...');
+                    localStorage.removeItem('allConstructor' + constructorId);
+                }
+            }
+            //console.log('Fetching data from API...');
+            // On fait une requête vers l'API ainsi que la sauvegarde dans le cache
             const responseConstructor = await fetch("http://ergast.com/api/f1/constructors/" + constructorId + ".json");
             const responseDrivers = await fetch("http://ergast.com/api/f1/constructors/" + constructorId + "/drivers.json?limit=200");
             const responseSeasons = await fetch("http://ergast.com/api/f1/constructors/" + constructorId + "/seasons.json?limit=100");
@@ -45,19 +89,34 @@ export default function AllConstructorsOnePage(){
             const dataDriverTitles = await responseDriverTitles.json();
             const dataFirstRace = await responseFirstRace.json();
             
-            setConstructors(dataConstructor.MRData.ConstructorTable.Constructors[0]);
-            setDrivers(dataDrivers.MRData.DriverTable.Drivers);
-            setSeasons(dataSeasons.MRData.SeasonTable.Seasons);
-            setTitles(dataConstructorStandingsFirst.MRData.total);
-            setConstructorStandingsFirst(dataConstructorStandingsFirst.MRData.StandingsTable.StandingsLists);
-            setWins(dataWins.MRData.total);
-            setSeconds(dataSeconds.MRData.total);
-            setThirds(dataThirds.MRData.total);
-            setDriverTitles(dataDriverTitles.MRData.StandingsTable.StandingsLists);
-            setFirstRace(dataFirstRace.MRData.RaceTable.Races[0]);
-        }catch(error){
+            const constructor = dataConstructor.MRData.ConstructorTable.Constructors[0];
+            const drivers = dataDrivers.MRData.DriverTable.Drivers;
+            const seasons = dataSeasons.MRData.SeasonTable.Seasons;
+            const titles = dataConstructorStandingsFirst.MRData.total;
+            const constructorStandingsFirst = dataConstructorStandingsFirst.MRData.StandingsTable.StandingsLists;
+            const wins = dataWins.MRData.total;
+            const seconds = dataSeconds.MRData.total;
+            const thirds = dataThirds.MRData.total;
+            const driverTitles = dataDriverTitles.MRData.StandingsTable.StandingsLists;
+            const firstRace = dataFirstRace.MRData.RaceTable.Races[0];
+
+            setConstructors(constructor);
+            setDrivers(drivers);
+            setSeasons(seasons);
+            setTitles(titles);
+            setConstructorStandingsFirst(constructorStandingsFirst);
+            setWins(wins);
+            setSeconds(seconds);
+            setThirds(thirds);
+            setDriverTitles(driverTitles);
+            setFirstRace(firstRace);
+
+            localStorage.setItem('allConstructor' + constructorId, JSON.stringify({ constructor, drivers, seasons, titles, constructorStandingsFirst, wins, seconds, thirds, driverTitles, firstRace }));
+        }
+        catch(error){
             console.log(error);
-        }finally{
+        }
+        finally{
             setIsLoading(false);
         }
     }
@@ -125,8 +184,6 @@ export default function AllConstructorsOnePage(){
             }
         }
     }
-
-    console.log(driverChampions);
 
     const textBold = {
         fontFamily: "Formula1-Bold",
