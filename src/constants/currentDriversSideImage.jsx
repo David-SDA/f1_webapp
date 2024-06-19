@@ -19,5 +19,5 @@ export const currentDriversSideImage = {
     "zhou": require("../assets/currentDriversSideImages/zhou.jpg"),
     "tsunoda": require("../assets/currentDriversSideImages/tsunoda.jpg"),
     "ricciardo": require("../assets/currentDriversSideImages/ricciardo.jpg"),
-    "de_vries": require("../assets/currentDriversSideImages/deVries.jpg"),
+    "bearman" : require("../assets/currentDriversSideImages/bearman.jpg"),
 }
