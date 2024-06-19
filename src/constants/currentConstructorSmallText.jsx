@@ -7,6 +7,6 @@ export const currentConstructorSmallText = {
     "mclaren": "McLaren",
     "williams": "Williams",
     "haas": "Haas",
-    "alfa": "Alfa Romeo",
-    "alphatauri": "AlphaTauri",
+    "sauber": "Kick Sauber",
+    "rb": "RB",
 }
