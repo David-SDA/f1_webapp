@@ -142,6 +142,7 @@ export default function CurrentDriversOnePage(){
                     dateOfBirth={dateOfBirth}
                     permanentNumber={standing?.DriverStandings[0]?.Driver?.permanentNumber}
                     team={currentConstructorSmallText[standing?.DriverStandings[0]?.Constructors[0]?.constructorId]}
+                    teamId={standing?.DriverStandings[0]?.Constructors[0]?.constructorId}
                 />
                 <h2 className="fst-italic mt-2" style={textRegular}>THIS SEASON, AFTER ROUND {standing?.round}</h2>
                 <CurrentDriversThisSeasonStatsContainer
@@ -149,6 +150,7 @@ export default function CurrentDriversOnePage(){
                     points={standing?.DriverStandings[0]?.points}
                     wins={standing?.DriverStandings[0]?.wins}
                     nbPodiums={nbPodiums}
+                    teamId={standing?.DriverStandings[0]?.Constructors[0]?.constructorId}
                 />
                 {
                     driverResults.length > 0 ? (
