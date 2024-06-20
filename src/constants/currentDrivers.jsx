@@ -20,4 +20,5 @@ export const currentDrivers = {
     "tsunoda" : require("../assets/currentDriversImages/tsunoda.jpg"),
     "max_verstappen" : require("../assets/currentDriversImages/verstappen.jpg"),
     "zhou" : require("../assets/currentDriversImages/zhou.jpg"),
+    "bearman" : require("../assets/currentDriversImages/bearman.jpg")
 }

@@ -150,65 +150,83 @@ export default function CurrentDriversOnePage(){
                     wins={standing?.DriverStandings[0]?.wins}
                     nbPodiums={nbPodiums}
                 />
-                <h2 className="fst-italic mt-2" style={textRegular}>RACES</h2>
-                <Container className="d-flex flex-column mb-2 pt-3 pb-3 rounded" style={{backgroundColor: "#38383f"}}>
-                    <CurrentDriversThisSeasonRacesSprintHeaderContainer />
-                    {
-                        [...driverResults].reverse().map((driverResult, index) => {
-                            return (
-                                <CurrentDriversThisSeasonRacesSprintContentContainer
-                                    key={index}
-                                    round={driverResult?.round}
-                                    raceName={driverResult?.raceName}
-                                    grid={driverResult?.Results[0]?.grid}
-                                    position={driverResult?.Results[0]?.positionText}
-                                    time={driverResult?.Results[0]?.Time?.time}
-                                    status={driverResult?.Results[0]?.status}
-                                    points={driverResult?.Results[0]?.points}
-                                />
-                            );
-                        })
-                    }
-                </Container>
-                <h2 className="fst-italic mt-2" style={textRegular}>QUALIFYING</h2>
-                <Container className="d-flex flex-column mb-2 pt-3 pb-3 rounded" style={{backgroundColor: "#38383f"}}>
-                    <CurrentDriversThisSeasonQualifyingHeaderContainer />
-                    {
-                        [...driverQualifyings].reverse().map((driverQualifying, index) => {
-                            return (
-                                <CurrentDriversThisSeasonQualifyingContentContainer
-                                    key={index}
-                                    round={driverQualifying?.round}
-                                    raceName={driverQualifying?.raceName}
-                                    position={driverQualifying?.QualifyingResults[0]?.position}
-                                    q1={driverQualifying?.QualifyingResults[0]?.Q1}
-                                    q2={driverQualifying?.QualifyingResults[0]?.Q2}
-                                    q3={driverQualifying?.QualifyingResults[0]?.Q3}
-                                />
-                            );
-                        })
-                    }
-                </Container>
-                <h2 className="fst-italic mt-2" style={textRegular}>SPRINTS</h2>
-                <Container className="d-flex flex-column mb-2 pt-3 pb-3 rounded" style={{backgroundColor: "#38383f"}}>
-                    <CurrentDriversThisSeasonRacesSprintHeaderContainer />
-                    {
-                        [...driverSprints].reverse().map((driverSprint, index) => {
-                            return (
-                                <CurrentDriversThisSeasonRacesSprintContentContainer
-                                    key={index}
-                                    round={driverSprint?.round}
-                                    raceName={driverSprint?.raceName}
-                                    grid={driverSprint?.SprintResults[0]?.grid}
-                                    position={driverSprint?.SprintResults[0]?.positionText}
-                                    time={driverSprint?.SprintResults[0]?.Time?.time}
-                                    status={driverSprint?.SprintResults[0]?.status}
-                                    points={driverSprint?.SprintResults[0]?.points}
-                                />
-                            );
-                        })
-                    }
-                </Container>
+                {
+                    driverResults.length > 0 ? (
+                        <>
+                            <h2 className="fst-italic mt-2" style={textRegular}>RACES</h2>
+                            <Container className="d-flex flex-column mb-2 pt-3 pb-3 rounded" style={{backgroundColor: "#38383f"}}>
+                                <CurrentDriversThisSeasonRacesSprintHeaderContainer />
+                                {
+                                    [...driverResults].reverse().map((driverResult, index) => {
+                                        return (
+                                            <CurrentDriversThisSeasonRacesSprintContentContainer
+                                                key={index}
+                                                round={driverResult?.round}
+                                                raceName={driverResult?.raceName}
+                                                grid={driverResult?.Results[0]?.grid}
+                                                position={driverResult?.Results[0]?.positionText}
+                                                time={driverResult?.Results[0]?.Time?.time}
+                                                status={driverResult?.Results[0]?.status}
+                                                points={driverResult?.Results[0]?.points}
+                                            />
+                                        );
+                                    })
+                                }
+                            </Container>
+                        </>
+                    ) : ("")
+                }
+                {
+                    driverQualifyings.length > 0 ? (
+                        <>
+                            <h2 className="fst-italic mt-2" style={textRegular}>QUALIFYING</h2>
+                            <Container className="d-flex flex-column mb-2 pt-3 pb-3 rounded" style={{backgroundColor: "#38383f"}}>
+                                <CurrentDriversThisSeasonQualifyingHeaderContainer />
+                                {
+                                    [...driverQualifyings].reverse().map((driverQualifying, index) => {
+                                        return (
+                                            <CurrentDriversThisSeasonQualifyingContentContainer
+                                                key={index}
+                                                round={driverQualifying?.round}
+                                                raceName={driverQualifying?.raceName}
+                                                position={driverQualifying?.QualifyingResults[0]?.position}
+                                                q1={driverQualifying?.QualifyingResults[0]?.Q1}
+                                                q2={driverQualifying?.QualifyingResults[0]?.Q2}
+                                                q3={driverQualifying?.QualifyingResults[0]?.Q3}
+                                            />
+                                        );
+                                    })
+                                }
+                            </Container>
+                        </>
+                    ) : ("")
+                }
+                {
+                    driverSprints.length > 0 ? (
+                        <>
+                            <h2 className="fst-italic mt-2" style={textRegular}>SPRINTS</h2>
+                            <Container className="d-flex flex-column mb-2 pt-3 pb-3 rounded" style={{backgroundColor: "#38383f"}}>
+                                <CurrentDriversThisSeasonRacesSprintHeaderContainer />
+                                {
+                                    [...driverSprints].reverse().map((driverSprint, index) => {
+                                        return (
+                                            <CurrentDriversThisSeasonRacesSprintContentContainer
+                                                key={index}
+                                                round={driverSprint?.round}
+                                                raceName={driverSprint?.raceName}
+                                                grid={driverSprint?.SprintResults[0]?.grid}
+                                                position={driverSprint?.SprintResults[0]?.positionText}
+                                                time={driverSprint?.SprintResults[0]?.Time?.time}
+                                                status={driverSprint?.SprintResults[0]?.status}
+                                                points={driverSprint?.SprintResults[0]?.points}
+                                            />
+                                        );
+                                    })
+                                }
+                            </Container>
+                        </>
+                    ) : ("")
+                }
             </Container>
         );
     }
