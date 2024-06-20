@@ -73,6 +73,7 @@ export default function RaceContainer({round, reset}){
         var dateFP3 = new Date(race?.ThirdPractice?.date + 'T' + race?.ThirdPractice?.time);
     }
     else{
+        var dateQualiSprint = new Date(race?.SecondPractice?.date + 'T' + race?.SecondPractice?.time);
         var dateSprint = new Date(race?.Sprint?.date + 'T' + race?.Sprint?.time);
     }
 
@@ -100,9 +101,9 @@ export default function RaceContainer({round, reset}){
                     :
                         <ScheduleSprintWeekendContainer
                             dateFP1={dateFP1}
-                            dateQuali={dateQuali}
-                            dateFP2={dateFP2}
+                            dateQualiSprint={dateQualiSprint}
                             dateSprint={dateSprint}
+                            dateQuali={dateQuali}
                             dateRace={dateRace}
                         />
                 }
