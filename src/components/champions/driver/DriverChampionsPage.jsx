@@ -153,6 +153,7 @@ export default function DriverChampionsPage() {
                                     givenName={champion?.DriverStandings[0]?.Driver?.givenName}
                                     familyName={champion?.DriverStandings[0]?.Driver?.familyName}
                                     team={champion?.DriverStandings[0]?.Constructors[0]?.name}
+                                    constructorId={champion?.DriverStandings[0]?.Constructors[0]?.constructorId}
                                     wins={champion?.DriverStandings[0]?.wins}
                                     points={champion?.DriverStandings[0]?.points}
                                     image={flagsNationality[champion?.DriverStandings[0]?.Driver?.nationality]}
