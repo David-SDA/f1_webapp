@@ -194,6 +194,7 @@ export default function AllDriversOnePage(){
                                     <AllDriversOneTeamContainer
                                         key={index}
                                         name={team?.name}
+                                        constructorId={team?.constructorId}
                                         nationality={team?.nationality}
                                         driverStandings={driverStandings}
                                     />

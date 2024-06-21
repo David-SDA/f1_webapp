@@ -6,6 +6,7 @@ import { Card, Col, Image } from "react-bootstrap";
 
 export default function AllConstructorsOneDriverContainer({
     driver,
+    driverId,
     nationality,
     seasons
 }){
@@ -22,7 +23,7 @@ export default function AllConstructorsOneDriverContainer({
     return (
         <Col md={6} lg={4} xl={3} className="mt-1 mb-1">
             <Card>
-                <a href="#" className="p-2 link-dark link-underline-opacity-0 link-opacity-75-hover">
+                <a href={"/allDrivers/" + driverId} className="p-2 link-dark link-underline-opacity-0 link-opacity-75-hover">
                     <Card.Title className="d-flex justify-content-center" style={textBold}>
                         {driver}
                     </Card.Title>

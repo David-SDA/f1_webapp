@@ -153,6 +153,7 @@ export default function AllConstructorsOnePage(){
             for(let index = 0; index < title?.DriverStandings[0]?.Constructors.length; index++){
                 if(title?.DriverStandings[0]?.Constructors[index]?.constructorId === constructorId){
                     const driver = title?.DriverStandings[0]?.Driver?.givenName + " " + title?.DriverStandings[0]?.Driver?.familyName;
+                    const driverId = title?.DriverStandings[0]?.Driver?.driverId;
                     const season = title?.season;
                     if(driverChampions[driver]){
                         driverChampions[driver].seasons.push(season);
@@ -160,6 +161,7 @@ export default function AllConstructorsOnePage(){
                     else{
                         const nationality = title?.DriverStandings[0]?.Driver?.nationality;
                         driverChampions[driver] = {
+                            driverId: driverId,
                             nationality: nationality,
                             seasons: [season]
                         };
@@ -170,6 +172,7 @@ export default function AllConstructorsOnePage(){
         else{
             if(title.DriverStandings[0]?.Constructors[0]?.constructorId === constructorId){
                 const driver = title?.DriverStandings[0]?.Driver?.givenName + " " + title?.DriverStandings[0]?.Driver?.familyName;
+                const driverId = title?.DriverStandings[0]?.Driver?.driverId;
                 const season = title?.season;
                 if(driverChampions[driver]){
                     driverChampions[driver].seasons.push(season);
@@ -177,6 +180,7 @@ export default function AllConstructorsOnePage(){
                 else{
                     const nationality = title?.DriverStandings[0]?.Driver?.nationality;
                     driverChampions[driver] = {
+                        driverId: driverId,
                         nationality: nationality,
                         seasons: [season]
                     };
@@ -228,6 +232,7 @@ export default function AllConstructorsOnePage(){
                                                 <AllConstructorsOneDriverContainer
                                                     key={index}
                                                     driver={driver}
+                                                    driverId={driverChampions[driver].driverId}
                                                     nationality={driverChampions[driver].nationality}
                                                     seasons={driverChampions[driver].seasons}
                                                 />
