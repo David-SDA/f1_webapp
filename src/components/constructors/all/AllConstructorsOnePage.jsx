@@ -215,7 +215,7 @@ export default function AllConstructorsOnePage(){
                     firstRace={firstRace?.season + " " + firstRace?.raceName}
                 />
                 {
-                    driverChampions !== null ? (
+                    Object.keys(driverChampions).length > 0 ? (
                         <>
                             <h1 className="fst-italic mt-3" style={textRegular}>
                                 DRIVERS TITLES
