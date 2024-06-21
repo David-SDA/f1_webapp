@@ -5,7 +5,9 @@ export default function OneSeasonDriverStandingsContent({
     position,
     givenName,
     familyName,
-    name,
+    driverId,
+    teamName,
+    teamId,
     wins,
     points
 }){
@@ -31,15 +33,21 @@ export default function OneSeasonDriverStandingsContent({
             </Col>
             <Col className="p-0" xs={5} sm={3} md={4} lg={4}>
                 <p className="m-0 d-none d-sm-block">
-                    <span style={textRegular}>{givenName}</span> <span style={textBold}>{familyName}</span>
+                    <a href={"/allDrivers/" + driverId} className="link-dark link-underline-opacity-0 link-underline-opacity-50-hover">
+                        <span style={textRegular}>{givenName}</span> <span style={textBold}>{familyName}</span>
+                    </a>
                 </p>
                 <p className="m-0 d-block d-sm-none" style={textBold}>
-                    {familyName}
+                    <a href={"/allDrivers/" + driverId} className="link-dark link-underline-opacity-0 link-underline-opacity-50-hover">
+                        {familyName}
+                    </a>
                 </p>
             </Col>
             <Col className="p-0 d-none d-sm-block" sm={3} md={4} lg={3}>
                 <p className="m-0 text-center" style={textRegular}>
-                    {name}
+                    <a href={"/allConstructors/" + teamId} className="link-dark link-underline-opacity-0 link-underline-opacity-50-hover">
+                        {teamName}
+                    </a>
                 </p>
             </Col>
             <Col className="p-0 d-none d-md-block" sm={1} md={1} lg={1}>

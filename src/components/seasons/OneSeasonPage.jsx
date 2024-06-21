@@ -158,7 +158,9 @@ export default function OneSeasonPage(){
                                     position={driver?.position}
                                     givenName={driver?.Driver?.givenName}
                                     familyName={driver?.Driver?.familyName}
-                                    name={driver?.Constructors[0]?.name}
+                                    driverId={driver?.Driver?.driverId}
+                                    teamName={driver?.Constructors[0]?.name}
+                                    teamId={driver?.Constructors[0]?.constructorId}
                                     wins={driver?.wins}
                                     points={driver?.points}
                                 />
@@ -179,6 +181,7 @@ export default function OneSeasonPage(){
                                                 key={index}
                                                 position={constructor?.position}
                                                 name={constructor?.Constructor?.name}
+                                                constructorId={constructor?.Constructor?.constructorId}
                                                 wins={constructor?.wins}
                                                 points={constructor?.points}
                                             />

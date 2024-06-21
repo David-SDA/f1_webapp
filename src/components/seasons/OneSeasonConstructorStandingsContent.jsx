@@ -4,6 +4,7 @@ import { Col, Row } from "react-bootstrap";
 export default function OneSeasonConstructorStandingsContent({
     position,
     name,
+    constructorId,
     wins,
     points
 }){
@@ -25,7 +26,9 @@ export default function OneSeasonConstructorStandingsContent({
             </Col>
             <Col className="p-0" xs={5} sm={6} md={7} lg={7}>
                 <p className="m-0" style={textBold}>
-                    {name}
+                    <a href={"/allConstructors/" + constructorId} className="link-dark link-underline-opacity-0 link-underline-opacity-50-hover">
+                        {name}
+                    </a>
                 </p>
             </Col>
             <Col className="p-0 d-none d-md-block" xs={3} sm={2} md={1} lg={1}>
