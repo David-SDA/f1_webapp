@@ -8,10 +8,11 @@ export default function CurrentDriversPage(){
     const [drivers, setDrivers] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
+    // Fonction pour connaitre le prochain lundi
     const getNextMonday = () => {
         const d = new Date();
         d.setDate(d.getDate() + (((1 + 7 - d.getDay()) % 7) || 7));
-        d.setHours(0, 0, 0, 0);
+        d.setHours(8, 0, 0, 0);
         return d.getTime();
     };
 
@@ -26,9 +27,8 @@ export default function CurrentDriversPage(){
             // Si les données sont en cache
             if(cachedDrivers){
                 // On extrait les données du cache
-                const { currentDrivers } = JSON.parse(cachedDrivers);
+                const { currentDrivers, nextMonday } = JSON.parse(cachedDrivers);
                 // On obtient le prochain lundi
-                const nextMonday = getNextMonday();
                 //console.log('Found cached data:', currentDrivers);
 
                 // Si la date actuelle est avant le prochain lundi, on utilise les données du cache
@@ -49,7 +49,7 @@ export default function CurrentDriversPage(){
             const data = await response.json();
             const currentDrivers = data.MRData.DriverTable.Drivers;
             setDrivers(currentDrivers);
-            localStorage.setItem('current_drivers', JSON.stringify({ currentDrivers }));
+            localStorage.setItem('current_drivers', JSON.stringify({ currentDrivers, nextMonday: getNextMonday() }));
         }
         catch(error){
             console.log(error);

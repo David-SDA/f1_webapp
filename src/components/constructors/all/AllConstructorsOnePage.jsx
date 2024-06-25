@@ -27,7 +27,7 @@ export default function AllConstructorsOnePage(){
     const getNextMonday = () => {
         const d = new Date();
         d.setDate(d.getDate() + (((1 + 7 - d.getDay()) % 7) || 7));
-        d.setHours(0, 0, 0, 0);
+        d.setHours(8, 0, 0, 0);
         return d.getTime();
     };
 
@@ -42,8 +42,7 @@ export default function AllConstructorsOnePage(){
             // Si les données sont en cache
             if(cachedData){
                 // On extrait les données du cache
-                const { constructor, drivers, seasons, titles, constructorStandingsFirst, wins, seconds, thirds, driverTitles, firstRace } = JSON.parse(cachedData);
-                const nextMonday = getNextMonday();
+                const { constructor, drivers, seasons, titles, constructorStandingsFirst, wins, seconds, thirds, driverTitles, firstRace, nextMonday } = JSON.parse(cachedData);
                 //console.log('Found cached data:', constructor);
 
                 // Si la date actuelle est avant le prochain lundi, on utilise les données du cache
@@ -111,7 +110,7 @@ export default function AllConstructorsOnePage(){
             setDriverTitles(driverTitles);
             setFirstRace(firstRace);
 
-            localStorage.setItem('allConstructor' + constructorId, JSON.stringify({ constructor, drivers, seasons, titles, constructorStandingsFirst, wins, seconds, thirds, driverTitles, firstRace }));
+            localStorage.setItem('allConstructor' + constructorId, JSON.stringify({ constructor, drivers, seasons, titles, constructorStandingsFirst, wins, seconds, thirds, driverTitles, firstRace, nextMonday: getNextMonday() }));
         }
         catch(error){
             console.log(error);

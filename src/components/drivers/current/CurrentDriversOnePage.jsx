@@ -26,7 +26,7 @@ export default function CurrentDriversOnePage(){
     const getNextMonday = () => {
         const d = new Date();
         d.setDate(d.getDate() + (((1 + 7 - d.getDay()) % 7) || 7));
-        d.setHours(0, 0, 0, 0);
+        d.setHours(8, 0, 0, 0);
         return d.getTime();
     };
 
@@ -41,10 +41,9 @@ export default function CurrentDriversOnePage(){
             // Si les données sont en cache
             if(cachedData){
                 // On extrait les données du cache
-                const { driverStanding, driverResults, driverQualifyings, driverSprints } = JSON.parse(cachedData);
-                const nextMonday = getNextMonday();
+                const { driverStanding, driverResults, driverQualifyings, driverSprints, nextMonday } = JSON.parse(cachedData);
                 //console.log('Found cached data:', driverStanding);
-
+console.log(nextMonday);
                 // Si la date actuelle est avant le prochain lundi, on utilise les données du cache
                 if(currentDateTime < nextMonday){
                     //console.log('Using cached data...');
@@ -82,7 +81,7 @@ export default function CurrentDriversOnePage(){
             setDriverQualifyings(driverQualifyings);
             setDriverSprints(driverSprints);
 
-            localStorage.setItem('nowDriver' + driverId, JSON.stringify({ driverStanding, driverResults, driverQualifyings, driverSprints }));
+            localStorage.setItem('nowDriver' + driverId, JSON.stringify({ driverStanding, driverResults, driverQualifyings, driverSprints, nextMonday: getNextMonday() }));
         }
         catch(error){
             console.log(error);

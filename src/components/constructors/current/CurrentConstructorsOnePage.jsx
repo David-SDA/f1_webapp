@@ -26,7 +26,7 @@ export default function CurrentConstuctorsOnePage(){
     const getNextMonday = () => {
         const d = new Date();
         d.setDate(d.getDate() + (((1 + 7 - d.getDay()) % 7) || 7));
-        d.setHours(0, 0, 0, 0);
+        d.setHours(8, 0, 0, 0);
         return d.getTime();
     };
 
@@ -41,8 +41,7 @@ export default function CurrentConstuctorsOnePage(){
             // Si les données sont en cache
             if(cachedData){
                 // On extrait les données du cache
-                const { constructorStanding, constructorDrivers, constructorResults, constructorSprints, constructorQualifyings } = JSON.parse(cachedData);
-                const nextMonday = getNextMonday();
+                const { constructorStanding, constructorDrivers, constructorResults, constructorSprints, constructorQualifyings, nextMonday } = JSON.parse(cachedData);
                 //console.log('Found cached data:', constructorStanding);
 
                 // Si la date actuelle est avant le prochain lundi, on utilise les données du cache
@@ -87,7 +86,7 @@ export default function CurrentConstuctorsOnePage(){
             setSprints(constructorSprints);
             setQualifyings(constructorQualifyings);
 
-            localStorage.setItem('nowConstructor' + constructorId, JSON.stringify({ constructorStanding, constructorDrivers, constructorResults, constructorSprints, constructorQualifyings }));
+            localStorage.setItem('nowConstructor' + constructorId, JSON.stringify({ constructorStanding, constructorDrivers, constructorResults, constructorSprints, constructorQualifyings, nextMonday: getNextMonday() }));
         }
         catch(error){
             console.log(error);
