@@ -26,7 +26,7 @@ export default function SchedulePageContainer() {
     const getNextMonday = () => {
         const d = new Date();
         d.setDate(d.getDate() + (((1 + 7 - d.getDay()) % 7) || 7));
-        d.setHours(0, 0, 0, 0);
+        d.setHours(8, 0, 0, 0);
         return d.getTime();
     };
 
@@ -41,8 +41,7 @@ export default function SchedulePageContainer() {
             // Si les données sont en cache
             if(cachedData){
                 // On extrait les données du cache
-                const { schedule, winners, seconds, thirds } = JSON.parse(cachedData);
-                const nextMonday = getNextMonday();
+                const { schedule, winners, seconds, thirds, nextMonday } = JSON.parse(cachedData);
                 //console.log('Found cached data:', schedule);
 
                 // Si la date actuelle est avant le prochain lundi, on utilise les données du cache
@@ -82,7 +81,7 @@ export default function SchedulePageContainer() {
             setSeconds(seconds);
             setThirds(thirds);
 
-            localStorage.setItem('nowSchedule', JSON.stringify({ schedule, winners, seconds, thirds }));
+            localStorage.setItem('nowSchedule', JSON.stringify({ schedule, winners, seconds, thirds, nextMonday: getNextMonday() }));
         }
         catch(error){
             console.log(error);
