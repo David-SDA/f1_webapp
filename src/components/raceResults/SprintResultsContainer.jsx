@@ -14,7 +14,7 @@ export default function SprintResultsContainer({round}){
     const getNextMonday = () => {
         const d = new Date();
         d.setDate(d.getDate() + (((1 + 7 - d.getDay()) % 7) || 7));
-        d.setHours(0, 0, 0, 0);
+        d.setHours(8, 0, 0, 0);
         return d.getTime();
     };
 
@@ -29,8 +29,7 @@ export default function SprintResultsContainer({round}){
             // Si les données sont en cache
             if(cachedData){
                 // On extrait les données du cache
-                const { results } = JSON.parse(cachedData);
-                const nextMonday = getNextMonday();
+                const { results, nextMonday } = JSON.parse(cachedData);
                 //console.log('Found cached data:', results);
 
                 // Si la date actuelle est avant le prochain lundi, on utilise les données du cache
@@ -51,7 +50,7 @@ export default function SprintResultsContainer({round}){
             const data = await response.json();
             const sprintResults = data.MRData.RaceTable.Races[0].SprintResults;
             setResults(sprintResults);
-            localStorage.setItem('nowSprintResults_' + round, JSON.stringify({ results: sprintResults }));
+            localStorage.setItem('nowSprintResults_' + round, JSON.stringify({ sprintResults, nextMonday: getNextMonday() }));
         }
         catch(error){
             console.log(error);

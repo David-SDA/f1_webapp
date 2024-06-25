@@ -16,7 +16,7 @@ export default function DriverStandingsPage() {
     const getNextMonday = () => {
         const d = new Date();
         d.setDate(d.getDate() + (((1 + 7 - d.getDay()) % 7) || 7));
-        d.setHours(0, 0, 0, 0);
+        d.setHours(8, 0, 0, 0);
         return d.getTime();
     };
 
@@ -31,8 +31,7 @@ export default function DriverStandingsPage() {
             // Si les données sont en cache
             if(cachedData){
                 // On extrait les données du cache
-                const { standings } = JSON.parse(cachedData);
-                const nextMonday = getNextMonday();
+                const { standings, nextMonday } = JSON.parse(cachedData);
                 //console.log('Found cached data:', standings);
 
                 // Si la date actuelle est avant le prochain lundi, on utilise les données du cache
@@ -53,7 +52,7 @@ export default function DriverStandingsPage() {
             const data = await response.json();
             const standings = data.MRData.StandingsTable.StandingsLists[0].DriverStandings;
             setStandings(standings);
-            localStorage.setItem('nowDriverStandings', JSON.stringify({ standings }));
+            localStorage.setItem('nowDriverStandings', JSON.stringify({ standings, nextMonday: getNextMonday() }));
         }
         catch(error){
             console.log(error);

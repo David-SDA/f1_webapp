@@ -35,7 +35,7 @@ export default function OneSeasonPage(){
     const getNextMonday = () => {
         const d = new Date();
         d.setDate(d.getDate() + (((1 + 7 - d.getDay()) % 7) || 7));
-        d.setHours(0, 0, 0, 0);
+        d.setHours(8, 0, 0, 0);
         return d.getTime();
     };
 
@@ -50,8 +50,7 @@ export default function OneSeasonPage(){
             // Si les données sont en cache
             if(cachedData){
                 // On extrait les données du cache
-                const { races, driverStandings, constructorStandings } = JSON.parse(cachedData);
-                const nextMonday = getNextMonday();
+                const { races, driverStandings, constructorStandings, nextMonday } = JSON.parse(cachedData);
                 //console.log('Found cached data:', races);
 
                 // Si la date actuelle est avant le prochain lundi, on utilise les données du cache
@@ -89,7 +88,7 @@ export default function OneSeasonPage(){
                 setConstructorStandings(constructorStandings);
             }
 
-            localStorage.setItem('season_' + season, JSON.stringify({races, driverStandings, constructorStandings}));
+            localStorage.setItem('season_' + season, JSON.stringify({races, driverStandings, constructorStandings, nextMonday: getNextMonday()}));
         }
         catch(error){
             console.log(error);

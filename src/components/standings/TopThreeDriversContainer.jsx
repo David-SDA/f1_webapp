@@ -9,6 +9,13 @@ export default function TopThreeDriversContainer(){
     const [standings, setStandings] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
+    const getNextMonday = () => {
+        const d = new Date();
+        d.setDate(d.getDate() + (((1 + 7 - d.getDay()) % 7) || 7));
+        d.setHours(8, 0, 0, 0);
+        return d.getTime();
+    };
+
     const fetchInfo = async () => {
         try{
             // Vérification si les données sont en cache
@@ -20,13 +27,11 @@ export default function TopThreeDriversContainer(){
             // Si les données sont en cache
             if(cachedTopThreeDrivers){
                 // On extrait les données du cache
-                const { topThreeDrivers, timestamp } = JSON.parse(cachedTopThreeDrivers);
-                // On extrait la date du lendemain
-                const oneDayFromNow = timestamp + 24 * 60 * 60 * 1000;
+                const { topThreeDrivers, nextMonday } = JSON.parse(cachedTopThreeDrivers);
                 //console.log('Found cached data:', topThreeDrivers);
 
                 // Si la date actuelle est avant la date du lendemain, on utilise les données du cache
-                if(currentDateTime < oneDayFromNow){
+                if(currentDateTime < nextMonday){
                     //console.log('Using cached data...');
                     setStandings(topThreeDrivers);
                     setIsLoading(false);
@@ -43,7 +48,7 @@ export default function TopThreeDriversContainer(){
             const data = await response.json();
             const topThreeDrivers = data.MRData.StandingsTable.StandingsLists[0].DriverStandings;
             setStandings(topThreeDrivers);
-            localStorage.setItem('topThreeDrivers', JSON.stringify({ topThreeDrivers, timestamp: new Date().getTime() }));
+            localStorage.setItem('topThreeDrivers', JSON.stringify({ topThreeDrivers, nextMonday: getNextMonday() }));
         }
         catch(error){
             console.log(error);

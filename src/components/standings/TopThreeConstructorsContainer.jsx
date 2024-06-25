@@ -10,6 +10,14 @@ export default function TopThreeConstructorsContainer(){
     const [standings, setStandings] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
+    // Fonction pour connaitre le prochain lundi
+    const getNextMonday = () => {
+        const d = new Date();
+        d.setDate(d.getDate() + (((1 + 7 - d.getDay()) % 7) || 7));
+        d.setHours(8, 0, 0, 0);
+        return d.getTime();
+    };
+
     const fetchInfo = async () => {
         try{
             // Vérification si les données sont en cache
@@ -21,13 +29,11 @@ export default function TopThreeConstructorsContainer(){
             // Si les données sont en cache
             if(cachedTopThreeConstructors){
                 // On extrait les données du cache
-                const { topThreeConstructors, timestamp } = JSON.parse(cachedTopThreeConstructors);
-                // On extrait la date du lendemain
-                const oneDayFromNow = timestamp + 24 * 60 * 60 * 1000;
+                const { topThreeConstructors, nextMonday } = JSON.parse(cachedTopThreeConstructors);
                 //console.log('Found cached data:', topThreeConstructors);
 
                 // Si la date actuelle est avant la date du lendemain, on utilise les données du cache
-                if(currentDateTime < oneDayFromNow){
+                if(currentDateTime < nextMonday){
                     //console.log('Using cached data...');
                     setStandings(topThreeConstructors);
                     setIsLoading(false);
@@ -44,7 +50,7 @@ export default function TopThreeConstructorsContainer(){
             const data = await response.json();
             const topThreeConstructors = data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings;
             setStandings(topThreeConstructors);
-            localStorage.setItem('topThreeConstructors', JSON.stringify({ topThreeConstructors, timestamp: new Date().getTime() }));
+            localStorage.setItem('topThreeConstructors', JSON.stringify({ topThreeConstructors, nextMonday: getNextMonday() }));
         }
         catch(error){
             console.log(error);
