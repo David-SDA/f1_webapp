@@ -21,4 +21,6 @@ export const currentYearTracks = {
     "interlagos": require("../assets/currentYearTracks/interlagos.png"),
     "vegas": require("../assets/currentYearTracks/vegas.png"),
     "yas_marina": require("../assets/currentYearTracks/yas_marina.png"),
+    "shanghai": require("../assets/currentYearTracks/shanghai.png"),
+    "imola": require("../assets/currentYearTracks/imola.png"),
 }
