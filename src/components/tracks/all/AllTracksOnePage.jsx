@@ -82,15 +82,17 @@ export default function AllTracksOnePage(){
     const driversWinsCount = winners.reduce((winsCount, race) => {
         const winnerName = race?.Results[0]?.Driver.givenName + " " + race?.Results[0]?.Driver.familyName;
         const winnerYear = race?.season;
+        const winnerId = race?.Results[0]?.Driver.driverId;
 
         // Si la key existe, on ajoute 1 à son nombre de victoires sinon on l'initialise à 1
         // -- -- --- ------, on ajoute l'année de la victoire sinon on l'initialise
-        if(winsCount[winnerName]){
-            winsCount[winnerName].wins++;
-            winsCount[winnerName].years.push(winnerYear)
+        if(winsCount[winnerId]){
+            winsCount[winnerId].wins++;
+            winsCount[winnerId].years.push(winnerYear)
         }
         else{
-            winsCount[winnerName] = {
+            winsCount[winnerId] = {
+                name: winnerName,
                 wins: 1,
                 years: [winnerYear]
             };
@@ -198,11 +200,11 @@ export default function AllTracksOnePage(){
                                 </Col>
                             </Row>
                             {
-                                sortedWinners.slice(0, showAllWinners ? sortedWinners.length : 5).map(([driver, { wins, years}], index) => (
+                                sortedWinners.slice(0, showAllWinners ? sortedWinners.length : 5).map(([winnerId, { name, wins, years }], index) => (
                                     <Row key={index} className="bg-white m-1 p-1 w-auto rounded-3">
                                         <Col xs={6} sm={5} md={5} lg={5} className="d-flex justify-content-center align-items-center">
-                                            <a href="#" className="link-dark link-underline-opacity-0 link-opacity-50-hover" >
-                                                <p className="text-center mb-0" style={textBold}>{driver}</p>
+                                            <a href={"/allDrivers/" + winnerId} className="link-dark link-underline-opacity-0 link-opacity-50-hover" >
+                                                <p className="text-center mb-0" style={textBold}>{name}</p>
                                             </a>
                                         </Col>
                                         <Col xs={3} sm={2} md={2} lg={2} className="d-flex justify-content-center align-items-center">
@@ -212,8 +214,8 @@ export default function AllTracksOnePage(){
                                             <p className="text-center mb-0" style={textRegular}>
                                                 {
                                                     years.map((year, index) => (
-                                                        <a href="#" className="link-dark link-underline-opacity-0 link-opacity-50-hover">
-                                                            <span key={index} style={textBold}>
+                                                        <a href={"/seasons/" + year} className="link-dark link-underline-opacity-0 link-opacity-50-hover" key={index}>
+                                                            <span style={textBold}>
                                                                 {index === 0 ? year : ", " + year}
                                                             </span>
                                                         </a>
@@ -263,7 +265,7 @@ export default function AllTracksOnePage(){
                                         <Row key={index} className="bg-white m-1 p-2 w-auto rounded-3">
                                             <Col xs={3} sm={2} md={2} lg={3}>
                                                 <p className="mb-0 text-center" style={textBold}>
-                                                    <a href="#" className="link-dark link-underline-opacity-0 link-opacity-50-hover">
+                                                    <a href={"/seasons/" + race?.season} className="link-dark link-underline-opacity-0 link-opacity-50-hover">
                                                         {race?.season}
                                                     </a>
                                                 </p>

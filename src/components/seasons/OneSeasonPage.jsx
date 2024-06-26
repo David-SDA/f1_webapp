@@ -78,16 +78,17 @@ export default function OneSeasonPage(){
             const constructorStandingsData = await constructorStandingsResponse.json();
 
             const races = racesData.MRData.RaceTable.Races;
-            setRaces(races);
-            
             const driverStandings = driverStandingsData.MRData.StandingsTable.StandingsLists[0].DriverStandings;
-            setDriverStandings(driverStandings);
-
-            if(constructorStandingsData.MRData.total != 0){
-                const constructorStandings = constructorStandingsData.MRData.StandingsTable.StandingsLists[0].ConstructorStandings;
-                setConstructorStandings(constructorStandings);
+            /** PROBLEME A CORRIGER */
+            const constructorStandings = [];
+            if(season >= 1958){
+                constructorStandings = constructorStandingsData.MRData.StandingsTable.StandingsLists[0].ConstructorStandings;
             }
-
+            
+            setRaces(races);
+            setDriverStandings(driverStandings);
+            setConstructorStandings(constructorStandings);
+            
             localStorage.setItem('season_' + season, JSON.stringify({races, driverStandings, constructorStandings, nextMonday: getNextMonday()}));
         }
         catch(error){
