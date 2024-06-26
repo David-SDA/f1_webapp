@@ -43,7 +43,7 @@ export default function CurrentDriversOnePage(){
                 // On extrait les données du cache
                 const { driverStanding, driverResults, driverQualifyings, driverSprints, nextMonday } = JSON.parse(cachedData);
                 //console.log('Found cached data:', driverStanding);
-console.log(nextMonday);
+
                 // Si la date actuelle est avant le prochain lundi, on utilise les données du cache
                 if(currentDateTime < nextMonday){
                     //console.log('Using cached data...');
@@ -130,7 +130,7 @@ console.log(nextMonday);
         return (
             <Container>
                 <h1 className="fst-italic mt-1">
-                    <a href="#" className="link-dark link-underline-opacity-0 link-underline-opacity-50-hover">
+                    <a href={"/allDrivers/" + driverId} className="link-dark link-underline-opacity-0 link-underline-opacity-50-hover">
                         <span style={textRegular}>{standing?.DriverStandings[0]?.Driver?.givenName}</span> <span style={textBold}>{standing?.DriverStandings[0]?.Driver?.familyName}</span>
                     </a>
                 </h1>

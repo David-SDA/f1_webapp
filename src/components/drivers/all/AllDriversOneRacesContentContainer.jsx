@@ -30,7 +30,11 @@ export default function AllDriversOneRacesContentContainer({
                 <p className="mb-0 text-center" style={textBlack}>{round}</p>
             </Col>
             <Col xs={2} sm={3} md={2} lg={2} className="d-flex justify-content-center align-items-center ps-0 ps-sm-2 pe-0 pe-sm-2">
-                <p className="mb-0 text-center" style={textRegular}>{season}</p>
+                <p className="mb-0 text-center" style={textRegular}>
+                    <a href={"/seasons/" + season} className="link-dark link-underline-opacity-0 link-underline-opacity-50-hover">
+                        {season}
+                    </a>
+                </p>
             </Col>
             <Col xs={8} sm={7} md={7} lg={6} className="d-flex justify-content-center align-items-center">
                 <a href="#" className="link-dark link-underline-opacity-0 link-underline-opacity-50-hover">
