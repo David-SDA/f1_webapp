@@ -114,20 +114,20 @@ export default function SchedulePageContainer() {
                             
                             return (
                                 <Col sm={12} md={6} lg={4} className="mb-3" key={index}>
-                                    <a href={"/schedule/" + race?.round + "/" + format} className="link-dark link-underline-opacity-0 link-opacity-75-hover">
-                                        <Container style={myBorder} >
+                                    <Container style={myBorder} >
+                                        <a href={"/schedule/" + race?.round + "/" + format} className="link-dark link-underline-opacity-0 link-opacity-75-hover">
                                             <SmallRoundFlagContainer round={race?.round} country={race?.Circuit?.Location?.country} />
                                             <DatesContainer dateDebut={dateDebut} dateFin={dateFin} />
                                             <p className="text-center mt-2" style={{fontFamily: "Formula1-Bold", letterSpacing: "0.0001rem"}}>{race?.raceName} &gt;</p>
-                                            {
-                                                winners[index] && seconds[index] && thirds[index] ? (
-                                                    <TopThreeDriversRaceContainer winner={winners[index]} second={seconds[index]} third={thirds[index]} />
-                                                ) : (
-                                                    <TrackImageContainer heightSize={170} circuitId={race?.Circuit?.circuitId} country={race?.Circuit?.Location?.country} />
-                                                )
-                                            }
-                                        </Container>
-                                    </a>
+                                        </a>
+                                        {
+                                            winners[index] && seconds[index] && thirds[index] ? (
+                                                <TopThreeDriversRaceContainer winner={winners[index]} second={seconds[index]} third={thirds[index]} />
+                                            ) : (
+                                                <TrackImageContainer heightSize={170} circuitId={race?.Circuit?.circuitId} country={race?.Circuit?.Location?.country} />
+                                            )
+                                        }
+                                    </Container>
                                 </Col>
                             );
                         })
