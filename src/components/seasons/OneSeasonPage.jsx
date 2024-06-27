@@ -79,8 +79,8 @@ export default function OneSeasonPage(){
 
             const races = racesData.MRData.RaceTable.Races;
             const driverStandings = driverStandingsData.MRData.StandingsTable.StandingsLists[0].DriverStandings;
-            /** PROBLEME A CORRIGER */
-            const constructorStandings = [];
+            
+            let constructorStandings = [];
             if(season >= 1958){
                 constructorStandings = constructorStandingsData.MRData.StandingsTable.StandingsLists[0].ConstructorStandings;
             }
