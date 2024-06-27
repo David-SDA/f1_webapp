@@ -5,6 +5,7 @@ import { flags } from "../../../constants/flags";
 
 import { Button, Col, Container, Image, Row, Spinner } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+import AllTracksInfoContainer from "./AllTracksInfoContainer";
 
 export default function AllTracksOnePage(){
     let { circuitId } = useParams();
@@ -145,39 +146,12 @@ export default function AllTracksOnePage(){
                         <Image src={allTracks[circuitId]} className="img-fluid" style={{maxHeight: "250px", objectFit: "contain"}}/>
                     </Col>
                     <Col lg={6}>
-                        <Row>
-                            <Col sm={6} md={6} lg={6} className="mb-3">
-                                <Container className="d-flex flex-column justify-content-around rounded-4" style={{height: "100px", borderRight: "5px solid #ff1801", borderBottom: "5px solid #ff1801"}}>
-                                    <span style={textBlack}>COUNTRY</span>
-                                    <Container className="d-flex justify-content-center align-items-center">
-                                        <Image src={flags[circuit?.Location?.country]} className="rounded border me-2" style={{height: "25px"}} />
-                                        <span className="text-center" style={textBold}>{circuit?.Location?.country}</span>
-                                    </Container>
-                                    <div></div>
-                                </Container>
-                            </Col>
-                            <Col sm={6} md={6} lg={6} className="mb-3">
-                                <Container className="d-flex flex-column justify-content-around rounded-4" style={{height: "100px", borderRight: "5px solid #ff1801", borderBottom: "5px solid #ff1801"}}>
-                                    <span style={textBlack}>LOCALITY</span>
-                                    <span className="text-center" style={textBold}>{circuit?.Location?.locality}</span>
-                                    <div></div>
-                                </Container>
-                            </Col>
-                            <Col sm={6} md={6} lg={6} className="mb-3">
-                                <Container className="d-flex flex-column justify-content-around rounded-4" style={{height: "100px", borderRight: "5px solid #ff1801", borderBottom: "5px solid #ff1801"}}>
-                                    <span style={textBlack}>RACES</span>
-                                    <span className="text-center" style={{...textBold, fontSize: "30px"}}>{races.length}</span>
-                                    <div></div>
-                                </Container>
-                            </Col>
-                            <Col sm={6} md={6} lg={6} className="mb-3">
-                                <Container className="d-flex flex-column justify-content-around rounded-4" style={{height: "100px", borderRight: "5px solid #ff1801", borderBottom: "5px solid #ff1801"}}>
-                                    <span style={textBlack}>WINNERS</span>
-                                    <span className="text-center" style={{...textBold, fontSize: "30px"}}>{countDifferentWinners()}</span>
-                                    <div></div>
-                                </Container>
-                            </Col>
-                        </Row>
+                        <AllTracksInfoContainer
+                            country={circuit?.Location?.country}
+                            locality={circuit?.Location?.locality}
+                            length={races.length}
+                            nbWinners={countDifferentWinners()}
+                        />
                     </Col>
                     <Col lg={12} className="mb-3 p-1 p-sm-2">
                         <p className="h2 fst-italic" style={textRegular}>All winners</p>
