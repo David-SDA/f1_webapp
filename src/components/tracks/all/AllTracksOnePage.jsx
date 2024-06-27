@@ -6,6 +6,7 @@ import { flags } from "../../../constants/flags";
 import { Button, Col, Container, Image, Row, Spinner } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import AllTracksInfoContainer from "./AllTracksInfoContainer";
+import AllTracksWinnersListContainer from "./AllTracksWinnersListContainer";
 
 export default function AllTracksOnePage(){
     let { circuitId } = useParams();
@@ -14,7 +15,6 @@ export default function AllTracksOnePage(){
     const [winners, setWinners] = useState([]);
     const [races, setRaces] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [showAllWinners, setShowAllWinners] = useState(false);
     const [showAllRaces, setShowAllRaces] = useState(false);
 
     const fetchInfo = async () => {
@@ -107,10 +107,6 @@ export default function AllTracksOnePage(){
         return Object.keys(driversWinsCount).length;
     }
 
-    const handleDisplayMoreWinners = () => {
-        setShowAllWinners(!showAllWinners);
-    }
-
     const handleDisplayMoreRaces = () => {
         setShowAllRaces(!showAllRaces);
     }
@@ -155,59 +151,10 @@ export default function AllTracksOnePage(){
                     </Col>
                     <Col lg={12} className="mb-3 p-1 p-sm-2">
                         <p className="h2 fst-italic" style={textRegular}>All winners</p>
-                        <Container className="d-flex flex-column p-1 rounded-3" style={{backgroundColor: "#38383f"}}>
-                            <Row className="bg-white m-1 p-1 w-auto rounded-3">
-                                <Col xs={6} sm={5} md={5} lg={5} className="p-0">
-                                    <p className="mb-0 text-center" style={textBlack}>
-                                        DRIVER
-                                    </p>
-                                </Col>
-                                <Col xs={3} sm={2} md={2} lg={2} className="p-0">
-                                    <p className="mb-0 text-center" style={textBlack}>
-                                        WINS
-                                    </p>
-                                </Col>
-                                <Col xs={3} sm={5} md={5} lg={5} className="p-0">
-                                    <p className="mb-0 text-sm-center" style={textBlack}>
-                                        YEARS
-                                    </p>
-                                </Col>
-                            </Row>
-                            {
-                                sortedWinners.slice(0, showAllWinners ? sortedWinners.length : 5).map(([winnerId, { name, wins, years }], index) => (
-                                    <Row key={index} className="bg-white m-1 p-1 w-auto rounded-3">
-                                        <Col xs={6} sm={5} md={5} lg={5} className="d-flex justify-content-center align-items-center">
-                                            <a href={"/allDrivers/" + winnerId} className="link-dark link-underline-opacity-0 link-opacity-50-hover" >
-                                                <p className="text-center mb-0" style={textBold}>{name}</p>
-                                            </a>
-                                        </Col>
-                                        <Col xs={3} sm={2} md={2} lg={2} className="d-flex justify-content-center align-items-center">
-                                            <p className="text-center mb-0" style={textBold}>{wins}</p>
-                                        </Col>
-                                        <Col xs={3} sm={5} md={5} lg={5} className="d-flex justify-content-center align-items-center">
-                                            <p className="text-center mb-0" style={textRegular}>
-                                                {
-                                                    years.map((year, index) => (
-                                                        <a href={"/seasons/" + year} className="link-dark link-underline-opacity-0 link-opacity-50-hover" key={index}>
-                                                            <span style={textBold}>
-                                                                {index === 0 ? year : ", " + year}
-                                                            </span>
-                                                        </a>
-                                                    ))
-                                                }
-                                            </p>
-                                        </Col>
-                                    </Row>
-                                ))
-                            }
-                            {
-                                countDifferentWinners() > 5 ? (
-                                    <Button variant="outline-light" size="sm" className="align-self-center mt-1" onClick={handleDisplayMoreWinners}>
-                                        {showAllWinners ? "Show less" : "Show More"}
-                                    </Button>
-                                ) : ("")
-                            }
-                        </Container>
+                        <AllTracksWinnersListContainer
+                            sortedWinners={sortedWinners}
+                            nbWinners={countDifferentWinners()}
+                        />
                     </Col>
                     <Col lg={12} className="mb-3 p-1 p-sm-2">
                         <p className="h2 fst-italic" style={textRegular}>All Races</p>
