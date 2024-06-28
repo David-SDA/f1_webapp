@@ -30,6 +30,7 @@ import AllConstructorsPage from './components/constructors/all/AllConstructorsPa
 import AllConstructorsOnePage from './components/constructors/all/AllConstructorsOnePage';
 import SeasonsPage from './components/seasons/SeasonsPage';
 import OneSeasonPage from './components/seasons/OneSeasonPage';
+import OneRacePage from './components/races/OneRacePage';
 
 
 function App() {
@@ -58,6 +59,7 @@ function App() {
                     <Route path='/allConstructors/:constructorId' element={<AllConstructorsOnePage />} />
                     <Route path='/seasons' element={<SeasonsPage />} />
                     <Route path='/seasons/:season' element={<OneSeasonPage />} />
+                    <Route path='/races/:season/:round' element={<OneRacePage />} />
                     <Route path='*' element={<NotFoundPage />} />
                 </Routes>
             </div>
