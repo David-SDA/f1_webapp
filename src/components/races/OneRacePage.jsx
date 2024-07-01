@@ -6,7 +6,7 @@ import { Container, Image, Spinner, Row, Col } from "react-bootstrap";
 
 import OneRaceResultsHeader from "./OneRaceResultsHeader";
 import { allTracks } from "../../constants/allTracks";
-import { flags } from "../../constants/flags";
+import OneRaceInfoContainer from "./OneRaceInfoContainer";
 
 export default function OneRacePage(){
     const { season, round } = useParams();
@@ -94,41 +94,13 @@ export default function OneRacePage(){
                     <Col lg={6} className="mb-3 d-flex justify-content-center align-items-center">
                         <Image src={allTracks[race.Circuit.circuitId]} className="img-fluid" style={{maxHeight: "250px", objectFit: "contain"}}/>
                     </Col>
-                    <Col lg={6}>
-                        <Row>
-                            <Col sm={6} md={6} lg={6} className="mb-3">
-                                <Container className="d-flex flex-column justify-content-around rounded-4" style={{height: "100px", borderRight: "5px solid #ff1801", borderBottom: "5px solid #ff1801"}}>
-                                    <span style={textBlack}>COUNTRY</span>
-                                    <Container className="d-flex justify-content-center align-items-center">
-                                        <Image src={flags[race.Circuit.Location.country]} className="rounded border me-2" style={{height: "25px"}} />
-                                        <span className="text-center" style={textBold}>{race.Circuit.Location.country}</span>
-                                    </Container>
-                                    <div></div>
-                                </Container>
-                            </Col>
-                            <Col sm={6} md={6} lg={6} className="mb-3">
-                                <Container className="d-flex flex-column justify-content-around rounded-4" style={{height: "100px", borderRight: "5px solid #ff1801", borderBottom: "5px solid #ff1801"}}>
-                                    <span style={textBlack}>LOCALITY</span>
-                                    <span className="text-center" style={textBold}>{race.Circuit.Location.locality}</span>
-                                    <div></div>
-                                </Container>
-                            </Col>
-                            <Col sm={6} md={6} lg={6} className="mb-3">
-                                <Container className="d-flex flex-column justify-content-around rounded-4" style={{height: "100px", borderRight: "5px solid #ff1801", borderBottom: "5px solid #ff1801"}}>
-                                    <span style={textBlack}>WINNER</span>
-                                    <span className="text-center" style={textBold}>{race.Results[0].Driver.givenName} {race.Results[0].Driver.familyName}</span>
-                                    <div></div>
-                                </Container>
-                            </Col>
-                            <Col sm={6} md={6} lg={6} className="mb-3">
-                                <Container className="d-flex flex-column justify-content-around rounded-4" style={{height: "100px", borderRight: "5px solid #ff1801", borderBottom: "5px solid #ff1801"}}>
-                                    <span style={textBlack}>TEAM WINNER</span>
-                                    <span className="text-center" style={textBold}>{race.Results[0].Constructor.name}</span>
-                                    <div></div>
-                                </Container>
-                            </Col>
-                        </Row>
-                    </Col>
+                    <OneRaceInfoContainer
+                        country={race.Circuit.Location.country}
+                        locality={race.Circuit.Location.locality}
+                        winnerFirstName={race.Results[0].Driver.givenName}
+                        winnerLastName={race.Results[0].Driver.familyName}
+                        winnerTeam={race.Results[0].Constructor.name}
+                    />
                 </Row>
                 <p className="h1 align-self-start fst-italic" style={{fontFamily: "Formula1-Regular", letterSpacing: "0.0005rem"}}>Race Results</p>
                 <Container className="d-flex flex-column p-0 p-sm-2 rounded" style={{backgroundColor: "#38383f"}}>
