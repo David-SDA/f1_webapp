@@ -54,7 +54,8 @@ export default function RaceResultsContainer({round}){
         }
         catch(error){
             console.log(error);
-        }finally{
+        }
+        finally{
             setIsLoading(false);
         }
     }
