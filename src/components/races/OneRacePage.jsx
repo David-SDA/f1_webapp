@@ -71,6 +71,11 @@ export default function OneRacePage(){
         fetchInfo();
     }, []);
 
+    const textRegular = {
+        fontFamily: "Formula1-Regular",
+        letterSpacing: "0.0005rem",
+    }
+
     const textBold = {
         fontFamily: "Formula1-Bold",
         letterSpacing: "0.0005rem",
@@ -80,6 +85,11 @@ export default function OneRacePage(){
         fontFamily: "Formula1-Black",
         letterSpacing: "0.0005rem",
     };
+    
+    const textWide = {
+        fontFamily: "Formula1-Wide",
+        letterSpacing: "0.0005rem",
+    }
 
     if(isLoading){
         return (
@@ -89,17 +99,17 @@ export default function OneRacePage(){
     else{
         return (
             <Container>
-                <h1 className="fst-italic mt-1" style={textBold}>{race.season} {race.raceName}</h1>
+                <h1 className="fst-italic mt-1" style={textBold}>{race?.season} {race?.raceName}</h1>
                 <Row>
                     <Col lg={6} className="mb-3 d-flex justify-content-center align-items-center">
-                        <Image src={allTracks[race.Circuit.circuitId]} className="img-fluid" style={{maxHeight: "250px", objectFit: "contain"}}/>
+                        <Image src={allTracks[race?.Circuit?.circuitId]} className="img-fluid" style={{maxHeight: "250px", objectFit: "contain"}}/>
                     </Col>
                     <OneRaceInfoContainer
-                        country={race.Circuit.Location.country}
-                        locality={race.Circuit.Location.locality}
-                        winnerFirstName={race.Results[0].Driver.givenName}
-                        winnerLastName={race.Results[0].Driver.familyName}
-                        winnerTeam={race.Results[0].Constructor.name}
+                        country={race?.Circuit?.Location?.country}
+                        locality={race?.Circuit?.Location?.locality}
+                        winnerFirstName={race?.Results[0]?.Driver?.givenName}
+                        winnerLastName={race?.Results[0]?.Driver?.familyName}
+                        winnerTeam={race?.Results[0]?.Constructor?.name}
                     />
                 </Row>
                 <p className="h1 align-self-start fst-italic" style={{fontFamily: "Formula1-Regular", letterSpacing: "0.0005rem"}}>Race Results</p>
@@ -110,39 +120,49 @@ export default function OneRacePage(){
                             return (
                                 <Row className="d-flex  flex-row justify-content-around align-items-center bg-white m-1 p-1 p-sm-2 rounded-3" key={index}>
                                     <Col className="p-0" xs={2} sm={1} md={1} lg={1}>
-                                        <p className="m-0 text-center" style={textBlack}>
-                                            POS
+                                        <p className="m-0 text-center d-none d-sm-block" style={textWide}>
+                                            {result?.positionText}
+                                        </p>
+                                        <p className="m-0 text-center d-sm-none" style={{...textWide, fontSize: "0.8rem"}}>
+                                            {result?.positionText}
                                         </p>
                                     </Col>
                                     <Col className="p-0" xs={5} sm={6} md={6} lg={5}>
-                                        <p className="m-0 d-none d-sm-block" style={textBlack}>
-                                            DRIVER
+                                        <p className="m-0 d-none d-sm-block" style={textRegular}>
+                                            {result?.Driver?.givenName} <span style={textBold}>{result?.Driver?.familyName}</span>
                                         </p>
-                                        <p className="m-0 d-block d-sm-none" style={textBlack}>
-                                            DRI
+                                        <p className="m-0 d-block d-sm-none" style={textBold}>
+                                            {result?.Driver?.familyName}
                                         </p>
                                     </Col>
                                     <Col className="p-0 d-none d-lg-block" lg={2}>
-                                        <p className="m-0 text-center d-none d-lg-block" style={textBlack}>
-                                            TEAM
+                                        <p className="m-0 text-center d-none d-lg-block" style={textRegular}>
+                                            {result?.Constructor?.name}
                                         </p>
                                     </Col>
-                                    <Col className="p-0 d-none d-md-block" md={1} lg={1}>
+                                    <Col className="p-0 d-none d-md-block" md={1} lg={1}>   
                                         <p className="m-0 text-center d-none d-md-block" style={textBlack}>
-                                            GRID
+                                            {result?.grid}
                                         </p>
                                     </Col>
-                                    <Col className="p-0" xs={4} sm={3} md={3} lg={2}>
-                                        <p className="m-0 text-center" style={textBlack}>
-                                            TIME
+                                    <Col className="p-0" xs={5} sm={3} md={3} lg={2}>
+                                        <p className="m-0 text-center rounded-5 p-1" style={textRegular}>
+                                        {
+                                            result?.Time?.time ? (
+                                                <span className="rounded-5 p-1" style={{backgroundColor: "#e8e8e8"}}>{result?.Time?.time}</span>
+                                            ) : (
+                                                result?.status ? (
+                                                    <span className="rounded-5 p-1 fst-italic">{result?.status}</span>
+                                                ):(
+                                                    <span className="rounded-5 p-1 fst-italic">DNF</span>
+                                                )
+                                            )
+                                        }
                                         </p>
                                     </Col>
                                     <Col className="p-0" sm={1} md={1} lg={1}>
-                                        <p className="m-0 text-center d-none d-lg-block" style={textBlack}>
-                                            POINTS
-                                        </p>
-                                        <p className="m-0 text-center d-none d-sm-block d-lg-none" style={textBlack}>
-                                            PTS
+                                        <p className="m-0 text-center d-none d-sm-block" style={textBlack}>
+                                            {result?.points}
                                         </p>
                                     </Col>
                                 </Row>
