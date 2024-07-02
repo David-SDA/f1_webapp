@@ -129,15 +129,21 @@ export default function OneRacePage(){
                                     </Col>
                                     <Col className="p-0" xs={5} sm={6} md={6} lg={5}>
                                         <p className="m-0 d-none d-sm-block" style={textRegular}>
-                                            {result?.Driver?.givenName} <span style={textBold}>{result?.Driver?.familyName}</span>
+                                            <a href={"/allDrivers/" + result?.Driver?.driverId} className="link-dark link-underline-opacity-0 link-underline-opacity-100-hover">
+                                                {result?.Driver?.givenName} <span style={textBold}>{result?.Driver?.familyName}</span>
+                                            </a>
                                         </p>
                                         <p className="m-0 d-block d-sm-none" style={textBold}>
-                                            {result?.Driver?.familyName}
+                                            <a href={"/allDrivers/" + result?.Driver?.driverId} className="link-dark link-underline-opacity-0 link-underline-opacity-100-hover">
+                                                {result?.Driver?.familyName}
+                                            </a>
                                         </p>
                                     </Col>
                                     <Col className="p-0 d-none d-lg-block" lg={2}>
                                         <p className="m-0 text-center d-none d-lg-block" style={textRegular}>
-                                            {result?.Constructor?.name}
+                                            <a href={"/allConstructors/" + result?.Constructor?.constructorId} className="link-dark link-underline-opacity-0 link-underline-opacity-100-hover">
+                                                {result?.Constructor?.name}
+                                            </a>
                                         </p>
                                     </Col>
                                     <Col className="p-0 d-none d-md-block" md={1} lg={1}>   
