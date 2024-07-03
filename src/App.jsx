@@ -41,7 +41,7 @@ function App() {
                 <Routes>
                     <Route path='/' element={<HomePage />} />
                     <Route path='/schedule' element={<SchedulePage />} />
-                    <Route path='/schedule/:round/:format' element={<RoundResultsPage />} />
+                    <Route path='/schedule/:round' element={<RoundResultsPage />} />
                     <Route path='/driverStandings' element={<DriverStandingsPage />} />
                     <Route path='/constructorStandings' element={<ConstructorStandingsPage />} />
                     <Route path='/driverChampions' element={<DriverChampionsPage />} />

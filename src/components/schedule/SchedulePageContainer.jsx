@@ -109,13 +109,11 @@ export default function SchedulePageContainer() {
                         schedule.map((race, index) => {
                             const dateDebut = new Date(race?.FirstPractice?.date);
                             const dateFin = new Date(race?.date);
-
-                            const format = race?.ThirdPractice ? "normal" : "sprint";
                             
                             return (
                                 <Col sm={12} md={6} lg={4} className="mb-3" key={index}>
                                     <Container style={myBorder} >
-                                        <a href={"/schedule/" + race?.round + "/" + format} className="link-dark link-underline-opacity-0 link-opacity-75-hover">
+                                        <a href={"/schedule/" + race?.round} className="link-dark link-underline-opacity-0 link-opacity-75-hover">
                                             <SmallRoundFlagContainer round={race?.round} country={race?.Circuit?.Location?.country} />
                                             <DatesContainer dateDebut={dateDebut} dateFin={dateFin} />
                                             <p className="text-center mt-2" style={{fontFamily: "Formula1-Bold", letterSpacing: "0.0001rem"}}>{race?.raceName} &gt;</p>
