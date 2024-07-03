@@ -84,10 +84,10 @@ export default function RaceSprintResultsContentContainer({
                             totalTime ? (
                                 <span className="rounded-5 p-1" style={{backgroundColor: "#e8e8e8"}}>{totalTime}</span>
                             ) : (
-                                status.includes("Lap") ? (
-                                    <span className="rounded-5 p-1" style={{backgroundColor: "#e8e8e8"}}>{status}</span>
+                                status ? (
+                                    <span className="fst-italic p-1">{status}</span>
                                 ):(
-                                    <span className="rounded-5 p-1" style={{backgroundColor: "#e8e8e8"}}>DNF</span>
+                                    <span className="fst-italic p-1">DNF</span>
                                 )
                             )
                         }

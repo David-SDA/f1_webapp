@@ -11,11 +11,15 @@ import SprintResultsContainer from "./SprintResultsContainer";
 export default function RoundResultsPage(){
     let { round } = useParams();
 
+    // Convertir round en nombre
+    const roundNumber = parseInt(round);
+
     const [race, setRace] = useState([]);
     const [raceResults, setRaceResults] = useState([]);
     const [qualifyingResults, setQualifyingResults] = useState([]);
     const [sprintResults, setSprintResults] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [isValidRound, setIsValidRound] = useState(true);
 
     // Fonction pour connaitre le prochain lundi
     const getNextMonday = () => {
@@ -85,8 +89,18 @@ export default function RoundResultsPage(){
     }
 
     useEffect(() => {
-        fetchInfo();
-    }, []);
+        // Valider si round est entre 1 et 24
+        if(isNaN(roundNumber) || roundNumber < 1 || roundNumber > 24){
+            setIsValidRound(false);
+        }
+        else{
+            fetchInfo();
+        }
+    }, [round, roundNumber]);
+
+    if(!isValidRound){
+        return <Navigate to="*" />;
+    }
 
     if(isLoading){
         return (

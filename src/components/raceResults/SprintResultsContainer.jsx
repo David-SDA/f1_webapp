@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import RaceSprintResultsHeaderContainer from "./RaceSprintResultsHeaderContainer";
 import RaceSprintResultsContentContainer from "./RaceSprintResultsContentContainer";
