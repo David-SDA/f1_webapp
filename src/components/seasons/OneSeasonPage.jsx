@@ -138,6 +138,7 @@ export default function OneSeasonPage(){
                                 return (
                                     <OneSeasonOneRace
                                         key={index}
+                                        season={race.season}
                                         round={race?.round}
                                         date={race?.date}
                                         raceName={race?.raceName}
