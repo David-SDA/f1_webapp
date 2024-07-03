@@ -58,7 +58,7 @@ export default function RoundResultsPage(){
                 }
             }
             //console.log('Fetching data from API...');
-            // On fait l'appel à l'API ainsi que la ssauvegarde dans le cache
+            // On fait l'appel à l'API ainsi que la sauvegarde dans le cache
             const raceResponse = await fetch('https://ergast.com/api/f1/current/' + round + '.json');
             const raceResultsResponse = await fetch("http://ergast.com/api/f1/current/" + round + "/results.json");
             const qualifyingResultsResponse = await fetch("http://ergast.com/api/f1/current/" + round + "/qualifying.json");
