@@ -148,7 +148,7 @@ export default function OneSeasonPage(){
                         }
                     </Row>
                 </Container>
-                <h2 className="fst-italic mt-1" style={textRegular}>DRIVER STANDINGS</h2>
+                <h2 className="fst-italic mt-1" style={textRegular}>DRIVERS STANDINGS</h2>
                 <Container className="mb-2 pt-3 pb-3 rounded" style={{backgroundColor: "#38383f"}}>
                     <OneSeasonDriverStandingsHeader />
                     {
