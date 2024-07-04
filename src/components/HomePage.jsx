@@ -23,16 +23,16 @@ export default function HomePage(){
             const cachedRace = localStorage.getItem('nextRace');
             // On détermine la date actuelle
             const currentDateTime = new Date().getTime();
-            console.log('Fetching race data...');
+            //console.log('Fetching race data...');
 
             // Si les données sont en cache
             if(cachedRace){
                 // On extrait les données du cache
                 const { race, nextMonday } = JSON.parse(cachedRace);
-                console.log('Found cached data:', race);
+                //console.log('Found cached data:', race);
 
                 if(currentDateTime < getNextMonday()){
-                    console.log('Using cached data...');
+                    //console.log('Using cached data...');
                     setRace(race);
                     setIsLoading(false);
                     return;

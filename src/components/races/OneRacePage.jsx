@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 
 import { Container, Image, Spinner, Row, Col } from "react-bootstrap";
 
@@ -12,7 +12,7 @@ import OneRaceResultsContainer from "./OneRaceResultsContainer";
 export default function OneRacePage(){
     const { season, round } = useParams();
 
-    const [race, setRace] = useState([]);
+    const [race, setRace] = useState([null]);
     const [isLoading, setIsLoading] = useState(true);
     
     // Fonction pour connaitre le prochain lundi
@@ -58,6 +58,13 @@ export default function OneRacePage(){
             const data = await response.json();
             const race = data.MRData.RaceTable.Races[0];
             setRace(race);
+
+            // Vérification si les données de la course sont vides
+            if(!race){
+                setIsLoading(false);
+                return;
+            }
+
             localStorage.setItem('raceSeason_' + season + '_round_' + round, JSON.stringify({ race, nextMonday: getNextMonday() }));
         }
         catch(error){
@@ -70,11 +77,15 @@ export default function OneRacePage(){
 
     useEffect(() => {
         fetchInfo();
-    }, []);
+    }, [season, round]);
 
     const textBold = {
         fontFamily: "Formula1-Bold",
         letterSpacing: "0.0005rem",
+    }
+
+    if(!race){
+        return <Navigate to="/*/" />;
     }
 
     if(isLoading){
