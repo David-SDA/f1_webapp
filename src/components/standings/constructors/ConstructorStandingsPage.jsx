@@ -78,7 +78,7 @@ export default function ConstructorStandingsPage() {
     else{
         return (
             <Container className="p-0">
-                <h1 className="fst-italic" style={{fontFamily: "Formula1-Regular"}}>F1 2024 : Constructor Standings</h1>
+                <h1 className="fst-italic" style={{fontFamily: "Formula1-Regular"}}>F1 2024 : Constructors Standings</h1>
                 <Container className="rounded p-1 mb-3" style={{backgroundColor: "#38383f"}}>
                     <ConstructorStandingsHeaderContainer />
                     {

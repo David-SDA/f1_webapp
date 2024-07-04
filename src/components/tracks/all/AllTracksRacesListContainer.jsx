@@ -55,14 +55,14 @@ export default function AllTracksRacesListContainer({
                         <Row key={index} className="bg-white m-1 p-2 w-auto rounded-3">
                             <Col xs={3} sm={2} md={2} lg={3}>
                                 <p className="mb-0 text-center" style={textBold}>
-                                    <a href={"/seasons/" + race?.season} className="link-dark link-underline-opacity-0 link-opacity-50-hover">
+                                    <a href={"/seasons/" + race?.season} className="link-dark link-underline-opacity-0 link-underline-opacity-100-hover">
                                         {race?.season}
                                     </a>
                                 </p>
                             </Col>
                             <Col xs={6} sm={8} md={8} lg={6}>
                                 <p className="mb-0 text-center" style={textBold}>
-                                    <a href="#" className="link-dark link-underline-opacity-0 link-opacity-50-hover">
+                                    <a href={"/races/" + race?.season + "/" + race?.round} className="link-dark link-underline-opacity-0 link-underline-opacity-100-hover">
                                         {race?.raceName}
                                     </a>
                                 </p>

@@ -22,8 +22,8 @@ export default function TopNavBar(){
                             <NavDropdown.Item href="/constructorStandings">Constructors</NavDropdown.Item>
                         </NavDropdown>
                         <NavDropdown title="Champions" id="basic-nav-dropdown" style={navListStyle}>
-                            <NavDropdown.Item href="/driverChampions">Driver</NavDropdown.Item>
-                            <NavDropdown.Item href="/constructorChampions">Constructor</NavDropdown.Item>
+                            <NavDropdown.Item href="/driverChampions">Drivers</NavDropdown.Item>
+                            <NavDropdown.Item href="/constructorChampions">Constructors</NavDropdown.Item>
                         </NavDropdown>
                         <NavDropdown title="Tracks" id="basic-nav-dropdown" style={navListStyle}>
                             <NavDropdown.Item href="/currentTracks">Current</NavDropdown.Item>

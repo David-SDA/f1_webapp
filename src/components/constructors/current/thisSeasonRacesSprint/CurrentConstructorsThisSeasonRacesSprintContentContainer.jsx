@@ -27,7 +27,7 @@ export default function CurrentConstructorsThisSeasonRacesSprintContentContainer
             {
                 driver3Position ? (
                     <Col xs={6} sm={5} md={4} lg={4} className="d-flex justify-content-center p-0">
-                        <a href="#" className="link-dark link-underline-opacity-0 link-underline-opacity-50-hover">
+                        <a href={"/schedule/" + round} className="link-dark link-underline-opacity-0 link-underline-opacity-100-hover">
                             <p className="d-flex d-sm-none align-items-center mb-0 text-center" style={{...textBold, minHeight: "5em"}}>{race}</p>
                             <p className="d-none d-sm-flex d-lg-none align-items-center mb-0 text-center" style={{...textBold, minHeight: "3em"}}>{race}</p>
                             <p className="d-none d-lg-flex align-items-center mb-0 text-center" style={textBold}>{race}</p>
@@ -35,7 +35,7 @@ export default function CurrentConstructorsThisSeasonRacesSprintContentContainer
                     </Col>
                 ) : (
                     <Col xs={8} sm={7} md={6} lg={6} className="d-flex justify-content-center p-0">
-                        <a href="#" className="link-dark link-underline-opacity-0 link-underline-opacity-50-hover">
+                        <a href={"/schedule/" + round} className="link-dark link-underline-opacity-0 link-underline-opacity-100-hover">
                             <p className="d-flex d-sm-none align-items-center mb-0 text-center" style={{...textBold, minHeight: "3em"}}>{race}</p>
                             <p className="d-none d-sm-flex align-items-center mb-0 text-center" style={textBold}>{race}</p>
                         </a>

@@ -119,7 +119,7 @@ export default function CurrentConstuctorsOnePage(){
         return (
             <Container>
                 <h1 className="fst-italic mt-1">
-                    <a href={"/allConstructors/" + constructorId} className="link-dark link-underline-opacity-0 link-underline-opacity-50-hover">
+                    <a href={"/allConstructors/" + constructorId} className="link-dark link-underline-opacity-0 link-underline-opacity-100-hover">
                         <span style={textBold}>{standing?.ConstructorStandings[0]?.Constructor?.name}</span>
                     </a>
                 </h1>

@@ -47,7 +47,7 @@ export default function CurrentConstructorsDetailsContainer({
                         drivers.map((driver, index) => {
                             return (
                                 <Col lg={6} className="mb-3" key={index}>
-                                    <a href={"/currentDrivers/" + driver?.driverId} className="link-dark link-underline-opacity-0 link-underline-opacity-50-hover">
+                                    <a href={"/currentDrivers/" + driver?.driverId} className="link-dark link-underline-opacity-0 link-underline-opacity-100-hover">
                                         <Container className="d-flex flex-column justify-content-between rounded-4" style={{height: "200px", borderRight: "5px solid #ff1801", borderBottom: "5px solid #ff1801"}}>
                                             <div className="d-flex justify-content-between">
                                                 <div className="d-flex">

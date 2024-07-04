@@ -50,7 +50,7 @@ export default function AllTracksWinnersListContainer({
                 sortedWinners.slice(0, showAllWinners ? sortedWinners.length : 5).map(([winnerId, { name, wins, years }], index) => (
                     <Row key={index} className="bg-white m-1 p-1 w-auto rounded-3">
                         <Col xs={6} sm={5} md={5} lg={5} className="d-flex justify-content-center align-items-center">
-                            <a href={"/allDrivers/" + winnerId} className="link-dark link-underline-opacity-0 link-opacity-50-hover" >
+                            <a href={"/allDrivers/" + winnerId} className="link-dark link-underline-opacity-0 link-underline-opacity-100-hover" >
                                 <p className="text-center mb-0" style={textBold}>{name}</p>
                             </a>
                         </Col>
@@ -61,7 +61,7 @@ export default function AllTracksWinnersListContainer({
                             <p className="text-center mb-0" style={textRegular}>
                                 {
                                     years.map((year, index) => (
-                                        <a href={"/seasons/" + year} className="link-dark link-underline-opacity-0 link-opacity-50-hover" key={index}>
+                                        <a href={"/seasons/" + year} className="link-dark link-underline-opacity-0 link-underline-opacity-100-hover" key={index}>
                                             <span style={textBold}>
                                                 {index === 0 ? year : ", " + year}
                                             </span>

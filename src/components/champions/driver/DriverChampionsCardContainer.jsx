@@ -40,7 +40,7 @@ export default function DriverChampionsCardContainer({
                 <Card.Img className="mt-1" variant="top" src={driversImages[driverId]} style={{height: "150px", objectFit: "contain"}} />
                 <Card.Body>
                     <Card.Title className="text-center">
-                        <a href={"/allDrivers/" + driverId} className="link-dark link-underline-opacity-0 link-opacity-75-hover">
+                        <a href={"/allDrivers/" + driverId} className="link-dark link-underline-opacity-0 link-underline-opacity-100-hover">
                             <span style={textRegular}>{givenName} <br/></span>
                             <span style={textBold}>{familyName}</span>
                         </a>
@@ -51,7 +51,7 @@ export default function DriverChampionsCardContainer({
                             <span style={textBold}>{nationality}</span>
                         </ListGroup.Item>
                         <ListGroup.Item style={textBold}>
-                            <a href={"/allConstructors/" + constructorId} className="link-dark link-underline-opacity-0 link-opacity-75-hover fst-italic">
+                            <a href={"/allConstructors/" + constructorId} className="link-dark link-underline-opacity-0 link-underline-opacity-100-hover fst-italic">
                                 {team}
                             </a>
                         </ListGroup.Item>

@@ -30,7 +30,7 @@ export default function CurrentDriversThisSeasonRacesSprintContentContainer({
                 <p className="mb-0 text-center" style={textBlack}>{round}</p>
             </Col>
             <Col xs={6} sm={7} md={6} lg={4} className="d-flex justify-content-center align-items-center p-0">
-                <a href="#" className="link-dark link-underline-opacity-0 link-underline-opacity-50-hover">
+                <a href={"/schedule/" + round} className="link-dark link-underline-opacity-0 link-underline-opacity-100-hover">
                     <p className="d-flex d-sm-none align-items-center mb-0 text-center" style={{...textBold, minHeight: "3em"}}>{raceName}</p>
                     <p className="d-none d-sm-flex align-items-center mb-0 text-center" style={textBold}>{raceName}</p>
                 </a>

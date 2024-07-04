@@ -10,7 +10,7 @@ export default function SmallDriverContainer({position, firstName, name, points,
     };
 
     return (
-        <a href={"/currentDrivers/" + driverId} className="link-dark link-underline-opacity-0 link-underline-opacity-50-hover">
+        <a href={"/currentDrivers/" + driverId} className="link-dark link-underline-opacity-0 link-underline-opacity-100-hover">
             <Container className="d-flex flex-row justify-content-start align-items-center bg-white mb-2 rounded-3 p-2">
                 <p className="m-0" style={{fontFamily: "Formula1-Wide", width: 23}}>{position}</p>
                 <div className="ms-1 rounded-3" style={MyBar}></div>

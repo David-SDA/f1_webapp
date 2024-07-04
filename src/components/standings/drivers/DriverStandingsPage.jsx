@@ -78,7 +78,7 @@ export default function DriverStandingsPage() {
     else{
         return (
             <Container className="p-0">
-                <h1 className="fst-italic" style={{fontFamily: "Formula1-Regular"}}>F1 2024 : Driver Standings</h1>
+                <h1 className="fst-italic" style={{fontFamily: "Formula1-Regular"}}>F1 2024 : Drivers Standings</h1>
                 <Container className="rounded p-1 mb-3" style={{backgroundColor: "#38383f"}}>
                     <DriverStandingsHeaderContainer />
                     {

@@ -37,7 +37,7 @@ export default function ConstructorChampionsCardContainer({
                 <Card.Img className="mt-1" variant="top" src={constructorImage[constructorId]} style={{height: "150px", objectFit: "contain"}} />
                 <Card.Body>
                     <Card.Title className="text-center">
-                        <a href="#" className="link-dark link-underline-opacity-0 link-opacity-75-hover">
+                        <a href="#" className="link-dark link-underline-opacity-0 link-underline-opacity-100-hover">
                             <span style={textBold}>{name}</span>
                         </a>
                     </Card.Title>

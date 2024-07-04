@@ -26,7 +26,7 @@ export default function AllConstructorsOneDetailsContainer({
 
     return (
         <Row className="d-flex justify-content-center">
-            <Col md={6} lg={4}>
+            <Col md={6} lg={4} className="mt-2">
                 <Container className="d-flex flex-column justify-content-around rounded-4" style={{height: "100px", borderRight: "5px solid #ff1801", borderBottom: "5px solid #ff1801"}}>
                     <p className="mb-0" style={textBlack}>NATIONALITY</p>
                     <div className="d-flex flex-row justify-content-center align-items-center">
@@ -36,7 +36,7 @@ export default function AllConstructorsOneDetailsContainer({
                     <div></div>
                 </Container>
             </Col>
-            <Col md={6} lg={4}>
+            <Col md={6} lg={4} className="mt-2">
                 <Container className="d-flex flex-column justify-content-around rounded-4" style={{height: "100px", borderRight: "5px solid #ff1801", borderBottom: "5px solid #ff1801"}}>
                     <p className="mb-0" style={textBlack}>DRIVERS</p>
                     <div className="d-flex flex-row justify-content-center align-items-center">
@@ -45,7 +45,7 @@ export default function AllConstructorsOneDetailsContainer({
                     <div></div>
                 </Container>
             </Col>
-            <Col md={6} lg={4}>
+            <Col md={6} lg={4} className="mt-2">
                 <Container className="d-flex flex-column justify-content-around rounded-4" style={{height: "100px", borderRight: "5px solid #ff1801", borderBottom: "5px solid #ff1801"}}>
                     <p className="mb-0" style={textBlack}>SEASONS</p>
                     <div className="d-flex flex-row justify-content-center align-items-center">
@@ -54,7 +54,7 @@ export default function AllConstructorsOneDetailsContainer({
                     <div></div>
                 </Container>
             </Col>
-            <Col md={6} lg={4}>
+            <Col md={6} lg={4} className="mt-2">
                 <Container className="d-flex flex-column justify-content-around rounded-4" style={{height: "100px", borderRight: "5px solid #ff1801", borderBottom: "5px solid #ff1801"}}>
                     <p className="mb-0" style={textBlack}>CONSTRUCTORS TITLES</p>
                     <div className="d-flex flex-row justify-content-center align-items-center">
@@ -63,7 +63,7 @@ export default function AllConstructorsOneDetailsContainer({
                     <div></div>
                 </Container>
             </Col>
-            <Col md={6} lg={4}>
+            <Col md={6} lg={4} className="mt-2">
                 <Container className="d-flex flex-column justify-content-around rounded-4" style={{height: "100px", borderRight: "5px solid #ff1801", borderBottom: "5px solid #ff1801"}}>
                     <p className="mb-0" style={textBlack}>WINS</p>
                     <div className="d-flex flex-row justify-content-center align-items-center">
@@ -72,7 +72,7 @@ export default function AllConstructorsOneDetailsContainer({
                     <div></div>
                 </Container>
             </Col>
-            <Col md={6} lg={4}>
+            <Col md={6} lg={4} className="mt-2">
                 <Container className="d-flex flex-column justify-content-around rounded-4" style={{height: "100px", borderRight: "5px solid #ff1801", borderBottom: "5px solid #ff1801"}}>
                     <p className="mb-0" style={textBlack}>PODIUMS</p>
                     <div className="d-flex flex-row justify-content-center align-items-center">
@@ -81,7 +81,7 @@ export default function AllConstructorsOneDetailsContainer({
                     <div></div>
                 </Container>
             </Col>
-            <Col md={6} lg={4}>
+            <Col md={6} lg={4} className="mt-2">
                 <Container className="d-flex flex-column justify-content-around rounded-4" style={{height: "100px", borderRight: "5px solid #ff1801", borderBottom: "5px solid #ff1801"}}>
                     <p className="mb-0" style={textBlack}>DRIVERS TITLES</p>
                     <div className="d-flex flex-row justify-content-center align-items-center">
@@ -90,7 +90,7 @@ export default function AllConstructorsOneDetailsContainer({
                     <div></div>
                 </Container>
             </Col>
-            <Col md={6} lg={4}>
+            <Col md={6} lg={4} className="mt-2">
                 <Container className="d-flex flex-column justify-content-around rounded-4" style={{height: "100px", borderRight: "5px solid #ff1801", borderBottom: "5px solid #ff1801"}}>
                     <p className="mb-0" style={textBlack}>FIRST RACE</p>
                     <div className="d-flex flex-row justify-content-center align-items-center">

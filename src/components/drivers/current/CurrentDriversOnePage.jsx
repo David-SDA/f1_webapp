@@ -130,7 +130,7 @@ export default function CurrentDriversOnePage(){
         return (
             <Container>
                 <h1 className="fst-italic mt-1">
-                    <a href={"/allDrivers/" + driverId} className="link-dark link-underline-opacity-0 link-underline-opacity-50-hover">
+                    <a href={"/allDrivers/" + driverId} className="link-dark link-underline-opacity-0 link-underline-opacity-100-hover">
                         <span style={textRegular}>{standing?.DriverStandings[0]?.Driver?.givenName}</span> <span style={textBold}>{standing?.DriverStandings[0]?.Driver?.familyName}</span>
                     </a>
                 </h1>

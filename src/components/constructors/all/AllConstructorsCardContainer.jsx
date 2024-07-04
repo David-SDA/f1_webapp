@@ -20,7 +20,7 @@ export default function AllConstructorsCardContainer({
 
     return (
         <Col sm={6} md={4} lg={3} xl={2} className="mb-2 p-1">
-            <a href={"/allConstructors/" + constructorId} className="link-dark link-underline-opacity-0 link-underline-opacity-50-hover">
+            <a href={"/allConstructors/" + constructorId} className="link-dark link-underline-opacity-0 link-underline-opacity-100-hover">
                 <Card style={{height: "8rem"}}>
                     <Card.Body className="d-flex flex-column justify-content-between">
                         <Card.Title>

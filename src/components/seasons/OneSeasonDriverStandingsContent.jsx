@@ -33,19 +33,19 @@ export default function OneSeasonDriverStandingsContent({
             </Col>
             <Col className="p-0" xs={5} sm={3} md={4} lg={4}>
                 <p className="m-0 d-none d-sm-block">
-                    <a href={"/allDrivers/" + driverId} className="link-dark link-underline-opacity-0 link-underline-opacity-50-hover">
+                    <a href={"/allDrivers/" + driverId} className="link-dark link-underline-opacity-0 link-underline-opacity-100-hover">
                         <span style={textRegular}>{givenName}</span> <span style={textBold}>{familyName}</span>
                     </a>
                 </p>
                 <p className="m-0 d-block d-sm-none" style={textBold}>
-                    <a href={"/allDrivers/" + driverId} className="link-dark link-underline-opacity-0 link-underline-opacity-50-hover">
+                    <a href={"/allDrivers/" + driverId} className="link-dark link-underline-opacity-0 link-underline-opacity-100-hover">
                         {familyName}
                     </a>
                 </p>
             </Col>
             <Col className="p-0 d-none d-sm-block" sm={3} md={4} lg={3}>
                 <p className="m-0 text-center" style={textRegular}>
-                    <a href={"/allConstructors/" + teamId} className="link-dark link-underline-opacity-0 link-underline-opacity-50-hover">
+                    <a href={"/allConstructors/" + teamId} className="link-dark link-underline-opacity-0 link-underline-opacity-100-hover">
                         {teamName}
                     </a>
                 </p>
