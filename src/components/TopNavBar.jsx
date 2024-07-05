@@ -11,7 +11,7 @@ export default function TopNavBar(){
     return (
         <Navbar variant="dark" expand="lg" style={{backgroundColor: "#ff1801"}}>
             <Container>
-                <Navbar.Brand href="/" className="text-white" style={{fontFamily: 'Formula1-Black'}}>F1 Webapp</Navbar.Brand>
+                <Navbar.Brand href="/" className="text-white" style={{fontFamily: 'Formula1-Black'}}>F1 HUB</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ms-auto">
