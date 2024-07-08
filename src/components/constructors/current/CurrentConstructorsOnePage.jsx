@@ -62,11 +62,11 @@ export default function CurrentConstuctorsOnePage(){
             }
             //console.log('Fetching data from API...');
             // On fait une requête vers l'API ainsi que la sauvegarde dans le cache
-            const response1 = await fetch("http://ergast.com/api/f1/current/constructors/" + constructorId + "/constructorStandings.json");
-            const response2 = await fetch("http://ergast.com/api/f1/current/constructors/" + constructorId + "/drivers.json");
-            const response3 = await fetch("http://ergast.com/api/f1/current/constructors/" + constructorId + "/results.json?limit=50");
-            const response4 = await fetch("http://ergast.com/api/f1/current/constructors/"+ constructorId + "/sprint.json");
-            const response5 = await fetch("http://ergast.com/api/f1/current/constructors/" + constructorId + "/qualifying.json?limit=50")
+            const response1 = await fetch("https://ergast.com/api/f1/current/constructors/" + constructorId + "/constructorStandings.json");
+            const response2 = await fetch("https://ergast.com/api/f1/current/constructors/" + constructorId + "/drivers.json");
+            const response3 = await fetch("https://ergast.com/api/f1/current/constructors/" + constructorId + "/results.json?limit=50");
+            const response4 = await fetch("https://ergast.com/api/f1/current/constructors/"+ constructorId + "/sprint.json");
+            const response5 = await fetch("https://ergast.com/api/f1/current/constructors/" + constructorId + "/qualifying.json?limit=50")
 
             const dataConstructorStanding = await response1.json();
             const dataConstructorDrivers = await response2.json();

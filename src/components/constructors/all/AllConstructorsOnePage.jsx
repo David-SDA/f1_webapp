@@ -68,15 +68,15 @@ export default function AllConstructorsOnePage(){
             }
             //console.log('Fetching data from API...');
             // On fait une requête vers l'API ainsi que la sauvegarde dans le cache
-            const responseConstructor = await fetch("http://ergast.com/api/f1/constructors/" + constructorId + ".json");
-            const responseDrivers = await fetch("http://ergast.com/api/f1/constructors/" + constructorId + "/drivers.json?limit=200");
-            const responseSeasons = await fetch("http://ergast.com/api/f1/constructors/" + constructorId + "/seasons.json?limit=100");
-            const responseConstructorStandingsFirst = await fetch("http://ergast.com/api/f1/constructors/" + constructorId + "/constructorStandings/1.json");
-            const responseWins = await fetch("http://ergast.com/api/f1/constructors/" + constructorId + "/results/1.json?limit=400");
-            const responseSeconds = await fetch("http://ergast.com/api/f1/constructors/" + constructorId + "/results/2.json?limit=400");
-            const responseThirds = await fetch("http://ergast.com/api/f1/constructors/" + constructorId + "/results/3.json?limit=400");
-            const responseDriverTitles = await fetch("http://ergast.com/api/f1/driverStandings/1.json?limit=100");
-            const responseFirstRace = await fetch("http://ergast.com/api/f1/constructors/" + constructorId + "/races.json?limit=1");
+            const responseConstructor = await fetch("https://ergast.com/api/f1/constructors/" + constructorId + ".json");
+            const responseDrivers = await fetch("https://ergast.com/api/f1/constructors/" + constructorId + "/drivers.json?limit=200");
+            const responseSeasons = await fetch("https://ergast.com/api/f1/constructors/" + constructorId + "/seasons.json?limit=100");
+            const responseConstructorStandingsFirst = await fetch("https://ergast.com/api/f1/constructors/" + constructorId + "/constructorStandings/1.json");
+            const responseWins = await fetch("https://ergast.com/api/f1/constructors/" + constructorId + "/results/1.json?limit=400");
+            const responseSeconds = await fetch("https://ergast.com/api/f1/constructors/" + constructorId + "/results/2.json?limit=400");
+            const responseThirds = await fetch("https://ergast.com/api/f1/constructors/" + constructorId + "/results/3.json?limit=400");
+            const responseDriverTitles = await fetch("https://ergast.com/api/f1/driverStandings/1.json?limit=100");
+            const responseFirstRace = await fetch("https://ergast.com/api/f1/constructors/" + constructorId + "/races.json?limit=1");
             
             const dataConstructor = await responseConstructor.json();
             const dataDrivers = await responseDrivers.json();

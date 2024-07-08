@@ -69,9 +69,9 @@ export default function OneSeasonPage(){
             }
             //console.log('Making API call...');
             // On fait l'appel API ainsi que la sauvegarde dans le cache
-            const racesResponse = await fetch("http://ergast.com/api/f1/" + season + ".json");
-            const driverStandingsResponse = await fetch("http://ergast.com/api/f1/" + season + "/driverStandings.json");
-            const constructorStandingsResponse = await fetch("http://ergast.com/api/f1/" + season + "/constructorStandings.json");
+            const racesResponse = await fetch("https://ergast.com/api/f1/" + season + ".json");
+            const driverStandingsResponse = await fetch("https://ergast.com/api/f1/" + season + "/driverStandings.json");
+            const constructorStandingsResponse = await fetch("https://ergast.com/api/f1/" + season + "/constructorStandings.json");
 
             const racesData = await racesResponse.json();
             const driverStandingsData = await driverStandingsResponse.json();

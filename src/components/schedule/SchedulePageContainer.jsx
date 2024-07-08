@@ -61,10 +61,10 @@ export default function SchedulePageContainer() {
             }
             //console.log('Making API call...');
             // On fait l'appel API ainsi que la sauvegarde dans le cache
-            const responseSchedule = await fetch("http://ergast.com/api/f1/current.json");
-            const responseWinners = await fetch("http://ergast.com/api/f1/current/results/1.json");
-            const responseSeconds = await fetch("http://ergast.com/api/f1/current/results/2.json");
-            const responseThirds = await fetch("http://ergast.com/api/f1/current/results/3.json");
+            const responseSchedule = await fetch("https://ergast.com/api/f1/current.json");
+            const responseWinners = await fetch("https://ergast.com/api/f1/current/results/1.json");
+            const responseSeconds = await fetch("https://ergast.com/api/f1/current/results/2.json");
+            const responseThirds = await fetch("https://ergast.com/api/f1/current/results/3.json");
 
             const dataSchedule = await responseSchedule.json();
             const dataWinners = await responseWinners.json();

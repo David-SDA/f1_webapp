@@ -38,7 +38,7 @@ export default function SeasonsPage(){
             }
             //console.log('Making API call...');
             // On fait l'appel API ainsi que la sauvegarde dans le cache
-            const seasonsResponse = await fetch("http://ergast.com/api/f1/seasons.json?limit=100");
+            const seasonsResponse = await fetch("https://ergast.com/api/f1/seasons.json?limit=100");
 
             const seasonsData = await seasonsResponse.json();
             const seasons = seasonsData.MRData.SeasonTable.Seasons;

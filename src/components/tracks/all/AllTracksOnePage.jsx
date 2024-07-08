@@ -48,9 +48,9 @@ export default function AllTracksOnePage(){
             }
             //console.log('Fetching data from API...');
             // On fait l'appel API ainsi que la sauvegarde dans le cache
-            const response1 = await fetch("http://ergast.com/api/f1/circuits/"+ circuitId + ".json");
-            const response2 = await fetch("http://ergast.com/api/f1/circuits/"+ circuitId + "/results/1.json?limit=100");
-            const response3 = await fetch("http://ergast.com/api/f1/circuits/"+ circuitId + "/races.json?limit=100");
+            const response1 = await fetch("https://ergast.com/api/f1/circuits/"+ circuitId + ".json");
+            const response2 = await fetch("https://ergast.com/api/f1/circuits/"+ circuitId + "/results/1.json?limit=100");
+            const response3 = await fetch("https://ergast.com/api/f1/circuits/"+ circuitId + "/races.json?limit=100");
 
             const dataCircuit = await response1.json();
             const dataWinners = await response2.json();

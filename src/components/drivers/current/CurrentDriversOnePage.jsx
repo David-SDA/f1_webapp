@@ -61,10 +61,10 @@ export default function CurrentDriversOnePage(){
             }
             //console.log('Making API call...');
             // On fait une requête vers l'API ainsi que la sauvegarde dans le cache
-            const response1 = await fetch("http://ergast.com/api/f1/current/drivers/" + driverId + "/driverStandings.json");
-            const response2 = await fetch("http://ergast.com/api/f1/current/drivers/" + driverId + "/results.json");
-            const response3 = await fetch("http://ergast.com/api/f1/current/drivers/" + driverId + "/qualifying.json")
-            const response4 = await fetch("http://ergast.com/api/f1/current/drivers/" + driverId + "/sprint.json")
+            const response1 = await fetch("https://ergast.com/api/f1/current/drivers/" + driverId + "/driverStandings.json");
+            const response2 = await fetch("https://ergast.com/api/f1/current/drivers/" + driverId + "/results.json");
+            const response3 = await fetch("https://ergast.com/api/f1/current/drivers/" + driverId + "/qualifying.json")
+            const response4 = await fetch("https://ergast.com/api/f1/current/drivers/" + driverId + "/sprint.json")
 
             const dataStanding = await response1.json();
             const dataDriverResults = await response2.json();

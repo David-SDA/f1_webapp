@@ -60,9 +60,9 @@ export default function RoundResultsPage(){
             //console.log('Fetching data from API...');
             // On fait l'appel à l'API ainsi que la sauvegarde dans le cache
             const raceResponse = await fetch('https://ergast.com/api/f1/current/' + round + '.json');
-            const raceResultsResponse = await fetch("http://ergast.com/api/f1/current/" + round + "/results.json");
-            const qualifyingResultsResponse = await fetch("http://ergast.com/api/f1/current/" + round + "/qualifying.json");
-            const sprintResultsResponse = await fetch("http://ergast.com/api/f1/current/" + round + "/sprint.json");
+            const raceResultsResponse = await fetch("https://ergast.com/api/f1/current/" + round + "/results.json");
+            const qualifyingResultsResponse = await fetch("https://ergast.com/api/f1/current/" + round + "/qualifying.json");
+            const sprintResultsResponse = await fetch("https://ergast.com/api/f1/current/" + round + "/sprint.json");
 
             const raceData = await raceResponse.json();
             const raceResultsData = await raceResultsResponse.json();

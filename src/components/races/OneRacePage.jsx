@@ -54,7 +54,7 @@ export default function OneRacePage(){
             }
             //console.log('Fetching data from API...');
             // On fait l'appel à l'API ainsi que la ssauvegarde dans le cache
-            const response = await fetch("http://ergast.com/api/f1/" + season + "/" + round + "/results.json");
+            const response = await fetch("https://ergast.com/api/f1/" + season + "/" + round + "/results.json");
             const data = await response.json();
             const race = data.MRData.RaceTable.Races[0];
             setRace(race);

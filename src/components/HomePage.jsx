@@ -31,7 +31,7 @@ export default function HomePage(){
                 const { race, nextMonday } = JSON.parse(cachedRace);
                 //console.log('Found cached data:', race);
 
-                if(currentDateTime < getNextMonday()){
+                if(currentDateTime < nextMonday){
                     //console.log('Using cached data...');
                     setRace(race);
                     setIsLoading(false);

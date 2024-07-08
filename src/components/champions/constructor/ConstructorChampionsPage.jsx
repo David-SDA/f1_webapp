@@ -43,7 +43,7 @@ export default function ConstructorChampionsPage() {
             }
             //console.log('Making API call...');
             // On fait l'appel API ainsi que la sauvegarde dans le cache
-            const response = await fetch("http://ergast.com/api/f1/constructorStandings/1.json?limit=100");
+            const response = await fetch("https://ergast.com/api/f1/constructorStandings/1.json?limit=100");
             const data = await response.json();
             const constructorChampions = data.MRData.StandingsTable.StandingsLists;
             setChampions(constructorChampions);

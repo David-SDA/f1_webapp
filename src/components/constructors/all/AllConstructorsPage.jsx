@@ -43,7 +43,7 @@ export default function AllConstructorsPage(){
             }
             //console.log('Making API call...');
             // On fait l'appel API ainsi que la sauvegarde dans le cache
-            const response = await fetch("http://ergast.com/api/f1/constructors.json?limit=250");
+            const response = await fetch("https://ergast.com/api/f1/constructors.json?limit=250");
             const data = await response.json();
             const allConstructors = data.MRData.ConstructorTable.Constructors;
             setConstructors(allConstructors);

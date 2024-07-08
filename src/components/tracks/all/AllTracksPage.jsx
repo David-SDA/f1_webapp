@@ -44,7 +44,7 @@ export default function AllTracksPage() {
             }
             //console.log('Making API call...');
             // On fait l'appel API ainsi que la sauvegarde dans le cache
-            const response = await fetch("http://ergast.com/api/f1/circuits.json?limit=100");
+            const response = await fetch("https://ergast.com/api/f1/circuits.json?limit=100");
             const data = await response.json();
             const allTracks = data.MRData.CircuitTable.Circuits;
             setTracks(allTracks);
